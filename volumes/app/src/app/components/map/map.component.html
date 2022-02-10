@@ -1,0 +1,32 @@
+<div class="map-content" #mapContainer>
+    <ng-scrollbar class="scroll">
+        <div #mapWrapper class="map-wrapper">
+            <div *ngFor="let levels of map" class="rows">
+                <div *ngFor="let level of levels" class="cols">
+                    <div class="node" *ngIf="level" [mapNode]="level" (click)="launch(level)">
+                        <civ-map-node [node]="level"></civ-map-node>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ng-scrollbar>
+</div>
+<div class="top-bar">
+    <div class="flex center-aligned">
+        <div class="score">
+            Score: 0
+        </div>
+        <div class="money">
+            {{ currency }} euros
+        </div>
+    </div>
+    <div class="characters-content">
+        <div *ngFor="let character of characters" [civ-tooltip]="character" [on-click]="true">
+            <div class="char-wrapper">
+                <char-deco [attr.character]="character.name" [class.dead]="character.health.isDead"></char-deco>
+                <div class="name">{{ character.name }}</div>
+                <civ-progress-bar [current]="character.health.current" [max]="character.health.max" [color]="'#eb4444'"></civ-progress-bar>
+            </div>
+        </div>
+    </div>
+</div>

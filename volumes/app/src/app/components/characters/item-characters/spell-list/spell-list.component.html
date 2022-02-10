@@ -1,0 +1,4 @@
+<div *ngFor="let spell of actor.spells">
+    <civ-spell-item [class.disabled]="spell.timer > 0" *ngIf="spell.unlocked" [spell]="spell" (click)="launchSpell(spell)" [civ-tooltip]="spell" [civ-tooltip-owner]="actor">
+    </civ-spell-item>
+</div>

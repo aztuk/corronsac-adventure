@@ -1,0 +1,15 @@
+@import "../../../../assets/scss/variables";
+@import "../../../../assets/scss/mixins";
+:host {
+    display: block;
+    padding: 1px;
+    border-radius: 4px;
+    @include wrapper();
+}
+
+.bar {
+    transition: width 100ms linear;
+    height: 100%;
+    border-radius: 2px;
+    box-shadow: inset 0 1px 3px 0px #ffffff59;
+}

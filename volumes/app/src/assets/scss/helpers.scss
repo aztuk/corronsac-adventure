@@ -1,0 +1,103 @@
+.overlay {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 5;
+}
+
+.relative {
+    position: relative;
+}
+
+.flex {
+    display: flex;
+}
+
+.center-align {
+    align-items: center;
+}
+
+.center-justify {
+    justify-content: center;
+}
+
+.space-between {
+    justify-content: space-between;
+}
+
+.space-around {
+    justify-content: space-around;
+}
+
+.breath {
+    margin: 20px;
+}
+
+.square-wrapper {
+    @include wrapper();
+}
+
+.money {
+    background: url('..//images/map/shop.png') no-repeat;
+    background-size: contain;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    padding-left: 50px;
+    font-family: $fontFamily;
+    font-size: 19px;
+    text-shadow: $textShadow;
+    position: relative;
+}
+
+.stats {
+    margin-top: 15px;
+    .stat-item {
+        box-sizing: border-box;
+        margin-bottom: 4px;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        // @include panel();
+        //padding: 15px 20px 10px;
+        border-radius: 3px;
+        font-weight: bold;
+        civ-stats {
+            position: relative;
+            margin-right: 15px;
+        }
+        .stat-name {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            line-height: 16px;
+            color: map-get($texts, shade-C);
+            .description {
+                color: map-get($texts, shade-C);
+                font-size: 13px;
+                display: none;
+            }
+        }
+        .value {
+            position: relative;
+            font-size: 13px;
+            align-self: center;
+            .current {
+                padding-right: 0px;
+            }
+            .buff {
+                display: inline-block;
+                position: absolute;
+                color: map-get($texts, shade-C);
+                right: -31px;
+                font-size: 9px;
+                white-space: nowrap;
+                width: 28px;
+            }
+        }
+    }
+}

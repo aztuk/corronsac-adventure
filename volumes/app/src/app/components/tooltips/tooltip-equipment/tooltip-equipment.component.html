@@ -1,0 +1,81 @@
+<div class="flex tooltip-wrapper">
+    <civ-equipment [equipment]="entity" class="square-wrapper"></civ-equipment>
+    <div>
+        <div class="flex space-between">
+            <strong class="name">{{ entity.name }}</strong>
+            <span>Equipement de {{owner.name}}</span>
+        </div>
+        <div class="description" [injectHTML]="entity.description(entity.damageInstances, owner, entity.healInstances)"></div>
+
+        <div class="stats">
+
+            <div class="stat-item" *ngIf="entity.health > 0">
+                <civ-stats class="health">
+                </civ-stats>
+                <div class="value">
+                    <span class="current">+{{ entity.health}} Points de vie</span>
+                </div>
+            </div>
+
+
+            <div class="stat-item" *ngIf="entity.stats.attack > 0">
+                <civ-stats class="attack">
+                </civ-stats>
+                <div class="value">
+                    <span class="current">+{{ entity.stats.attack}} attaque</span>
+                </div>
+            </div>
+
+            <div class="stat-item" *ngIf="entity.stats.power > 0">
+                <civ-stats class="power">
+                </civ-stats>
+                <div class="value">
+                    <span class="current">+{{ entity.stats.power}} puissance</span>
+                </div>
+            </div>
+
+            <div class="stat-item" *ngIf="entity.stats.critical > 0">
+                <civ-stats class="critical">
+                </civ-stats>
+                <div class="value">
+                    <span class="current">+{{ entity.stats.critical}}% chances critique</span>
+                </div>
+            </div>
+
+            <div class="stat-item" *ngIf="entity.stats.criticalDamage > 0">
+                <civ-stats class="criticalDamage">
+                </civ-stats>
+                <div class="value">
+                    <span class="current">+{{ entity.stats.criticalDamage * 100}}% dégâts critiques</span>
+                </div>
+            </div>
+
+            <div class="stat-item" *ngIf="entity.stats.speed > 0">
+                <civ-stats class="speed">
+                </civ-stats>
+                <div class="value">
+                    <span class="current">{{ entity.stats.speed }} ticks</span>
+                </div>
+            </div>
+
+            <div class="stat-item" *ngIf="entity.stats.dodge > 0">
+                <civ-stats class="dodge">
+                </civ-stats>
+                <div class="value">
+                    <span class="current">+{{ entity.stats.dodge }}% esquive</span>
+                </div>
+            </div>
+
+            <div class="stat-item" *ngIf="entity.stats.touch > 0">
+                <civ-stats class="touch">
+                </civ-stats>
+                <div class="value">
+                    <span class="current">+{{ entity.stats.touch }}% touché</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--
+            </div>
+        </div>-->

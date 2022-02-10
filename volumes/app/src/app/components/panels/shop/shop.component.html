@@ -1,0 +1,45 @@
+<div class="loot-wrapper">
+    <button class="leave-button" (click)="leave()">Continuer</button>
+    <div class="money-wrapper">
+        <div class="money">
+            {{ currentMoney }}
+        </div>
+    </div>
+    <div class="title">Boutique</div>
+    <div class="description">Vous pouvez acheter ce que vous voulez, tant que vous avez assez de sous.
+    </div>
+    <div class="loot-table flex">
+
+
+        <div class="left">
+            <strong class="title-section">Personnage</strong>
+            <div class="characters">
+                <div *ngFor="let a of charactersInShop" class="square-wrapper" [class.disabled]="currentMoney < 80 || a.sold" (click)="unlockActor(a, 80)">
+                    <char-deco [attr.character]="a.item.name" [civ-tooltip]="a.item"></char-deco>
+                    <div class="money">80</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="right">
+            <strong class="title-section">Sorts</strong>
+            <div class="spells">
+                <div *ngFor="let s of spellsToBuy" class="square-wrapper" [class.disabled]="currentMoney < s.item.spell.price || s.sold" (click)="unlockSpell(s, s.item.spell.price)">
+                    <civ-spells [spell]="s.item.spell" [civ-tooltip]="s.item.spell" [civ-tooltip-owner]="s.item.actor"></civ-spells>
+                    <div class="money">{{ s.item.spell.price }}</div>
+                </div>
+            </div>
+
+            <strong class="title-section">Equipement</strong>
+            <div class="equipment">
+                <div *ngFor="let e of equipmentToBuy" class="square-wrapper" [class.disabled]="currentMoney < e.item.equipment.price || e.sold" (click)="unlockEquipment(e, e.item.equipment.price)">
+                    <civ-equipment [equipment]="e.item.equipment" [civ-tooltip]="e.item.equipment" [civ-tooltip-owner]="e.item.actor"></civ-equipment>
+                    <div class="money">{{ e.item.equipment.price }}</div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+<div class="overlay"></div>

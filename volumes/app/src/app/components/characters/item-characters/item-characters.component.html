@@ -1,0 +1,15 @@
+<div class="avatar">
+    <char-deco [attr.character]="character.name" [attr.big]="true" [class.ai]="!character.possessed"></char-deco>
+</div>
+<div class="combat-info">
+    <strong class="name">{{character.name}}</strong>
+    <civ-progress-bar class="health-points" [current]="character.health.current" [color]="'#eb4444'" [max]="character.health.max">
+        <strong class="health">{{character.health.current | number:'1.0-0'}}/{{character.health.max}}</strong>
+    </civ-progress-bar>
+    <civ-progress-bar *ngIf="!character.health.isDead" class="speed" [color]="'#4d8bd9'" [current]="getTurnProgress()" [max]="getNextTurn()">
+    </civ-progress-bar>
+    <span *ngIf="character.health.isDead">Mort</span>
+    <div class="effect-list">
+        <civ-effects *ngFor="let effect of character.effects" class="effect-{{effect.effect}}" [effect]="effect" [civ-tooltip]="effect"></civ-effects>
+    </div>
+</div>

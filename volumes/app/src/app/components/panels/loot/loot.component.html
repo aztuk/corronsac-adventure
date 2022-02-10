@@ -1,0 +1,13 @@
+<div class="loot-wrapper">
+    <div class="title">Choisissez une récompense</div>
+    <div class="description">
+        Vous gagnez {{forcedCurrencyEarning}} euros et vous pouvez choisir l'une des récompenses suivantes.
+    </div>
+    <div class="flex loot-table">
+        <div *ngFor="let loot of lootTable">
+            <civ-loot-item [loot]="loot.value" [type]="loot.type" (click)="select(loot)" [class.selected]="selectedLoot === loot"></civ-loot-item>
+        </div>
+    </div>
+    <button (click)="confirmLoot()" [disabled]="selectedLoot === undefined">Confirmer</button>
+</div>
+<div class="overlay"></div>

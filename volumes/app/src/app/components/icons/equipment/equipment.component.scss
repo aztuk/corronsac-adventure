@@ -1,0 +1,58 @@
+@import "../../../../assets/scss/variables";
+:host {
+    display: inline-block;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    border-radius: 8px;
+    height: 50px;
+    width: 50px;
+    &:not(.disabled):hover {
+        @include hoverEffect();
+    }
+    &.disabled {
+        filter: saturate(0) contrast(.6) brightness(.7);
+    }
+    .equip-icon {
+        position: relative;
+        width: 50px;
+        height: 50px;
+        border-radius: 5px;
+        &.equip-BALLANTINES {
+            background: url('../../../../assets/images/equipment/ballantines.png');
+        }
+        &.equip-SOURISCONGELEES {
+            background: url('../../../../assets/images/equipment/souris.png');
+        }
+        &.equip-COMPTEDEEZER {
+            background: url('../../../../assets/images/equipment/spotify.png');
+        }
+        &.equip-MANETTE {
+            background: url('../../../../assets/images/equipment/manette.png');
+        }
+        &.equip-ALCOTEST {
+            background: url('../../../../assets/images/equipment/alcotest.png');
+        }
+        &.equip-CASQUE {
+            background: url('../../../../assets/images/equipment/casque.png');
+        }
+        &.equip-PROTEGETIBIA {
+            background: url('../../../../assets/images/equipment/tibia.png');
+        }
+        &.equip-VESTEDE {
+            background: url('../../../../assets/images/equipment/veste.png');
+        }
+        &.equip-GANTSDESCALADE {
+            background: url('../../../../assets/images/equipment/gants.png');
+        }
+        &.equip-FREELANCE {
+            background: url('../../../../assets/images/equipment/freelance.png');
+        }
+        &.equip-RISK {
+            background: url('../../../../assets/images/equipment/risk.png');
+        }
+        &.equip-DISCORD {
+            background: url('../../../../assets/images/equipment/discord.png');
+        }
+    }
+}

@@ -1,0 +1,54 @@
+@import "../../../../assets/scss/variables";
+@import "../../../../assets/scss/mixins";
+:host {
+    background: url('../../../../assets/images/map/map_background.png') container no-repeat;
+    width: 300px;
+    border-radius: 5px;
+    .image {
+        position: absolute;
+        top: -5px;
+        left: -40px;
+    }
+    .identity {
+        padding-left: 20px;
+    }
+    .name {
+        font-size: 25px;
+        font-family: $fontFamily;
+    }
+    .classe {
+        font-size: 11px;
+        color: map-get($texts, shade-C);
+    }
+    .health {
+        margin-top: 10px;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        margin-bottom: 7px;
+        .points {
+            position: absolute;
+            top: 0px;
+            color: white;
+            font-weight: bold;
+        }
+        civ-progress-bar {
+            height: 12px;
+            width: 100%;
+        }
+    }
+    .section-title {
+        font-family: $fontFamily;
+        font-size: 15px;
+        margin: 30px 0 10px;
+    }
+    .spells,
+    .equipment {
+        display: flex;
+        .square-wrapper {
+            margin-right: 5px;
+        }
+    }
+}

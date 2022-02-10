@@ -1,0 +1,26 @@
+@import "../../../../assets/scss/variables";
+@import "../../../../assets/scss/mixins";
+:host {
+    width: 350px;
+    .tooltip-wrapper {
+        padding-left: 60px;
+    }
+    civ-equipment {
+        position: absolute;
+        left: -20px;
+    }
+    .name {
+        font-size: 20px;
+        font-family: $fontFamily;
+    }
+    .stat-item {
+        justify-content: flex-start;
+        .value {
+            font-size: 11px;
+        }
+    }
+    .description {
+        color: map-get($texts, shade-B);
+        margin: 10px 0;
+    }
+}

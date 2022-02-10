@@ -1,0 +1,13 @@
+<div class="loot-wrapper">
+    <div class="title">{{ event.title }}</div>
+    <div class="description">{{ event.description }}
+    </div>
+    <div class="loot-table">
+        <div *ngFor="let choice of event.choices">
+            <div [class.disabled]="!checkChoice(choice)" class="choice" (click)="applyChoice(choice)">
+                <strong class="choice-name">{{choice.name}}</strong>
+                <span [injectHTML]="choice.text()"></span></div>
+        </div>
+    </div>
+</div>
+<div class="overlay"></div>

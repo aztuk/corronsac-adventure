@@ -1,0 +1,60 @@
+@import "../../../../assets/scss/variables.scss";
+@import "../../../../assets/scss/mixins.scss";
+:host {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    display: block;
+    .loot-wrapper {
+        @include panel();
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        padding: 40px 80px 60px;
+        transform: translate(-50%, -50%);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        z-index: 3;
+    }
+    .title {
+        font-family: $fontFamily;
+        font-size: 28px;
+        margin: 20px 0 15px;
+        color: map-get($texts, shade-B)
+    }
+    .description {
+        font-size: 13px;
+        color: map-get($texts, shade-C);
+        max-width: 400px;
+        text-align: center;
+    }
+    .loot-table {
+        margin: 20px 0;
+    }
+    .overlay {
+        z-index: 2;
+        backdrop-filter: blur(15px) saturate(0.5) brightness(0.5);
+    }
+    .choice {
+        @include wrapper(#84674a);
+        @include hoverEffect();
+        font-family: $fontFamily2;
+        margin-top: 15px;
+        padding: 15px 25px;
+        color: map-get($texts, shade-A);
+        &.disabled {
+            opacity: 0.5;
+            pointer-events: none;
+            filter: saturate(0);
+        }
+        .choice-name {
+            display: block;
+            color: map-get($texts, shade-A);
+            font-family: $fontFamily;
+            font-size: 15px;
+            margin-bottom: 4px;
+        }
+    }
+}

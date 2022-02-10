@@ -1,0 +1,39 @@
+<div class="loot-content" *ngIf="type === 0">
+    <div class="reward-icon-wrapper">
+        <div class="money">{{loot}}</div>
+    </div>
+    <div class="title">
+        <strong>{{loot}} Euros</strong>
+        <span class="smaller">A utiliser dans la boutique</span>
+    </div>
+</div>
+
+<div class="loot-content" *ngIf="type === 1">
+    <div class="reward-icon-wrapper">
+        <char-deco [attr.character]="loot.name" [attr.big]="true" [civ-tooltip]="loot"></char-deco>
+    </div>
+    <div class="title">
+        <strong>{{loot.name}}</strong>
+        <span class="smaller">{{loot.specialty | specialtyName}}</span>
+    </div>
+</div>
+
+<div class="loot-content" *ngIf="type === 2">
+    <div class="reward-icon-wrapper">
+        <civ-equipment class="square-wrapper" [equipment]="loot.equipment" [civ-tooltip]="loot.equipment" [civ-tooltip-owner]="loot.actor"></civ-equipment>
+    </div>
+    <div class="title">
+        <strong>{{loot.equipment.name}}</strong>
+        <span class="smaller">Nouvel équipement pour {{loot.actor.name}}</span>
+    </div>
+</div>
+
+<div class="loot-content" *ngIf="type === 3">
+    <div class="reward-icon-wrapper">
+        <civ-spells class="square-wrapper" *ngIf="type === 3" [spell]="loot.spell" [civ-tooltip]="loot.spell" [civ-tooltip-owner]="loot.actor"></civ-spells>
+    </div>
+    <div class="title">
+        <strong>{{loot.spell.name}}</strong>
+        <span class="smaller">Nouveau sort pour {{loot.actor.name}}</span>
+    </div>
+</div>

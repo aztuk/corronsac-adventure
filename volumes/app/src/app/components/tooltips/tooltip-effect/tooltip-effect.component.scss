@@ -1,0 +1,16 @@
+@import "../../../../assets/scss/variables";
+@import "../../../../assets/scss/mixins";
+:host {
+    width: 300px;
+    .name {
+        font-size: 30px;
+    }
+    .available {
+        font-size: 18px;
+        color: map-get($texts, shade-D);
+    }
+    .description {
+        color: map-get($texts, shade-B);
+        margin: 10px 0;
+    }
+}

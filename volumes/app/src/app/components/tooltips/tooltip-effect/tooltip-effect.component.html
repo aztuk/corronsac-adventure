@@ -1,0 +1,7 @@
+<div class="tooltip-wrapper">
+    <div class="flex space-between">
+        <strong class="name">{{ entity.effect | effectName }}</strong>
+    </div>
+    <div class="description" [injectHTML]="description"></div>
+    <span class="available" *ngIf="entity.timer > 0">Fini dans {{ entity.timer }} tours</span>
+</div>

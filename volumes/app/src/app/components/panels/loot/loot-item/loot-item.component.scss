@@ -1,0 +1,66 @@
+@import "../../../../../assets/scss/variables.scss";
+@import "../../../../../assets/scss/mixins.scss";
+:host {
+    @include hoverEffect();
+    @include wrapper(#b79067);
+    display: block;
+    position: relative;
+    width: 180px;
+    height: 230px;
+    margin: 10px;
+    padding-bottom: 20px;
+    border-radius: 10px;
+    &.selected {
+        filter: brightness(1.5);
+    }
+    .loot-content {
+        height: 100%;
+        .reward-icon-wrapper {
+            @include insetWrapper();
+            background-color: #3b362f;
+            position: absolute;
+            top: 0;
+            border-radius: 5px;
+            height: 153px;
+            top: 4px;
+            left: 4px;
+            right: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            .money {
+                background: url('../../../../../assets/images/map/shop.png');
+                width: 80px;
+                height: 80px;
+                font-size: 20px;
+                font-family: $fontFamily;
+                color: white;
+                display: flex;
+                align-items: flex-end;
+                justify-content: center;
+            }
+        }
+        .title {
+            position: absolute;
+            bottom: 20px;
+            width: 100%;
+        }
+        strong {
+            width: 100%;
+            text-align: center;
+            font-family: $fontFamily;
+            font-size: 20px;
+            text-shadow: $textShadow;
+            display: block;
+            color: map-get($texts, shade-B);
+            margin-bottom: 5px;
+        }
+        .smaller {
+            font-size: 11px;
+            width: 100%;
+            text-align: center;
+            display: block;
+            color: map-get($texts, shade-D);
+        }
+    }
+}

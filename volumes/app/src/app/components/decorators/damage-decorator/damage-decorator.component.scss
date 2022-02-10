@@ -1,0 +1,15 @@
+@import "../../../../assets/scss/variables";
+
+civ-stats {
+  position: relative;
+  top: 3px;
+  margin: 0 3px;
+  width: 12px;
+  height: 12px;
+}
+
+.small {
+  font-size: 9px;
+  white-space: nowrap;
+  color: map-get($texts, shade-D);
+}

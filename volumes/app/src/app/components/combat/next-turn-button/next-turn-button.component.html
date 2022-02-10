@@ -1,0 +1,20 @@
+<button *ngIf="mode > 2">{{ text }}</button>
+
+
+<div *ngIf="lastItem as logItem" class="log">
+    <char-deco class="caster" [attr.character]="logItem.actor.name" [attr.big]="true"></char-deco>
+
+    <strong class="actor-name" [civ-tooltip]="logItem.actor">{{ logItem.actor.name }}</strong> a lancé
+
+    <strong class="spell-decorator" [civ-tooltip]="logItem.spell.spellDescription" [civ-tooltip-owner]="logItem.actor">{{ logItem.spell.spellDescription.name }} </strong>
+
+    <span *ngIf="logItem.spell.damages?.length > 0" class="damage-instances">
+      sur
+        <span *ngFor="let damage of logItem.spell.damages; let i = index">
+            <strong class="actor-name" [civ-tooltip]="damage.target">{{ damage.target.name }}</strong>
+            <span *ngIf="damage.damage > 0" class="damage-{{damage.damageType | damageType}}"> ({{ damage.damage | number:'1.0-0' }} dégâts)</span>
+    <span *ngIf="damage.damage === 0" class="damage-{{damage.damageType | damageType}}"> (raté)</span>
+    <span *ngIf="i < logItem.spell.damages.length - 1">, </span>
+    </span>
+    </span>
+</div>

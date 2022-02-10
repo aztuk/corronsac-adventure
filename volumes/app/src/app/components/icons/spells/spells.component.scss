@@ -1,0 +1,116 @@
+@import "../../../../assets/scss/variables";
+:host {
+    display: inline-block;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    border-radius: 8px;
+    height: 50px;
+    width: 50px;
+    &:not(.disabled):hover {
+        @include hoverEffect();
+    }
+    &.disabled {
+        filter: saturate(0) contrast(.6) brightness(.7);
+    }
+    .value {
+        position: absolute;
+        bottom: -8px;
+        right: 1px;
+        font-weight: bold;
+        color: white;
+        text-shadow: $textShadow;
+    }
+    .spell-icon {
+        position: relative;
+        width: 50px;
+        height: 50px;
+        border-radius: 5px;
+        background-image: url('../../../../assets/images/spells/spell-sprite-1.jpg');
+        background-size: 871px;
+        z-index: 2;
+        &::before {
+            content: '';
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            position: absolute;
+            box-shadow: inset 0 8px 19px -10px white;
+            z-index: 3;
+            border-radius: 5px;
+        }
+        &.spell-ATTAQUE {
+            background-position: -1548px -1131px;
+        }
+        &.spell-JONGLAGE {
+            background-position: -1322px -1189px;
+        }
+        &.spell-ENTRAINEMENT {
+            background-position: -1015px -1245px;
+        }
+        &.spell-SEDUCTION {
+            background-position: -1436px -1131px;
+            filter: hue-rotate(-29deg);
+        }
+        &.spell-ESCALADE {
+            background-position: -1549px -1020px;
+            filter: hue-rotate(5deg);
+        }
+        &.spell-ECRANDE {
+            background-position: -1186px -1358px;
+            filter: hue-rotate(114deg);
+        }
+        &.spell-AMANDINE {
+            background-position: -902px -1077px;
+            filter: hue-rotate(-157deg)
+        }
+        &.spell-DISCUSSIONINSENSEE {
+            background-image: url('../../../../assets/images/spells/sprite-3.jpg');
+            background-position: -947px -513px;
+            background-size: 648px;
+        }
+        &.spell-FRONTLISSE {
+            background-image: url('../../../../assets/images/spells/spell-sprite-2.png');
+            background-position: -1366px -835px
+        }
+        &.spell-TETELA {
+            background-position: -1549px -1076px;
+        }
+        &.spell-MAURICE {
+            background-image: url('../../../../assets/images/spells/spell-sprite-2.png');
+            background-position: -37px -779px;
+        }
+        &.spell-SERPENTS {
+            background-image: url('../../../../assets/images/spells/spell-sprite-2.png');
+            background-position: -556px -662px;
+        }
+        &.spell-PIGEON {
+            background-position: -1378px -1302px;
+        }
+        &.spell-SMARTLIFE {
+            background-position: -902px -1302px;
+        }
+        &.spell-DEBATPOLITIQUE {
+            background-image: url('../../../../assets/images/spells/sprite-3.jpg');
+            background-position: -947px -612px;
+            background-size: 648px;
+            filter: hue-rotate(45deg);
+        }
+        &.spell-FUITE {
+            background-position: -1185px -1022px;
+            filter: hue-rotate(55deg);
+        }
+        &.spell-NOOB {
+            background-position: -1376px -1022px;
+            filter: hue-rotate(105deg);
+        }
+        &.spell-PLAYLIST {
+            background-position: -1071px -1300px;
+            filter: hue-rotate(175deg)
+        }
+        &.spell-TRAGOSOCIAL {
+            background-position: -1661px -1357px;
+        }
+    }
+}

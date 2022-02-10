@@ -1,0 +1,140 @@
+<div class="tooltip-wrapper">
+    <char-deco [attr.character]="entity.name" [attr.big]="true" class="image"></char-deco>
+    <div class="identity">
+        <div class="flex space-between">
+            <strong class="name">{{ entity.name }}</strong>
+            <span class="classe">{{ entity.specialty | specialtyName }}</span>
+        </div>
+        <div class="health">
+            <div class="points"> {{ entity.health.current }} / {{ entity.health.max }}</div>
+            <civ-progress-bar [color]="'#eb4444'" [current]="entity.health.current" [max]="entity.health.max"></civ-progress-bar>
+        </div>
+        <civ-effects *ngFor="let effect of entity.effects" class="effect-{{effect.effect}}" [effect]="effect" [civ-tooltip]="effect"></civ-effects>
+    </div>
+
+    <div class="stats">
+        <div class="section-title">Caractéristiques</div>
+
+        <div class="stat-item">
+            <civ-stats class="attack">
+            </civ-stats>
+            <div class="stat-name">
+                <span class="label">Attaque</span>
+                <div class="description">
+                    Influence les dégâts des attaques physiques
+                </div>
+            </div>
+            <div class="value">
+                <span class="current">{{ entity.stats.attack}}</span>
+                <span class="buff" *ngIf="entity.buffs.attack !==  0" [class.negative]="entity.buffs.attack < 0">
+                  <span *ngIf="entity.buffs.attack > 0">+</span> {{ entity.buffs.attack}}</span>
+            </div>
+        </div>
+
+        <div class="stat-item">
+            <civ-stats class="power">
+            </civ-stats>
+            <div class="stat-name">
+                <span class="label">Puissance</span>
+                <div class="description">
+                    Influence les dégâts des sorts et effets
+                </div>
+            </div>
+            <div class="value">
+                <span class="current">{{ entity.stats.power}}</span>
+                <span class="buff" *ngIf="entity.buffs.power !==  0" [class.negative]="entity.buffs.power < 0">
+                  <span *ngIf="entity.buffs.power > 0">+</span> {{ entity.buffs.power}}</span>
+            </div>
+        </div>
+
+        <div class="stat-item">
+            <civ-stats class="critical">
+            </civ-stats>
+            <div class="stat-name">
+                <span class="label">Critiques</span>
+                <div class="description">
+                    Chances d'infliger un coup critique
+                </div>
+            </div>
+            <div class="value">
+                <span class="current">{{ entity.stats.critical}}%</span>
+                <span class="buff" *ngIf="entity.buffs.critical !==  0" [class.negative]="entity.buffs.critical < 0">
+                  <span *ngIf="entity.buffs.critical > 0">+</span> {{ entity.buffs.critical}}%</span>
+            </div>
+        </div>
+
+        <div class="stat-item">
+            <civ-stats class="criticalDamage">
+            </civ-stats>
+            <div class="stat-name">
+                <span class="label">Dégâts Critiques</span>
+                <div class="description">
+                    Bonus de dégâts critiques
+                </div>
+            </div>
+            <div class="value">
+                <span class="current">{{ entity.stats.criticalDamage * 100}}%</span>
+                <span class="buff" *ngIf="entity.buffs.criticalDamage !==  0" [class.negative]="entity.buffs.criticalDamage < 0">
+                  <span *ngIf="entity.buffs.criticalDamage > 0">+</span> {{ entity.buffs.criticalDamage * 100}}%</span>
+            </div>
+        </div>
+
+        <div class="stat-item">
+            <civ-stats class="speed">
+            </civ-stats>
+            <div class="stat-name">
+                <span class="label">Vitesse</span>
+                <div class="description">
+                    Temps entre chaque tour
+                </div>
+            </div>
+            <div class="value">
+                <span class="current">{{ entity.stats.speed }} ticks</span>
+                <span class="buff" *ngIf="entity.buffs.speed !==  0" [class.negative]="entity.buffs.speed < 0">
+                  <span *ngIf="entity.buffs.speed > 0">+</span> {{ entity.buffs.speed }} ticks</span>
+            </div>
+        </div>
+
+        <div class="stat-item">
+            <civ-stats class="dodge">
+            </civ-stats>
+            <div class="stat-name">
+                <span class="label">Esquive</span>
+                <div class="description">
+                    Chances d'esquiver une attaque
+                </div>
+            </div>
+            <div class="value">
+                <span class="current">{{ entity.stats.dodge }}%</span>
+                <span class="buff" *ngIf="entity.buffs.dodge !==  0" [class.negative]="entity.buffs.dodge < 0">
+                  <span *ngIf="entity.buffs.dodge > 0">+</span> {{ entity.buffs.dodge }}%</span>
+            </div>
+        </div>
+
+        <div class="stat-item">
+            <civ-stats class="touch">
+            </civ-stats>
+            <div class="stat-name">
+                <span class="label">Touché</span>
+                <div class="description">
+                    Réduit l'esquive de l'adversaire
+                </div>
+            </div>
+            <div class="value">
+                <span class="current">{{ entity.stats.touch }}%</span>
+                <span class="buff" *ngIf="entity.buffs.touch !== 0" [class.negative]="entity.buffs.touch < 0">
+                  <span *ngIf="entity.buffs.touch > 0">+</span> {{ entity.buffs.touch }}%</span>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="section-title">Sorts</div>
+    <div class="spells">
+        <civ-spells *ngFor="let spell of entity.spells" class="square-wrapper" [class.disabled]="!spell.unlocked" [spell]="spell" [civ-tooltip]="spell" [civ-tooltip-owner]="entity">{{ spell.name }}</civ-spells>
+    </div>
+
+    <div class="section-title">Equipement</div>
+    <div class="equipment">
+        <civ-equipment *ngFor="let equip of entity.equipment" class="square-wrapper" [equipment]="equip" [class.disabled]="!equip.unlocked" [civ-tooltip]="equip" [civ-tooltip-owner]="entity"></civ-equipment>
+    </div>

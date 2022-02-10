@@ -1,0 +1,23 @@
+@import "../../../assets/scss/variables";
+@import "../../../assets/scss/mixins";
+
+:host {
+  position: absolute;
+  background: $backgroundColor;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  z-index: 10;
+
+  .error-message-container {
+    position: fixed;
+    bottom: 60%;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    z-index: 100000;
+  }
+}

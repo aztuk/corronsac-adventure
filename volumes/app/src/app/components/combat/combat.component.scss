@@ -1,0 +1,71 @@
+@import "../../../assets/scss/variables";
+@import "../../../assets/scss/mixins";
+:host {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    z-index: 100;
+    .current-turn {
+        border: 1px solid black;
+    }
+    .combat-viewport {
+        width: 100vw;
+        height: 65vh;
+        justify-content: space-around;
+        .allies,
+        .enemies {
+            padding: 50px;
+            position: relative;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-around;
+            z-index: 3;
+        }
+    }
+    .actions {
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        bottom: 30px;
+        char-deco {
+            position: absolute;
+            left: -60px;
+            z-index: 3;
+            top: -40px;
+        }
+        civ-progress-bar {
+            position: absolute;
+            height: 10px;
+            top: -13px;
+            left: -25px;
+            width: 90%;
+        }
+        .turn-wrapper {
+            @include wrapper(#7e6042);
+            z-index: 2;
+            position: relative;
+            border-radius: 5px;
+            padding-left: 10px;
+            display: flex;
+            align-items: center;
+            min-width: 200px;
+            .text {
+                color: #1d150c;
+                font-size: 20px;
+                font-family: $fontFamily;
+            }
+            civ-spell-list {
+                padding: 3px;
+            }
+        }
+    }
+}

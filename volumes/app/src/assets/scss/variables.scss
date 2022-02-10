@@ -1,0 +1,37 @@
+$backgroundColor: #fff;
+$smooth: #808796;
+$primary: #1b1e25;
+$transition: all 200ms cubic-bezier(.17, .67, .3, .97);
+$fontFamily: 'Bangers',
+cursive;
+$fontFamily2: 'Poppins',
+sans-serif;
+$textShadow: 0 1px 0 #bb9d77,
+1px 0 0 #bb9d77,
+0 -1px 0 #bb9d77,
+-1px 0 0 #bb9d77;
+$whiteTextShadow: 0 1px 0 white,
+1px 0 0 white,
+0 -1px 0 white,
+-1px 0 0 white;
+$backgrounds: (shade-A: #221e19, shade-B: #42392f, shade-C: #584b3c, shade-D: #635545);
+$texts: (shade-A: #18160d, shade-B: #292719, shade-C: #353324, shade-D: #494230);
+$ally: #39ffdb;
+$enemy: #ff0a0a;
+$physicalDamage: #a34200;
+$magicDamage: #950052;
+$heal: #85ff00;
+$spell: #fffd2a;
+$effect: #0043ff;
+$health: #9b1212;
+$speed: #4d8bd9;
+@mixin hoverEffect() {
+    cursor: pointer;
+    transition: $transition;
+    &:hover {
+        filter: brightness(150%);
+    }
+    &:active {
+        filter: brightness(50%);
+    }
+}

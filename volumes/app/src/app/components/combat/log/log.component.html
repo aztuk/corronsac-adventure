@@ -1,0 +1,49 @@
+<div class="log">
+    <ng-scrollbar>
+        <div *ngFor="let logItem of log" class="log-item">
+            <strong class="actor-name" [class.enemy-decorator]="!logItem.actor.possessed" [class.ally-decorator]="logItem.actor.possessed" class="actor-name" [civ-tooltip]="logItem.actor">[{{ logItem.actor.name }}]</strong>
+
+
+            <div *ngIf="logItem.spell.damages?.length > 0" class="damage-instances">
+                <div *ngFor="let damage of logItem.spell.damages">
+                    <span *ngIf="damage.status === 'Touché'">
+          <strong class="spell-decorator" [civ-tooltip]="logItem.spell.spellDescription"
+                  [civ-tooltip-owner]="logItem.actor">[{{ logItem.spell.spellDescription.name }}] </strong>
+           inflige <span class="damage-{{damage.damageType | damageType}}">{{ damage.damage | number:'1.0-0' }}
+              dégâts </span> à </span>
+
+                    <span *ngIf="damage.status === 'Critique'">
+          <strong class="spell-decorator" [civ-tooltip]="logItem.spell.spellDescription"
+                  [civ-tooltip-owner]="logItem.actor">[{{ logItem.spell.spellDescription.name }}] </strong> inflige
+          <span class="damage-{{damage.damageType | damageType}}">{{ damage.damage | number:'1.0-0' }} dégâts (coup critique)</span> à </span>
+
+
+                    <span *ngIf="damage.status === 'Raté'">
+            <strong class="spell-decorator" [civ-tooltip]="logItem.spell.spellDescription"
+                    [civ-tooltip-owner]="logItem.actor">[{{ logItem.spell.spellDescription.name }}
+              ]</strong> rate </span>
+                    <strong [class.enemy-decorator]="!damage.target.possessed" [class.ally-decorator]="damage.target.possessed" class="actor-name" [civ-tooltip]="damage.target">[{{ damage.target.name }}]</strong>
+                </div>
+            </div>
+
+            <div *ngIf="logItem.spell.heals?.length > 0" class="damage-instances">
+                <div *ngFor="let heal of logItem.spell.heals">
+                    <strong class="spell-decorator" [civ-tooltip]="logItem.spell.spellDescription" [civ-tooltip-owner]="logItem.actor">[{{ logItem.spell.spellDescription.name }}] </strong> soigne
+                    <strong [class.enemy-decorator]="!heal.target.possessed" [class.ally-decorator]="heal.target.possessed" class="actor-name" [civ-tooltip]="heal.target">[{{ heal.target.name }}]</strong> de
+                    <span class="heal">{{ heal.heal | number:'1.0-0' }} PV </span>
+
+                </div>
+            </div>
+
+            <div *ngIf="logItem.spell.effects?.length > 0" class="damage-instances">
+                <div *ngFor="let effect of logItem.spell.effects">
+                    <strong class="spell-decorator" [civ-tooltip]="logItem.spell.spellDescription" [civ-tooltip-owner]="logItem.actor">[{{ logItem.spell.spellDescription.name }}] </strong> applique
+                    <span class="effect-decorator" [civ-tooltip]="effect">[{{ effect.effect | effectName }}] </span> à
+
+                    <strong [class.enemy-decorator]="!effect.target.possessed" [class.ally-decorator]="effect.target.possessed" class="actor-name" [civ-tooltip]="effect.target">[{{ effect.target.name }}]</strong>
+                </div>
+            </div>
+        </div>
+    </ng-scrollbar>
+</div>
+<button (click)="toggleCombatLog()">Combat log</button>

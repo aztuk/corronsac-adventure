@@ -1,0 +1,16 @@
+<div class="loot-wrapper">
+    <div class="title">Apéro</div>
+    <div class="description">Vous prenez le temps de vous reposer.
+    </div>
+    <div class="loot-table">
+        <div class="choice" (click)="healAll()">
+            <strong class="choice-name">Soigner</strong>
+            <span>Tous les personnages blessés sont soignés à 100%</span>
+        </div>
+        <div class="choice" *ngFor="let actor of deadCharacters" (click)="ressucitate(actor)">
+            <strong class="choice-name">Réanimer {{ actor.name }}</strong>
+            <span>Ramène {{ actor.name }} à la vie</span>
+        </div>
+    </div>
+</div>
+<div class="overlay"></div>

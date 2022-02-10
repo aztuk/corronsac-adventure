@@ -1,0 +1,14 @@
+<strong class="damage-{{type}}">
+  <span class="detail">
+  {{damage}} dégâts
+  <span *ngIf="type === 'physical'">physiques</span>
+  <span *ngIf="type === 'magical'">magiques</span>
+</span>
+  <span class="small">
+  ({{amount * 100}}%
+  <civ-stats class="attack" *ngIf="type === 'physical'"></civ-stats>
+  <civ-stats class="power" *ngIf="type === 'magical'"></civ-stats>
+  <span *ngIf="type === 'physical'">attaque</span>
+  <span *ngIf="type === 'magical'">puissance</span>)
+</span>
+</strong>

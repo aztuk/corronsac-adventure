@@ -1,0 +1,138 @@
+:host {
+    &.disabled {
+        filter: saturate(0) contrast(.6) brightness(.7);
+    }
+    &.ai .character {
+        transform: scaleX(-1);
+    }
+}
+
+.character {
+    width: 60px;
+    height: 80px;
+    filter: drop-shadow(0 0 5px black) saturate(0.7) brightness(0.9);
+    &.KEVIN {
+        background-image: url('../../../../assets/images/characters/kevin.png');
+    }
+    &.LOIC {
+        background-image: url('../../../../assets/images/characters/loic.png');
+    }
+    &.CLEMENT {
+        background-image: url('../../../../assets/images/characters/clement.png');
+    }
+    &.QUENTIN {
+        background-image: url('../../../../assets/images/characters/quentin.png');
+    }
+    &.ADRIEN {
+        background-image: url('../../../../assets/images/characters/adrien.png');
+    }
+    &.COSTY {
+        background-image: url('../../../../assets/images/characters/costy.png');
+    }
+    &.MARIE {
+        background-image: url('../../../../assets/images/characters/marie.png');
+    }
+    &.SANDIE {
+        background-image: url('../../../../assets/images/characters/sandie.png');
+    }
+    &.PATRONLOURD {
+        background-image: url('../../../../assets/images/characters/patron.png');
+    }
+    &.PETITERACAILLE {
+        background-image: url('../../../../assets/images/characters/racaille.png');
+    }
+    &.VIEILLECONNAISSANCE {
+        background-image: url('../../../../assets/images/characters/connaissance.png');
+    }
+    &.COVID {
+        background-image: url('../../../../assets/images/characters/covid.png');
+    }
+    &.VACCIN {
+        background-image: url('../../../../assets/images/characters/vaccin.png');
+    }
+    &.WHISKY {
+        background-image: url('../../../../assets/images/characters/whisky.png');
+    }
+    &.KAREN {
+        background-image: url('../../../../assets/images/characters/karen.png');
+    }
+    &.PETITBONHOMME {
+        background-image: url('../../../../assets/images/characters/karen.png');
+    }
+    &.MMEALBERGE {
+        background-image: url('../../../../assets/images/characters/alberge.png');
+    }
+    &.AMANT {
+        background-image: url('../../../../assets/images/characters/amant.png');
+    }
+    &.ENFANT {
+        background-image: url('../../../../assets/images/characters/enfant.png');
+    }
+    &.MILOU {
+        background-image: url('../../../../assets/images/characters/milou.png');
+    }
+    &.big {
+        width: 90px;
+        height: 120px;
+        &.KEVIN {
+            background-image: url('../../../../assets/images/characters/kevin@2x.png');
+        }
+        &.LOIC {
+            background-image: url('../../../../assets/images/characters/loic@2x.png');
+        }
+        &.CLEMENT {
+            background-image: url('../../../../assets/images/characters/clement@2x.png');
+        }
+        &.QUENTIN {
+            background-image: url('../../../../assets/images/characters/quentin@2x.png');
+        }
+        &.ADRIEN {
+            background-image: url('../../../../assets/images/characters/adrien@2x.png');
+        }
+        &.COSTY {
+            background-image: url('../../../../assets/images/characters/costy@2x.png');
+        }
+        &.MARIE {
+            background-image: url('../../../../assets/images/characters/marie@2x.png');
+        }
+        &.SANDIE {
+            background-image: url('../../../../assets/images/characters/sandie@2x.png');
+        }
+        &.PATRONLOURD {
+            background-image: url('../../../../assets/images/characters/patron@2x.png');
+        }
+        &.PETITERACAILLE {
+            background-image: url('../../../../assets/images/characters/racaille@2x.png');
+        }
+        &.VIEILLECONNAISSANCE {
+            background-image: url('../../../../assets/images/characters/connaissance@2x.png');
+        }
+        &.COVID {
+            background-image: url('../../../../assets/images/characters/covid@2x.png');
+        }
+        &.VACCIN {
+            background-image: url('../../../../assets/images/characters/vaccin@2x.png');
+        }
+        &.MILOU {
+            background-image: url('../../../../assets/images/characters/milou@2x.png');
+        }
+        &.WHISKY {
+            background-image: url('../../../../assets/images/characters/whisky@2x.png');
+        }
+        &.KAREN {
+            background-image: url('../../../../assets/images/characters/karen@2x.png');
+        }
+        &.PETITBONHOMME {
+            background-image: url('../../../../assets/images/characters/karen@2x.png');
+        }
+        &.MMEALBERGE {
+            background-image: url('../../../../assets/images/characters/alberge@2x.png');
+        }
+        &.AMANT {
+            background-image: url('../../../../assets/images/characters/amant@2x.png');
+        }
+        &.ENFANT {
+            background-image: url('../../../../assets/images/characters/enfant@2x.png');
+        }
+    }
+}

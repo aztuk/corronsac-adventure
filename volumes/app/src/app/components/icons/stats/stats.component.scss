@@ -1,0 +1,33 @@
+:host {
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    filter: brightness(.3);
+    &.attack {
+        background-image: url('../../../../assets/images/stats/attack.png');
+    }
+    &.power {
+        background-image: url('../../../../assets/images/stats/power.png');
+    }
+    &.critical {
+        background-image: url('../../../../assets/images/stats/critical.png');
+    }
+    &.criticalDamage {
+        background-image: url('../../../../assets/images/stats/criticalDamage.png');
+    }
+    &.speed {
+        background-image: url('../../../../assets/images/stats/speed.png');
+    }
+    &.dodge {
+        background-image: url('../../../../assets/images/stats/dodge.png');
+    }
+    &.touch {
+        background-image: url('../../../../assets/images/stats/touch.png');
+    }
+    &.health {
+        background-image: url('../../../../assets/images/stats/health.png');
+    }
+}

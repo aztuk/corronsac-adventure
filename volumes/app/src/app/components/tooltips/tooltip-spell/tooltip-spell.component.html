@@ -1,0 +1,11 @@
+<div class="flex tooltip-wrapper">
+    <civ-spells [spell]="entity" class="square-wrapper"></civ-spells>
+    <div>
+        <div class="flex space-between">
+            <strong class="name">{{ entity.name }}</strong>
+            <span>Sort de {{owner.name}}</span>
+        </div>
+        <div class="description" [injectHTML]="entity.description(entity.damageInstances, owner, entity.healInstances)"></div>
+        <span class="available" *ngIf="entity.timer > 0">Temps de récupération: {{ entity.cooldown }} tours</span>
+    </div>
+</div>

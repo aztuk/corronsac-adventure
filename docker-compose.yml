@@ -1,0 +1,11 @@
+version: '3'
+
+services:
+
+  node:
+    hostname: node
+    build: docker/node
+    tty: true
+    volumes:
+      - ./volumes/app:/app
+    working_dir: /app

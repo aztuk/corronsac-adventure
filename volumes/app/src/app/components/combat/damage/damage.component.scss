@@ -1,0 +1,10 @@
+@import "../../../../assets/scss/variables";
+:host {
+    position: absolute;
+    transition: 2s cubic-bezier(0.075, 0.82, 0.165, 1) all;
+    font-size: 30px;
+    font-family: $fontFamily;
+    filter: drop-shadow(0 0 8px black);
+    color: white;
+    white-space: nowrap;
+}

@@ -1,0 +1,82 @@
+@import "../../../../assets/scss/variables";
+@import "../../../../assets/scss/mixins";
+:host {
+    display: block;
+    transition: $transition;
+    position: relative;
+    margin: 15px 30px;
+    &:hover char-deco {
+        filter: brightness(1.5);
+    }
+    &.turn {
+        filter: drop-shadow(0 0 20px rgb(255, 254, 172));
+    }
+    &.target {
+        filter: drop-shadow(0 0 20px rgb(235, 89, 89));
+    }
+    &.dead {
+        pointer-events: none;
+        opacity: 0.5;
+        .avatar {
+            transition-duration: 1.5s;
+            transform: rotate(90deg) translate(-14px, -80px);
+        }
+    }
+}
+
+.name {
+    font-family: $fontFamily;
+    display: block;
+    color: white;
+    font-size: 17px;
+    padding: 2px 8px 6px;
+    white-space: nowrap;
+    top: -24px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 5px;
+    min-width: 75%;
+    text-align: center;
+    position: absolute;
+    filter: drop-shadow(0px 0px 5px black);
+}
+
+.combat-info {
+    position: absolute;
+    left: -15px;
+    right: -15px;
+    bottom: -15px;
+}
+
+.effect-list {
+    position: absolute;
+    top: 26px;
+}
+
+.health-points {
+    height: 12px;
+    position: relative;
+    z-index: 8;
+    .health {
+        color: white;
+        position: absolute;
+        left: 0;
+        right: 0;
+        text-align: center;
+        top: -1px;
+        font-size: 11px;
+        font-size: 9px;
+        font-weight: bold;
+        text-shadow: $textShadow;
+    }
+}
+
+.speed {
+    margin: auto;
+    height: 3px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    width: 80%;
+    z-index: 0;
+    top: -1px;
+}

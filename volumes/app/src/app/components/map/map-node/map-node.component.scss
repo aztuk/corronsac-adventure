@@ -1,0 +1,76 @@
+@import "../../../../assets/scss/variables";
+:host {
+    display: block;
+    width: 77px;
+    height: 77px;
+    background: url('../../../../assets/images/map_badges.png');
+    position: relative;
+    filter: drop-shadow(0 2px 8px rgba(black, .5)) saturate(0) brightness(0.5) contrast(0.8);
+    &.unlocked {
+        filter: drop-shadow(0 2px 8px rgba(black, .5)) saturate(1);
+        &:hover {
+            filter: drop-shadow(0 2px 8px rgba(black, .5)) saturate(1) brightness(1.5);
+            cursor: pointer;
+        }
+    }
+    &.done {
+        filter: drop-shadow(0 2px 8px rgba(black, .5)) saturate(1);
+    }
+    strong {
+        font-family: $fontFamily;
+        font-size: 17px;
+        position: absolute;
+        bottom: -2px;
+        width: 100%;
+        text-align: center;
+        text-shadow: $textShadow;
+        color: map-get($texts, shade-B)
+    }
+    &.type-0 {
+        background: url('../../../../assets/images/map/combat.png');
+    }
+    &.type-1 {
+        background: url('../../../../assets/images/map/nemesis.png');
+    }
+    &.type-2 {
+        background-position: -83px -4px;
+        height: 87px;
+    }
+    &.type-3 {
+        background: url('../../../../assets/images/map/rest.png');
+    }
+    &.type-4 {
+        background: url('../../../../assets/images/map/treasure.png');
+    }
+    &.type-5 {
+        background: url('../../../../assets/images/map/shop.png');
+    }
+    &.type-6 {
+        background: url('../../../../assets/images/map/event.png');
+    }
+    @for $i from 1 through 29 {
+        &.animate-#{$i} {
+            animation-name: animate#{$i};
+            animation-duration: random(15)+15+s;
+            animation-iteration-count: infinite;
+        }
+    }
+    @for $i from 1 through 29 {
+        @keyframes animate#{$i} {
+            0% {}
+            25% {
+                transform: rotate(random(5)*(-1)+deg) scale(random(2)*0.05+0.95) translateY((random(10))+px) translateX(random(10)+px);
+            }
+            ;
+            50% {
+                transform: rotate(random(5)+deg) scale(random(2)*0.05+0.95) translateY((random(10))+px) translateX(random(10)+px);
+            }
+            ;
+            75% {
+                transform: rotate(random(5)*(-1)+deg) scale(random(2)*0.05+0.95) translateY((random(10))+px) translateX(random(10)+px);
+            }
+            ;
+            100% {}
+        }
+    }
+}

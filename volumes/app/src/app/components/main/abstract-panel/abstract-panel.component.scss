@@ -1,0 +1,24 @@
+:host {
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+
+  &.hide {
+    display: none;
+  }
+
+  .container {
+    position: relative;
+    z-index: 100;
+  }
+
+  .overlay {
+    z-index: 90;
+  }
+}
