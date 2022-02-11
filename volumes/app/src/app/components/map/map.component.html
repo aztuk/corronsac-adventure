@@ -13,8 +13,8 @@
 </div>
 <div class="top-bar">
     <div class="flex center-aligned">
-        <div class="score">
-            Score: 0
+        <div class="score" [civ-tooltip]="scoreS">
+            Score: {{ score }}
         </div>
         <div class="money">
             {{ currency }} euros

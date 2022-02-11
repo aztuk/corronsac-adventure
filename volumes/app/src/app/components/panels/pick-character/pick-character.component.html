@@ -20,7 +20,7 @@
                     <span class="label">Points de vie</span>
                 </div>
                 <div class="value  squares">
-                    <div *ngFor="let item of littleSquare(char.health.max, 8)" class="health-square">
+                    <div *ngFor="let item of littleSquare(char.health.max, 13)" class="health-square">
                     </div>
                 </div>
             </div>
@@ -31,7 +31,7 @@
                     <span class="label">Vitesse</span>
                 </div>
                 <div class="value  squares">
-                    <div *ngFor="let item of littleSquare(char.stats.speed , 7)" class="speed-square">
+                    <div *ngFor="let item of littleSquare(char.stats.speed, 5, true)" class="speed-square">
                     </div>
                 </div>
             </div>
@@ -42,7 +42,7 @@
                     <span class="label">Attaque</span>
                 </div>
                 <div class="value  squares">
-                    <div *ngFor="let item of littleSquare(char.stats.attack , 1.5)" class="attack-square">
+                    <div *ngFor="let item of littleSquare(char.stats.attack , 2)" class="attack-square">
                     </div>
                 </div>
             </div>

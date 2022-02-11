@@ -14,7 +14,6 @@ export class TooltipEquipmentComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    console.log(this.entity)
   }
 
 }

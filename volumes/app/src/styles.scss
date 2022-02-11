@@ -86,6 +86,10 @@ button {
     &:active {
         filter: brightness(50%);
     }
+    &.disabled {
+        filter: saturate(0) contrast(.6) brightness(.7);
+        pointer-events: none;
+    }
 }
 
 p {
@@ -113,15 +117,18 @@ p {
 }
 
 .damage-physical {
+    font-weight: bold;
     color: $physicalDamage;
 }
 
 .damage-magic,
 .damage-magical {
+    font-weight: bold;
     color: $magicDamage;
 }
 
 .effect-decorator {
+    font-weight: bold;
     color: $effect;
 }
 
@@ -131,17 +138,21 @@ p {
 }
 
 .enemy-decorator {
+    font-weight: bold;
     color: $enemy;
 }
 
 .ally-decorator {
+    font-weight: bold;
     color: $ally;
 }
 
 .heal {
+    font-weight: bold;
     color: $heal;
 }
 
 .equipment-effect {
-    color: #ec7ae7;
+    font-weight: bold;
+    color: #801a7a;
 }

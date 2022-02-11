@@ -37,24 +37,28 @@
         z-index: 2;
         backdrop-filter: blur(15px) saturate(0.5) brightness(0.5);
     }
-    .choice {
-        @include wrapper(#84674a);
-        @include hoverEffect();
-        font-family: $fontFamily2;
-        margin-top: 15px;
-        padding: 15px 25px;
-        color: map-get($texts, shade-A);
-        &.disabled {
-            opacity: 0.5;
-            pointer-events: none;
-            filter: saturate(0);
+    .reroll {
+        display: flex;
+        align-items: center;
+        .money {
+            padding-left: 40px;
+            margin-left: 25px;
         }
-        .choice-name {
-            display: block;
-            color: map-get($texts, shade-A);
-            font-family: $fontFamily;
-            font-size: 15px;
-            margin-bottom: 4px;
+    }
+    .leave-button {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        height: 44px;
+    }
+    .money-wrapper {
+        @include wrapper(#9c7d5f);
+        padding: 0 15px 0 5px;
+        position: absolute;
+        bottom: 0;
+        right: 105px;
+        .money {
+            padding-left: 50px;
         }
     }
 }

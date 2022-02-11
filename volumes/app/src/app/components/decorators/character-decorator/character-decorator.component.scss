@@ -57,7 +57,7 @@
         background-image: url('../../../../assets/images/characters/karen.png');
     }
     &.PETITBONHOMME {
-        background-image: url('../../../../assets/images/characters/karen.png');
+        background-image: url('../../../../assets/images/characters/petitbonhomme.png');
     }
     &.MMEALBERGE {
         background-image: url('../../../../assets/images/characters/alberge.png');
@@ -70,6 +70,15 @@
     }
     &.MILOU {
         background-image: url('../../../../assets/images/characters/milou.png');
+    }
+    &.POLICIER {
+        background-image: url('../../../../assets/images/characters/police.png');
+    }
+    &.FRANCISLALANE {
+        background-image: url('../../../../assets/images/characters/francis.png');
+    }
+    &.IVOIRIEN {
+        background-image: url('../../../../assets/images/characters/ivoirien.png');
     }
     &.big {
         width: 90px;
@@ -123,7 +132,7 @@
             background-image: url('../../../../assets/images/characters/karen@2x.png');
         }
         &.PETITBONHOMME {
-            background-image: url('../../../../assets/images/characters/karen@2x.png');
+            background-image: url('../../../../assets/images/characters/petitbonhomme@2x.png');
         }
         &.MMEALBERGE {
             background-image: url('../../../../assets/images/characters/alberge@2x.png');
@@ -131,8 +140,17 @@
         &.AMANT {
             background-image: url('../../../../assets/images/characters/amant@2x.png');
         }
+        &.POLICIER {
+            background-image: url('../../../../assets/images/characters/police@2x.png');
+        }
         &.ENFANT {
             background-image: url('../../../../assets/images/characters/enfant@2x.png');
+        }
+        &.FRANCISLALANE {
+            background-image: url('../../../../assets/images/characters/francis@2x.png');
+        }
+        &.IVOIRIEN {
+            background-image: url('../../../../assets/images/characters/ivoirien@2x.png');
         }
     }
 }

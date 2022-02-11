@@ -1,3 +1,4 @@
+import { ScoreService } from './score.service';
 import { EquipmentDescription } from './../object/components/equipment-description';
 import {ESPells} from '../sharedScript/spells-enum';
 import {SpellDescription} from '../object/components/spell-description';
@@ -26,13 +27,18 @@ export class CharactersService {
   }
 
   constructor() {
-    let hero1 = this.createAdrien(false);
-    let hero2 = this.createQuentin(false);
-    let hero3 = this.createClement(false);
-    hero2.health.hurt(100);
-    hero3.health.hurt(100);
+  }
 
-    this.characters = [hero1];
+  countFullStuff() {
+    let count = 0;
+
+    this.characters.forEach(element => {
+      if(!element.spells.some(s => !s.unlocked) && !element.equipment.some(s => !s.unlocked)) {
+        count++;
+      }
+    });
+
+    return count;
   }
 
   createCharacterByName(name: EHero): Actor {
@@ -53,6 +59,7 @@ export class CharactersService {
   }
 
   addCharacter(name: EHero) {
+    ScoreService.getInstance().stats.sizeTeam =  this.characters.length;
     this.characters.push(this.createCharacterByName(name));
   }
 
@@ -113,8 +120,8 @@ export class CharactersService {
 
   createAdrien(full) {
     let character = new Actor(EHero.ADRIEN, EClass.COMBATTANT, true);
-    character.health = new Health(48);
-    character.stats$ = new Stats(6, 0, 35);
+    character.health = new Health(72);
+    character.stats$ = new Stats(8, 0, 35);
 
     // Spells
     character.spells.push(new SpellDescription(ESPells.BASIC));
@@ -135,8 +142,8 @@ export class CharactersService {
 
   createLoic(full):Actor {
     let character = new Actor(EHero.LOIC, EClass.COMBATTANT, true);
-    character.health = new Health(43);
-    character.stats$ = new Stats(7, 0, 30);
+    character.health = new Health(65);
+    character.stats$ = new Stats(9, 0, 30);
     character.spells.push(new SpellDescription(ESPells.BASIC));
     character.spells.push(new SpellDescription(ESPells.DISCUSSION_INSENSEE));
     character.spells.push(new SpellDescription(ESPells.FRONT_LISSE));
@@ -155,8 +162,8 @@ export class CharactersService {
 
   createKevin(full) {
     let character = new Actor(EHero.KEVIN, EClass.MAGE, true);
-    character.health = new Health(36);
-    character.stats$ = new Stats(2, 4, 32);
+    character.health = new Health(54);
+    character.stats$ = new Stats(4, 4, 32);
     character.spells.push(new SpellDescription(ESPells.BASIC));
     character.spells.push(new SpellDescription(ESPells.MAURICE));
     character.spells.push(new SpellDescription(ESPells.SNAKES));
@@ -175,8 +182,8 @@ export class CharactersService {
 
   createQuentin(full) {
     let character = new Actor(EHero.QUENTIN, EClass.MAGE, true);
-    character.health = new Health(31);
-    character.stats$ = new Stats(1, 5, 30);
+    character.health = new Health(47);
+    character.stats$ = new Stats(4, 5, 30);
     character.spells.push(new SpellDescription(ESPells.BASIC));
     character.spells.push(new SpellDescription(ESPells.SMART_LIFE));
     character.spells.push(new SpellDescription(ESPells.DEBAT_POLITIQUE));
@@ -195,8 +202,8 @@ export class CharactersService {
 
   createClement(full) {
     let character = new Actor(EHero.CLEMENT, EClass.TANK, true);
-    character.health = new Health(56);
-    character.stats$ = new Stats(4, 1, 25);
+    character.health = new Health(84);
+    character.stats$ = new Stats(7, 1, 25);
     character.spells.push(new SpellDescription(ESPells.BASIC));
     character.spells.push(new SpellDescription(ESPells.JONGLAGE));
     character.spells.push(new SpellDescription(ESPells.TRAINING));
@@ -214,8 +221,8 @@ export class CharactersService {
 
   createCosty(full) {
     let character = new Actor(EHero.COSTY, EClass.SUPPORT, true);
-    character.health = new Health(39);
-    character.stats$ = new Stats(3, 3, 24);
+    character.health = new Health(59);
+    character.stats$ = new Stats(5, 3, 24);
     character.spells.push(new SpellDescription(ESPells.BASIC));
     character.spells.push(new SpellDescription(ESPells.NOOB));
     character.spells.push(new SpellDescription(ESPells.PLAYLIST));
@@ -254,5 +261,6 @@ export class CharactersService {
         this.characters.push(this.createClement(false));
         break;
     }
+    ScoreService.getInstance().stats.sizeTeam =  this.characters.length;
   }
 }

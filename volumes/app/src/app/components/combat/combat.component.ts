@@ -24,6 +24,7 @@ import {exists, getRandomInArray} from '../../sharedScript/helpers';
 import {CharactersService} from '../../services/characters.service';
 import {Router} from '@angular/router';
 import {SpellCast} from "../../object/system/spellCast";
+import { ScoreService } from '../../services/score.service';
 
 @Component({
   selector: 'civ-combat',
@@ -49,7 +50,7 @@ export class CombatComponent implements OnInit, OnDestroy {
   public mode$ = ECombatState.BEGIN;
   public actorSubscription;
 
-  constructor(private queue: CombatQueueService, private combatService: CombatService, private _router: Router, private ms: MapService, private cs: CharactersService, private cfs: ComponentFactoryService) {
+  constructor(private scoreService: ScoreService, private queue: CombatQueueService, private combatService: CombatService, private _router: Router, private ms: MapService, private cs: CharactersService, private cfs: ComponentFactoryService) {
     this.actorSubscription = this.combatService.actors$.subscribe((actors) => this.actors = actors);
   }
 
@@ -132,7 +133,7 @@ export class CombatComponent implements OnInit, OnDestroy {
 
   applyDamages(damages: ISystemDamage[]): void {
     (damages ?? []).forEach((d, i) => {
-      if (d.applyDamage()) { // TRUE IF IS DEAD
+      if (d.applyDamage()) {
         this.queue.removeActorFromQueue(d.target);
       }
       this.animateActor(d);

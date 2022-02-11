@@ -1,13 +1,14 @@
 <div class="flex center-align combat-viewport">
     <div class="allies flex">
-        <civ-item-characters class="slot-{{i}}" [damageAnimation]="ally.id" [damageDisplay]="ally.id" [current-turn]="actorTurn?.id === ally.id" *ngFor="let ally of getAllies(); let i = index" [character]="ally" (click)="setTarget(ally)" [isTarget]="target?.id === ally.id"
+        <civ-item-characters class="slot-{{i}}" [damageAnimation]="ally.id" [damageDisplay]="ally.id" [current-turn]="actorTurn?.id === ally.id" *ngFor="let ally of getAllies(); let i = index" [character]="ally" [on-click]="true" (click)="setTarget(ally)" [isTarget]="target?.id === ally.id"
             [civ-tooltip]="ally">
             <div #damage></div>
         </civ-item-characters>
     </div>
     <civ-next-turn-button [log]="combatLog" [mode]="mode" (nextActorTurn)="selectNextActorTurn()" (begin)="beginCombat()" (endGame)="endGame()" (getLoot)="getLoot()"></civ-next-turn-button>
     <div class="enemies flex">
-        <civ-item-characters [damageAnimation]="enemy.id" [damageDisplay]="enemy.id" [current-turn]="actorTurn?.id === enemy.id" *ngFor="let enemy of getEnemies()" [character]="enemy" (click)="setTarget(enemy)" [isTarget]="target?.id === enemy.id" [civ-tooltip]="enemy">
+        <civ-item-characters [damageAnimation]="enemy.id" [damageDisplay]="enemy.id" [current-turn]="actorTurn?.id === enemy.id" *ngFor="let enemy of getEnemies()" [character]="enemy" (click)="setTarget(enemy)" [isTarget]="target?.id === enemy.id" [on-click]="true"
+            [civ-tooltip]="enemy">
             <div #damage></div>
         </civ-item-characters>
     </div>

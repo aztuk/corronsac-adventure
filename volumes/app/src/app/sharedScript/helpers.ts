@@ -20,6 +20,13 @@ export function getRandomInArray(array: any, min?, max?) {
   return array[index];
 }
 
+export function objectToArray<A>(input: { [s: string]: A }): (A & {name: string})[] {
+  return Object.entries(input)
+    .map(a => {
+      return {name: a[0], ...a[1]}
+    })
+}
+
 export function getRandomElementsInArray(arr, n) {
   var result = new Array(n),
     len = arr.length,

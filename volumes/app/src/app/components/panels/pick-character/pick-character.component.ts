@@ -64,7 +64,10 @@ export class PickCharacterComponent implements OnInit {
     this._router.navigate(['map']);
   }
 
-  littleSquare(value, div) {
+  littleSquare(value, div, inverted?) {
+    if(inverted) {
+      return Array(Math.round((50 - value )/ div));
+    }
     return Array(Math.round(value / div));
   }
 

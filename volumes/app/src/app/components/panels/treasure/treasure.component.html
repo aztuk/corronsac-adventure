@@ -1,9 +1,17 @@
 <div class="loot-wrapper">
     <div class="title">Trésor</div>
-    <div class="description">Vous pouvez choisir 3 récompenses !
+    <div class="description">Vous obtenez ces 3 récompenses ! Si elles ne vous satisfont pas, payez pour relancer.
     </div>
-    <div class="loot-table">
-        <div>
+    <div class="loot-table flex">
+        <div *ngFor="let item of treasure">
+            <civ-loot-item [loot]="item.value" [type]="item.type"></civ-loot-item>
+        </div>
+    </div>
+    <button (click)="reroll()" class="reroll" [class.disabled]="currentMoney < rerollPrice">Relancer <span class="money">{{ rerollPrice }}</span></button>
+    <button (click)="leave()" class="leave-button">Continuer</button>
+    <div class="money-wrapper">
+        <div class="money">
+            {{ currentMoney }}
         </div>
     </div>
 </div>

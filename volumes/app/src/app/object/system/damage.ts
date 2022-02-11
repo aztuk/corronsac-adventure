@@ -1,4 +1,5 @@
-import {EAttackStatus, EDamageType} from '../../sharedScript/enums';
+import { ScoreService } from './../../services/score.service';
+import {EAttackStatus, EClass, EDamageType} from '../../sharedScript/enums';
 import {IEntityActor, ISystemDamage} from '../../sharedScript/interfaces';
 import {dice} from '../../sharedScript/helpers';
 
@@ -19,8 +20,29 @@ export class Damage implements ISystemDamage {
     this.setDamage(amount);
   }
 
+  // TODO Use this instead of hurt() in components
   applyDamage(): boolean {
-    return this.target.health.hurt(this.damage);
+    let score = ScoreService.getInstance();
+    const isDead = this.target.health.hurt(this.damage);
+
+    score.setDamageInflicted(this);
+    if(this.target.possessed && isDead) {
+      score.stats.death ++;
+    } else if (!this.target.possessed && isDead) {
+      if(this.target.specialty === EClass.TIER_1 || this.target.specialty === EClass.INVOCATION) {
+        score.stats.tierOneKilled++;
+      }
+      if(this.target.specialty === EClass.TIER_2) {
+        score.stats.tierTwoKilled++;
+      }
+      if(this.target.specialty === EClass.TIER_3) {
+        score.stats.tierThreeKilled++;
+      }
+      if(this.target.specialty === EClass.INVOCATION) {
+        score.stats.tierOneKilled++;
+      }
+    }
+    return isDead;
   }
 
   private setAttackStatus() {

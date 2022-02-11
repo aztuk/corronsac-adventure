@@ -46,6 +46,7 @@ import { EquipmentComponent } from './components/icons/equipment/equipment.compo
 import { RestComponent } from './components/panels/rest/rest.component';
 import { ShopComponent } from './components/panels/shop/shop.component';
 import { TreasureComponent } from './components/panels/treasure/treasure.component';
+import { TooltipScoreComponent } from './components/tooltips/tooltip-score/tooltip-score.component';
 
 
 @NgModule({
@@ -94,6 +95,7 @@ import { TreasureComponent } from './components/panels/treasure/treasure.compone
     RestComponent,
     ShopComponent,
     TreasureComponent,
+    TooltipScoreComponent,
   ],
   imports: [
     BrowserModule,

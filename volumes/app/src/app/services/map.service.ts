@@ -1,3 +1,4 @@
+import { ScoreService } from './score.service';
 import { Router } from '@angular/router';
 import {Combat} from '../object/system/combat';
 import {ELevelType} from '../sharedScript/enums';
@@ -58,6 +59,7 @@ export class MapService {
 
   finished() {
     this.currentLevel.done = true;
+    ScoreService.getInstance().stats.floorsClimbed++;
 
     // Unlock next room
     this.currentLevel.parents.forEach(element => {
@@ -87,6 +89,11 @@ export class MapService {
         combat.type = ELevelType.TREASURE;
       }
     });
+    this.map[9].forEach(combat => {
+      if (exists(combat)) {
+        combat.type = ELevelType.SHOP;
+      }
+    });
     this.map[13].forEach(combat => {
       if (exists(combat)) {
         combat.type = ELevelType.HEAL;
@@ -96,7 +103,7 @@ export class MapService {
 
   applyTypes() {
     this.map.forEach((floor, floorIndex) => {
-      if (floorIndex !== 0 && floorIndex !== 8 && floorIndex !== 13) {
+      if (floorIndex !== 0 && floorIndex !== 8 && floorIndex !== 9 && floorIndex !== 13) {
         floor.forEach((node, room) => {
           if (node instanceof Combat && node.type === undefined) {
             this.setTypeWithRules(floorIndex, room, node);
@@ -173,7 +180,7 @@ export class MapService {
 
   generatePath(firstRoom) {
     let combat = new Combat(0);
-    combat.type = ELevelType.SHOP;
+    combat.type = ELevelType.COMBAT_TIER_1;
     combat.unlocked = true;
     this.map[0][firstRoom] = combat;
 

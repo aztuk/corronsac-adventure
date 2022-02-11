@@ -1,3 +1,5 @@
+import { ScoreService } from './../services/score.service';
+import { TooltipScoreComponent } from './../components/tooltips/tooltip-score/tooltip-score.component';
 import { TooltipEquipmentComponent } from './../components/tooltips/tooltip-equipment/tooltip-equipment.component';
 import { EquipmentDescription } from './../object/components/equipment-description';
 import {TooltipMapNodeComponent} from '../components/tooltips/tooltip-map-node/tooltip-map-node.component';
@@ -77,6 +79,9 @@ export class TooltipDirective implements OnDestroy {
     if (this.entity instanceof EquipmentDescription) {
       this.component = TooltipEquipmentComponent;
     }
+    if(this.entity instanceof ScoreService) {
+      this.component = TooltipScoreComponent;
+    }
 
     this.tooltip = this.cfs.createComponent(this.container, this.component);
     this.tooltip.instance.entity = this.entity;
@@ -109,7 +114,9 @@ export class TooltipDirective implements OnDestroy {
 
       }
 
-      this.renderer.setStyle(this.tooltip.location.nativeElement, 'top', $event.pageY - 50 - deltaY + "px");
+      const top =  ($event.pageY - 50 - deltaY < 30) ? 30 : $event.pageY - 50 - deltaY;
+
+      this.renderer.setStyle(this.tooltip.location.nativeElement, 'top',  top + "px");
     } else {
       this.renderer.setStyle(this.tooltip.location.nativeElement, 'right', "20px");
       this.renderer.setStyle(this.tooltip.location.nativeElement, 'bottom', "20px");

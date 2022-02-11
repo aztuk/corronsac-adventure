@@ -367,7 +367,7 @@ export const ESPells = {
     effectInstances: [],
     healInstances: [{
       targetsType: ETargetTypes.SELF,
-      amount: 0.15,
+      amount: 0.05,
       condition: ($this) => {
         return $this.damages[0].damage >= $this.damages[0].target.health.current;
       }
@@ -388,7 +388,7 @@ export const ESPells = {
     }],
     healInstances: [{
       targetsType: ETargetTypes.SELF,
-      amount: 0.10,
+      amount: 0.05,
     }]
   },
   SEDUCTION: {
@@ -413,7 +413,7 @@ export const ESPells = {
     }],
     healInstances: [{
       targetsType: ETargetTypes.SELF,
-      amount: 0.10,
+      amount: 0.05,
     }]
   },
 
@@ -476,7 +476,7 @@ export const ESPells = {
     effectInstances: [],
     healInstances: [{
       targetsType: ETargetTypes.ALL_ALLIES,
-      amount: 0.20,
+      amount: 0.05,
     }]
   },
 
@@ -491,8 +491,8 @@ export const ESPells = {
     timer: 1,
     invocation: ($this) => {
       const invocation = new Actor('Policier', EClass.INVOCATION, false);
-      invocation.stats$ = new Stats(6, 0, 25);
-      invocation.health = new Health(13);
+      invocation.stats$ = new Stats(4, 0, 28);
+      invocation.health = new Health(12);
       invocation.spells.push(new SpellDescription(ESPells.BASIC));
 
       return [invocation];
@@ -639,7 +639,7 @@ export const ESPells = {
       return `La jalousie pousse ${owner.name} a faire un reproche mesquin à sa cible qui perd <eff-deco effect="DOWN_AP" with-time></eff-deco>. <br/><br>
       Si la cible a plus de points de vie, elle perd aussi  <eff-deco effect="DOWN_AD" with-time></eff-deco>`
     },
-    cooldown: 0,
+    cooldown: 1,
     timer: 0,
     damageInstances: [],
     effectInstances: [{
@@ -686,7 +686,7 @@ export const ESPells = {
       return `"Ta mère c'est une pute" inflige  <dmg-deco amount="${damageInstances[0].amount}" stat="${owner.stats.attack}" type="physical"></dmg-deco> à tous les enemis. <br><br>
       Chaque fois que l'insulte est ratée, ${owner.name} subit les dégâts à la place.`
     },
-    cooldown: 0,
+    cooldown: 1,
     timer: 0,
     damageInstances: [{
       targetsType: ETargetTypes.ALL_ENEMIES,

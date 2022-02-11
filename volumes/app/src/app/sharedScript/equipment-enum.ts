@@ -223,7 +223,7 @@ export const EEquipment = {
     name: 'Veste de marque',
     price: 31,
     description: (damageInstances, owner?) => {
-      return `<strong class="spell-decorator">Seduction</strong> soigne de 25% de la santé maximale au lieu de 10%.`
+      return `<strong class="spell-decorator">Seduction</strong> soigne de 10% de la santé maximale au lieu de 5%.`
     },
     health: 30,
     stats: () => {
@@ -238,7 +238,7 @@ export const EEquipment = {
       let spellUpgrade = actor.spells.find(s => s.name === ESPells.SEDUCTION.name);
 
       if(exists(spellUpgrade)) {
-        spellUpgrade.healInstances[0].amount = 0.25;
+        spellUpgrade.healInstances[0].amount = 0.1;
       }
     }
   },
@@ -251,7 +251,7 @@ export const EEquipment = {
     health: 15,
     stats: () => {
       const stats = new Stats(0,0,0);
-      stats.speed = -8;
+      stats.speed = -4;
       return stats;
     },
     callback: (actor) => {
@@ -277,7 +277,7 @@ export const EEquipment = {
     health: 30,
     stats: () => {
       const stats = new Stats(0,0,0);
-      stats.speed = -5;
+      stats.speed = -2;
       return stats;
     },
     callback: (actor) => {

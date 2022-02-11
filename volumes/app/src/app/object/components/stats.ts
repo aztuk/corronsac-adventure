@@ -25,7 +25,7 @@ export class Stats implements IComponentStats {
       this.power = power;
       this.critical = 5;
       this.criticalDamage = 1.5;
-      this.dodge = 15;
+      this.dodge = 10;
       this.touch = 0;
     }
   }

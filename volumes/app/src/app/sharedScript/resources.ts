@@ -36,6 +36,6 @@ export let EFFECT_TIMERS = {
   DOWN_DODGE: 2,
   DOWN_SPEED: 1,
   DOWN_AD: 2,
-  STUN: 1,
+  STUN: 2,
   TAUNT: 3
 }

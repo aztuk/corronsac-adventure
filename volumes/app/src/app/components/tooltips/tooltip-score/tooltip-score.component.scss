@@ -1,0 +1,35 @@
+@import "../../../../assets/scss/variables";
+@import "../../../../assets/scss/mixins";
+:host {
+    width: 350px;
+    .tooltip-wrapper {
+        padding-left: 60px;
+    }
+    civ-equipment {
+        position: absolute;
+        left: -20px;
+    }
+    .name {
+        font-size: 20px;
+        font-family: $fontFamily;
+    }
+    .description {
+        color: map-get($texts, shade-B);
+        margin: 10px 0;
+    }
+    .value {
+        font-size: 20px;
+        font-family: $fontFamily;
+    }
+    .score-item {
+        margin: 20px 0;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        .title {
+            font-size: 15px;
+            font-family: $fontFamily;
+        }
+    }
+}

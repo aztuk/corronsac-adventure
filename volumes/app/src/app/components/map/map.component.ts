@@ -1,3 +1,4 @@
+import { ScoreService } from './../../services/score.service';
 import { ShopService } from './../../services/shop.service';
 import { ICombat } from './../../sharedScript/interfaces';
 import {CombatService} from '../../services/combat.service';
@@ -36,6 +37,9 @@ export class MapComponent implements OnInit, OnDestroy, AfterViewInit {
   public charSub;
   public currSub;
 
+  public scoreS = ScoreService.getInstance();
+  public score;
+
   public currency;
 
   constructor(private ss: ShopService, private charService: CharactersService, private _router: Router, private ms: MapService, private renderer: Renderer2, private cs: CombatService, private es: EventService) {
@@ -49,6 +53,9 @@ export class MapComponent implements OnInit, OnDestroy, AfterViewInit {
       this._router.navigate(['']);
     }
     this.ms.generateMap();
+    // Update full stuff character stat
+    ScoreService.getInstance().stats.fullStuffCharacters = this.charService.countFullStuff();
+    this.score = this.scoreS.getScore();
   }
 
   ngOnDestroy(): void {

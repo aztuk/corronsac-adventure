@@ -21,7 +21,6 @@ export class LootComponent implements OnInit, OnDestroy {
   public currentLevel;
   public forcedCurrencyEarning: number;
   public selectedLoot;
-  private combatSub;
 
 
   constructor(private cs: CharactersService, private combatService: CombatService, private ss: ShopService, private ms: MapService) {
@@ -35,7 +34,6 @@ export class LootComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-      this.combatSub.unsubscribe();
   }
 
   generateLootRates() {

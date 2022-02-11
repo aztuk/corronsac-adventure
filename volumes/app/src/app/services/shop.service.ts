@@ -1,3 +1,4 @@
+import { ScoreService } from './score.service';
 import { EHero } from './../sharedScript/enums';
 import { ESPells } from './../sharedScript/spells-enum';
 import { ISpellDescription, IEquipmentDescription, IEntityActor, IShopItem } from './../sharedScript/interfaces';
@@ -80,10 +81,14 @@ export class ShopService {
   }
 
   addCurrency(value: number) {
+    const score = ScoreService.getInstance();
+    score.stats.goldAcquired += value;
     this.currency += value;
   }
 
   removeCurrency(value:number) {
+    const score = ScoreService.getInstance();
+    score.stats.goldSpent += value;
     this.currency -= value;
 
     if(this.currency < 0){

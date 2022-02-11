@@ -1,0 +1,117 @@
+<div class="tooltip-wrapper">
+    <div class="flex space-between">
+        <strong class="name">Score</strong>
+        <div class="value">
+            {{ total }}
+        </div>
+    </div>
+
+    <div class="score-item">
+        <!--<div class="score-item" *ngIf="entity.score.floorsClimbed > 0">-->
+        <div>
+            <div class="title">Ascension</div>
+            <div class="stat">{{ entity.stats.floorsClimbed }} étages franchis</div>
+        </div>
+        <div class="value">
+            {{ entity.score.floorsClimbed }}
+        </div>
+    </div>
+
+    <div class="score-item">
+        <!--<div class="score-item" *ngIf="entity.score.tierOneKilled > 0">-->
+        <div class="">
+            <div class="title">Tueur de monstres</div>
+            <div class="stat">{{ entity.stats.tierOneKilled }} monstres basiques tués</div>
+        </div>
+        <div class="value">
+            {{ entity.score.tierOneKilled }}
+        </div>
+    </div>
+
+    <div class="score-item">
+        <div class="">
+            <div class="title">David contre Goliath</div>
+            <div class="stat">{{ entity.stats.tierTwoKilled }} Nemesis tués</div>
+        </div>
+        <div class="value">
+            {{ entity.score.tierTwoKilled }}
+        </div>
+    </div>
+    <div class="score-item">
+        <div class="">
+            <div class="title">Victoire</div>
+            <div class="stat">Boss tué</div>
+        </div>
+        <div class="value">
+            {{ entity.score.tierThreeKilled }}
+        </div>
+    </div>
+
+    <div class="score-item">
+        <div class="">
+            <div class="title">Riche comme cresus</div>
+            <div class="stat">{{ entity.stats.goldAcquired }} euros gagnés</div>
+        </div>
+        <div class="value">
+            {{ entity.score.goldAcquired }}
+        </div>
+    </div>
+    <div class="score-item">
+        <div class="">
+            <div class="title">Reine du shopping</div>
+            <div class="stat">{{ entity.stats.goldSpent }} euros dépensés</div>
+        </div>
+        <div class="value">
+            {{ entity.score.goldSpent }}
+        </div>
+    </div>
+    <div class="score-item">
+        <div class="">
+            <div class="title">Plus on est de fous</div>
+            <div class="stat">{{ entity.stats.sizeTeam }} aventuriers</div>
+        </div>
+        <div class="value">
+            {{ entity.score.sizeTeam }}
+        </div>
+    </div>
+
+    <div class="score-item">
+        <div class="">
+            <div class="title">Plus on rit</div>
+            <div class="stat">{{ entity.stats.fullStuffCharacters }} aventuriers suréquipés</div>
+        </div>
+        <div class="value">
+            {{ entity.score.fullStuffCharacters }}
+        </div>
+    </div>
+
+    <div class="score-item">
+        <div class="">
+            <div class="title">Dévastateur</div>
+            <div class="stat">{{ entity.stats.damageInflicted }} dégâts infligés</div>
+        </div>
+        <div class="value">
+            {{ entity.score.damageInflicted }}
+        </div>
+    </div>
+    <div class="score-item">
+        <div class="">
+            <div class="title">Bouclier humain</div>
+            <div class="stat">{{ entity.stats.damageReceived }} dégâts reçus</div>
+        </div>
+        <div class="value">
+            {{ entity.score.damageReceived }}
+        </div>
+    </div>
+    <div class="score-item">
+        <div class="">
+            <div class="title">Aucun instinct de survie</div>
+            <div class="stat">{{ entity.stats.death }} morts au combat</div>
+        </div>
+        <div class="value">
+            {{ entity.score.death }}
+        </div>
+    </div>
+
+
+</div>
