@@ -7,6 +7,8 @@ import { EventComponent } from './components/panels/event/event.component';
 import { RestComponent } from './components/panels/rest/rest.component';
 import { TreasureComponent } from './components/panels/treasure/treasure.component';
 import { ShopComponent } from './components/panels/shop/shop.component';
+import { LootComponent } from './components/panels/loot/loot.component';
+import { EndComponent } from './components/panels/end/end.component';
 
 const routes: Routes = [{
   path: '',
@@ -29,6 +31,12 @@ const routes: Routes = [{
 }, {
   path: 'treasure',
   component: TreasureComponent
+}, {
+  path: 'loot',
+  component: LootComponent
+}, {
+  path: 'end',
+  component: EndComponent
 }];
 
 @NgModule({

@@ -52,6 +52,11 @@ export class MapComponent implements OnInit, OnDestroy, AfterViewInit {
     if (this.characters.length === 0) {
       this._router.navigate(['']);
     }
+
+    if(this.charService.isPartyDead()) {
+      this._router.navigate(['end']);
+    }
+
     this.ms.generateMap();
     // Update full stuff character stat
     ScoreService.getInstance().stats.fullStuffCharacters = this.charService.countFullStuff();

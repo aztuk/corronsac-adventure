@@ -1,2 +1,2 @@
-<span *ngIf="!isHeal"> {{ textDamage }}</span>
-<span class="heal" *ngIf="isHeal"> {{ textHeal }}</span>
+<span *ngIf="!isHeal"> {{ textDamage | number:'1.0-0'}}</span>
+<span class="heal" *ngIf="isHeal"> {{ textHeal  | number:'1.0-0' }}</span>

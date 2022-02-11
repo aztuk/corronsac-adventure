@@ -29,7 +29,7 @@ export class TreasureComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.ms.antiCheat([ELevelType.TREASURE]);
+    this.ms.antiCheat([ELevelType.TREASURE, ELevelType.COMBAT_TIER_2]);
     this.generateLootTable();
     this.treasure = getRandomElementsInArray(this.lootTable, 3);
     this.ss.addCurrency(200);

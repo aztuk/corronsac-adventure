@@ -1067,7 +1067,7 @@ export const ESPells = {
       return `Francis Lalane tente de convaincre la mairie de lui donner plus de pouvoirs. Il invoque deux conseillers municipaux.`
     },
     cooldown: 4,
-    timer: 2,
+    timer: 0,
     invocation: ($this) => {
       let inv = [];
 
@@ -1077,6 +1077,8 @@ export const ESPells = {
         actor.health = new Health(40);
         actor.spells.push(new SpellDescription(ESPells.BASIC));
         actor.spells.push(new SpellDescription(ESPells.PROTECTION));
+
+        inv.push(actor);
       }
 
       return inv;

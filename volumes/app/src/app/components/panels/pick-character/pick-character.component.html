@@ -2,7 +2,7 @@
     <div class="character " *ngFor="let char of pickableCharacters">
         <char-deco [attr.character]="char.name"></char-deco>
         <div class="identity">
-            <div class="name spec-{{char.specialty}}">{{char.name}}</div>
+            <div class="name">{{char.name}}</div>
             <div class="specialty">{{char.specialty | specialtyName}}</div>
         </div>
 

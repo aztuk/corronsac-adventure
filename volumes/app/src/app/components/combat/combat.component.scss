@@ -36,6 +36,12 @@
         align-items: center;
         position: absolute;
         bottom: 30px;
+        .versus {
+            color: white;
+            filter: drop-shadow(0 0 8px black);
+            font-size: 30px;
+            font-family: $fontFamily;
+        }
         char-deco {
             position: absolute;
             left: -60px;
@@ -54,18 +60,44 @@
             z-index: 2;
             position: relative;
             border-radius: 5px;
-            padding-left: 10px;
+            padding: 5px 10px 5px 5px;
             display: flex;
             align-items: center;
-            min-width: 200px;
+            //min-width: 200px;
             .text {
                 color: #1d150c;
                 font-size: 20px;
                 font-family: $fontFamily;
             }
-            civ-spell-list {
-                padding: 3px;
+        }
+        .target {
+            .turn-wrapper {
+                padding-right: 10px;
+                padding-left: 0px;
+                flex-direction: row-reverse;
             }
+            char-deco {
+                right: -60px;
+                left: auto;
+                transform: scaleX(-1);
+            }
+            civ-progress-bar {
+                right: -25px;
+                left: auto;
+            }
+            civ-spells {
+                &:hover {
+                    filter: none;
+                    cursor: normal;
+                }
+                margin-left: 5px;
+            }
+        }
+        .turn,
+        .target {
+            margin: 0 80px;
+            position: relative;
+            min-width: 200px;
         }
     }
 }

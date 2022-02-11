@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { ScoreService } from './score.service';
 import { EquipmentDescription } from './../object/components/equipment-description';
 import {ESPells} from '../sharedScript/spells-enum';
@@ -26,7 +27,7 @@ export class CharactersService {
     return this.characters$.getValue();
   }
 
-  constructor() {
+  constructor(private _router: Router) {
   }
 
   countFullStuff() {
@@ -56,6 +57,10 @@ export class CharactersService {
       case EHero.LOIC:
         return this.createLoic(false);
     }
+  }
+
+  isPartyDead() {
+    return this.characters.every(a => a.health.isDead);
   }
 
   addCharacter(name: EHero) {

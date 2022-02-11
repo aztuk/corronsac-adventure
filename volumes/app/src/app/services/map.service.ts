@@ -30,7 +30,7 @@ export class MapService {
   }
 
   typeBucket = {
-    'shop': 5,
+    'shop': 8,
     'heal': 12,
     'event': 22,
     'elite': 8,
@@ -142,6 +142,10 @@ export class MapService {
     }
 
     // Sibling-rooms that are connected to the same parent-room can't be the same type.
+    if (floor < 3 && (pickedType === ELevelType.SHOP)) {
+      this.setTypeWithRules(floor, room, node);
+      return;
+    }
 
     //MonsterRoomElite and RestRoom can't be assigned to rooms below 6th floor.
     if (floor < 5 && (pickedType === ELevelType.HEAL || pickedType === ELevelType.COMBAT_TIER_2)) {

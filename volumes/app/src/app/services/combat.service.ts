@@ -109,10 +109,6 @@ export class CombatService {
     return this.actors.filter((a) => !a.possessed);
   }
 
-  isCombatLost(): boolean {
-    return this.getAliveActors(this.getAllies()).length === 0;
-  }
-
   isCombatWin(): boolean {
     return this.getAliveActors(this.getEnemies()).length === 0;
   }

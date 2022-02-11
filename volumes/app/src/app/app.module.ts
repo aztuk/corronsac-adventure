@@ -47,6 +47,7 @@ import { RestComponent } from './components/panels/rest/rest.component';
 import { ShopComponent } from './components/panels/shop/shop.component';
 import { TreasureComponent } from './components/panels/treasure/treasure.component';
 import { TooltipScoreComponent } from './components/tooltips/tooltip-score/tooltip-score.component';
+import { EndComponent } from './components/panels/end/end.component';
 
 
 @NgModule({
@@ -96,6 +97,7 @@ import { TooltipScoreComponent } from './components/tooltips/tooltip-score/toolt
     ShopComponent,
     TreasureComponent,
     TooltipScoreComponent,
+    EndComponent,
   ],
   imports: [
     BrowserModule,

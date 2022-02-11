@@ -61,9 +61,6 @@ export class CombatComponent implements OnInit, OnDestroy {
 
   set mode(value) {
     this.mode$ = value;
-    if (value === ECombatState.LOST) {
-      this.endGame();
-    }
     if (value === ECombatState.WIN) {
       this.getLoot();
     }
@@ -174,12 +171,6 @@ export class CombatComponent implements OnInit, OnDestroy {
   }
 
   setCombatMode() {
-    // CHECK LOSE
-    if (this.combatService.isCombatLost()) {
-      this.mode = ECombatState.LOST;
-      return;
-    }
-
     // CHECK WIN
     if (this.combatService.isCombatWin()) {
       this.mode = ECombatState.WIN;
@@ -210,19 +201,16 @@ export class CombatComponent implements OnInit, OnDestroy {
   }
 
   // LOST
-  endGame() {
-    console.log('the game is lost');
-  }
-
-  // LOST
   getLoot() {
     setTimeout(() => {
-      let lootComponent = this.cfs.createComponent(this.lootContainer, LootComponent, true);
-      lootComponent.instance.retrievedLoot.subscribe((a) => {
+      if(this.ms.currentLevel.type === ELevelType.COMBAT_TIER_1) {
+        this._router.navigate(['loot']);
+      } else if(this.ms.currentLevel.type === ELevelType.COMBAT_TIER_2){
+        this._router.navigate(['treasure']);
+      } else if(this.ms.currentLevel.type === ELevelType.COMBAT_TIER_3) {
         this.ms.finished();
-        this._router.navigate(['map']);
-        lootComponent.destroy();
-      });
+        this._router.navigate(['end']);
+      }
 
     },
     1000);

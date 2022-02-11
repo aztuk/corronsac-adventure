@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { MapService } from './../../../services/map.service';
 import { ShopService } from './../../../services/shop.service';
 import { CombatService } from './../../../services/combat.service';
@@ -5,7 +6,7 @@ import { IEntityActor } from './../../../sharedScript/interfaces';
 import { CharactersService } from './../../../services/characters.service';
 import { Component, OnInit, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { createWeightedTable, getRandomElementsInArray, getRandomInArray, getRandomInt, weightedRand } from '../../../sharedScript/helpers';
-import { ELootType } from '../../../sharedScript/enums';
+import { ELevelType, ELootType } from '../../../sharedScript/enums';
 
 @Component({
   selector: 'civ-loot',
@@ -23,11 +24,15 @@ export class LootComponent implements OnInit, OnDestroy {
   public selectedLoot;
 
 
-  constructor(private cs: CharactersService, private combatService: CombatService, private ss: ShopService, private ms: MapService) {
+  constructor(private cs: CharactersService, private combatService: CombatService, private ss: ShopService, private ms: MapService, private _router: Router) {
     this.currentLevel = this.ms.currentLevel;
    }
 
   ngOnInit(): void {
+    this.ms.antiCheat([ELevelType.COMBAT_TIER_1]);
+    if(this.combatService.getEnemies().some(a => !a.health.isDead)) {
+      this._router.navigate(['combat']);
+    }
     this.forcedCurrencyEarning = 3 + (this.currentLevel.floor * getRandomInt(4, 6));
     this.generateLootRates();
     this.generateLootTable();
@@ -124,7 +129,8 @@ export class LootComponent implements OnInit, OnDestroy {
         this.ss.addCurrency(this.selectedLoot.value);
       }
       this.ss.addCurrency(this.forcedCurrencyEarning);
-      this.retrievedLoot.emit(true);
+      this.ms.finished();
+      this._router.navigate(['map']);
     }
   }
 
