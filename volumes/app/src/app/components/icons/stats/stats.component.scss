@@ -5,18 +5,17 @@
     background-repeat: no-repeat;
     background-size: cover;
     position: relative;
-    filter: brightness(.3);
     &.attack {
-        background-image: url('../../../../assets/images/stats/attack.png');
+        background-image: url('../../../../assets/images/stats/ad.png');
     }
     &.power {
-        background-image: url('../../../../assets/images/stats/power.png');
+        background-image: url('../../../../assets/images/stats/ap.png');
     }
     &.critical {
-        background-image: url('../../../../assets/images/stats/critical.png');
+        background-image: url('../../../../assets/images/stats/crit.png');
     }
     &.criticalDamage {
-        background-image: url('../../../../assets/images/stats/criticalDamage.png');
+        background-image: url('../../../../assets/images/stats/crit-dmg.png');
     }
     &.speed {
         background-image: url('../../../../assets/images/stats/speed.png');

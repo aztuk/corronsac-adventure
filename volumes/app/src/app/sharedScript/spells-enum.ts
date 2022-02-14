@@ -6,7 +6,7 @@ import {Health} from '../object/components/health';
 import {Stats} from '../object/components/stats';
 import {Actor} from '../object/entities/actor';
 import {EAttackStatus, EClass, EDamageType, EEffects, EHero, ETargetTypes} from './enums';
-import {dice} from './helpers';
+import {dice, exists} from './helpers';
 import {SpellCast} from '../object/system/spellCast';
 import { EEquipment } from './equipment-enum';
 
@@ -31,13 +31,14 @@ export const ESPells = {
       targetsType: ETargetTypes.TARGET,
       damageType: EDamageType.PHYSIC,
       amount: 1
-    }]
+    }],
+    effectInstances: []
   },
 
   /* SORTS DE ADRIEN */
   ESCALADE: {
     name: 'Escalade',
-    price: 41,
+    price: 82,
     description: (damageInstances, owner?) => {
       let text = `Escalade la cible infligeant <dmg-deco amount="${damageInstances[0].amount}" stat="${owner.stats.attack}" type="physical"></dmg-deco>.
       Si la cible est déjà <eff-deco effect="STUN"></eff-deco>, l'escalade inflige <dmg-deco amount="${damageInstances[1].amount}" stat="${owner.stats.attack}" type="physical"></dmg-deco> supplémentaire. <br/><br/>
@@ -76,7 +77,7 @@ export const ESPells = {
   },
   SMOKE_SCREEN: {
     name: 'Ecran de fumée',
-    price: 19,
+    price: 38,
     description: (damageInstances, owner?) => {
       return `Fume aggressivement, provoquant un nuage de fumée permettant de gagner
       <eff-deco effect="UP_DODGE" with-time></eff-deco>
@@ -96,7 +97,7 @@ export const ESPells = {
   },
   AMANDINE: {
     name: 'Amandine',
-    price: 37,
+    price: 74,
     description: (damageInstances, owner?) => {
       let text = `Appelle Amandine à la rescousse qui par sa présence inattendue inflige <dmg-deco amount="${damageInstances[0].amount}" stat="${owner.stats.attack}" type="physical"></dmg-deco> à tous les enemis.<br/><br/>
       ${owner.name} gagne <eff-deco effect="UP_CRIT_DMG" with-time></eff-deco>`;
@@ -126,7 +127,7 @@ export const ESPells = {
   /* SORTS DE LOIC */
   DISCUSSION_INSENSEE: {
     name: 'Discussion insensée',
-    price: 39,
+    price: 78,
     description: (damageInstances, owner?) => {
       let text =  `Entame une discussion avec sa cible lui infligeant <dmg-deco amount="${damageInstances[0].amount}" stat="${owner.stats.attack}" type="physical"></dmg-deco>.<br/><br/>
       Si le coup est critique, la cible reste sans voix et est <eff-deco effect="STUN" with-time></eff-deco>`;
@@ -155,7 +156,7 @@ export const ESPells = {
   },
   FRONT_LISSE: {
     name: 'Front lisse',
-    price: 20,
+    price: 40,
     description: (damageInstances, owner?) => {
       return `Les reflets du front lisse de ${owner.name} aveuglent ses enemis. Ce qui lui permet de gagner  <eff-deco effect="UP_CRIT" with-time></eff-deco>.`
     },
@@ -168,7 +169,7 @@ export const ESPells = {
   },
   TETE_PREMIERE: {
     name: 'Tête la première',
-    price: 36,
+    price: 62,
     description: (damageInstances, owner?) => {
       let text = `Envoie un violent coup de tête vers l'avant, sans réfléchir, s'infligeant au passage  <dmg-deco amount="${damageInstances[0].amount}" stat="${owner.stats.attack}" type="physical"></dmg-deco>
        mais aussi <dmg-deco amount="${damageInstances[1].amount}" stat="${owner.stats.attack}" type="physical"></dmg-deco> à tous les enemis`;
@@ -197,7 +198,7 @@ export const ESPells = {
   /* SORTS DE KEVIN */
   MAURICE: {
     name: 'Maurice',
-    price: 33,
+    price: 66,
     description: (damageInstances, owner?) => {
       return `Fait goûter une portion de Maurice à ${damageInstances[0].targetsAmount} de ses adversaires leur infligeant <dmg-deco amount="${damageInstances[0].amount}" stat="${owner.stats.power}" type="magical"></dmg-deco>.<br/><br/>
       Si la cible sélectionnée est empoisonnée, inflige   <dmg-deco amount="${damageInstances[1].amount}" stat="${owner.stats.power}" type="magical"></dmg-deco> supplémentaires.`
@@ -220,7 +221,7 @@ export const ESPells = {
   },
   PIGEON: {
     name: 'Pigeon',
-    price: 44,
+    price: 88,
     description: (damageInstances, owner?) => {
       let text =`Propose un pigeon, alors que personne n'a envie. Tous les enemis sont empoisonnés infligeant <eff-deco effect="POISON" with-time power="${owner.stats.power}"></eff-deco>.`
       const equipment = owner.equipment.find(e => e.name === EEquipment.BALLANTINES.name);
@@ -231,7 +232,7 @@ export const ESPells = {
 
       return text;
     },
-    cooldown: 0,
+    cooldown: 2,
     damageInstances: [],
     effectInstances: [{
       targetsType: ETargetTypes.ALL_ENEMIES,
@@ -240,7 +241,7 @@ export const ESPells = {
   },
   SNAKES: {
     name: 'Serpents',
-    price: 30,
+    price: 60,
     description: (damageInstances, owner?) => {
       let text = `Invoque 1 serpent rabougri qui rejoindra l'équipe.`;
       const equipment = owner.equipment.find(e => e.name === EEquipment.SOURIS.name);
@@ -251,7 +252,7 @@ export const ESPells = {
 
       return text;
     },
-    cooldown: 0,
+    cooldown: 2,
     invocation: ($this) => {
       const snake = new Actor('Serpent', EClass.INVOCATION, true);
       snake.stats$ = new Stats(2, 0, 25);
@@ -266,7 +267,7 @@ export const ESPells = {
   },
   SNAKES_BITE: {
     name: 'Morsure de serpent',
-    price: 12,
+    price: 24,
     description: (damageInstances, owner?) => {
       return `Tente d'empoisonner la cible infligeant  <eff-deco effect="POISON" with-time power="${owner.stats.power}"></eff-deco>, environ 50% de chance de réussir.`
     },
@@ -284,7 +285,7 @@ export const ESPells = {
   /* SORTS DE QUENTIN */
   SMART_LIFE: {
     name: 'Smart life',
-    price: 33,
+    price: 67,
     description: (damageInstances, owner?) => {
       let text = `Propose un smart life à ${damageInstances[0].targetsAmount} de ses adversaires leur infligeant <dmg-deco amount="${damageInstances[0].amount}" stat="${owner.stats.power}" type="magical"></dmg-deco>.<br/><br/>
       Chaque cible touché augmente les dégâts de 8% pour la prochaine utilisation de ce sort.`;
@@ -310,7 +311,7 @@ export const ESPells = {
   },
   DEBAT_POLITIQUE: {
     name: 'Débat politique',
-    price: 36,
+    price: 73,
     description: (damageInstances, owner?) => {
       return `Lance un ennuyeux débat politique à sa cible lui infligeant <dmg-deco amount="${damageInstances[0].amount}" stat="${owner.stats.power}" type="magical"></dmg-deco>.`
     },
@@ -324,7 +325,7 @@ export const ESPells = {
   },
   FUITE: {
     name: 'Fuite',
-    price: 27,
+    price: 45,
     description: (damageInstances, owner?) => {
       let text = `Ne donne plus de nouvelles, ce qui lui permet de gagner  <eff-deco effect="UP_AP" with-time></eff-deco>.`;
       const equipment = owner.equipment.find(e => e.name === EEquipment.DISCORD.name);
@@ -346,7 +347,7 @@ export const ESPells = {
   /* SORTS DE CLEMENT */
   JONGLAGE: {
     name: 'Jonglage',
-    price: 34,
+    price: 69,
     description: (damageInstances, owner?, healInstances?) => {
       let text = `Se met à jongler pour impressionner sa cible et lui inflige  <dmg-deco amount="${damageInstances[0].amount}" stat="${owner.stats.attack}" type="physical"></dmg-deco>.<br/><br/>
       Si ça cible est tuée par son impressionante prestation, ${owner.name} récupère <strong class="heal">${Math.round(healInstances[0].amount * owner.health.max)} PV</strong>.`;
@@ -375,7 +376,7 @@ export const ESPells = {
   },
   TRAINING: {
     name: 'Entraînement',
-    price: 26,
+    price: 53,
     description: (damageInstances, owner?, healInstances?) => {
       return `Se lance dans un coaching individuel pour chaque membre de son équipe, ce qui leur font gagner  <eff-deco effect="UP_AD" with-time></eff-deco>.<br/><br/>
       ${owner.name} en profite pour se reposer et récupère <strong class="heal">${Math.round(healInstances[0].amount * owner.health.max)} PV</strong>.`
@@ -393,7 +394,7 @@ export const ESPells = {
   },
   SEDUCTION: {
     name: 'Séduction',
-    price: 47,
+    price: 95,
     description: (damageInstances, owner?, healInstances?) => {
       let text = `Le regard de ${owner.name} emplie ses adversaires d'envie, qui finisse par ne penser qu'à lui. ${owner.name} gagne <eff-deco effect="TAUNT" with-time></eff-deco>.<br/><br/>
       La confiance engendrée lui permet de récupèrer <strong class="heal">${Math.round(healInstances[0].amount * owner.health.max)} PV</strong>.`;
@@ -420,7 +421,7 @@ export const ESPells = {
   /* SORTS DE COSTY */
   NOOB: {
     name: 'Noob',
-    price: 31,
+    price: 61,
     description: (damageInstances, owner?, healInstances?) => {
       let text = `Essaye un nouveau jeu sans lire les règles, faisant n'importe quoi. Ses adversaires sont abasourdis et perdent <eff-deco effect="DOWN_DODGE" with-time></eff-deco>.`;
       const equipment = owner.equipment.find(e => e.name === EEquipment.MANETTE_XBOX.name);
@@ -442,7 +443,7 @@ export const ESPells = {
   },
   PLAYLIST: {
     name: 'Playlist',
-    price: 36,
+    price: 71,
     description: (damageInstances, owner?, healInstances?) => {
       let text = `Lance une bonne playlist qui encense ses alliés leur permettant de gagner <eff-deco effect="UP_AD" with-time></eff-deco> et <eff-deco effect="UP_AP" with-time></eff-deco>.`;
       const equipment = owner.equipment.find(e => e.name === EEquipment.MANETTE_XBOX.name);
@@ -467,7 +468,7 @@ export const ESPells = {
   },
   TRAGO_SOCIAL: {
     name: 'Trago social',
-    price: 48,
+    price: 93,
     description: (damageInstances, owner?, healInstances?) => {
       return `Propose un trago social à tous ses alliés, qui acceptent et récupèrent <strong class="heal">${Math.round(healInstances[0].amount * owner.health.max)} PV</strong>.`
     },
@@ -491,7 +492,7 @@ export const ESPells = {
     timer: 1,
     invocation: ($this) => {
       const invocation = new Actor('Policier', EClass.INVOCATION, false);
-      invocation.stats$ = new Stats(4, 0, 28);
+      invocation.stats$ = new Stats(4, 0, 42);
       invocation.health = new Health(12);
       invocation.spells.push(new SpellDescription(ESPells.BASIC));
 
@@ -544,12 +545,12 @@ export const ESPells = {
       return `Se voyant à peine rempli, ${owner.name} décide d'appeler ApéroMinute pour se soigner de <strong class="heal">${Math.round(healInstances[0].amount * owner.health.max)} PV</strong>.`
     },
     cooldown: 1,
-    timer: 0,
+    timer: 1,
     damageInstances: [],
     effectInstances: [],
     healInstances: [{
       targetsType: ETargetTypes.SELF,
-      amount: 0.15,
+      amount: 0.2,
     }]
   },
   DELTA: {
@@ -559,11 +560,13 @@ export const ESPells = {
       return `Contamine la cible et empoisonne la cible infligeant  <eff-deco effect="POISON" with-time power="${owner.stats.power}"></eff-deco>. <br/> <br/> Si la cible est déjà empoissonée, invoque Vaccin.`
     },
     cooldown: 2,
+    timer: 1,
     invocation: ($this) => {
-      if ($this.targets[0].effects.find((e) => e.effect === EEffects.POISON).stacks > 1) {
+      if (exists($this._combatActors.target.effects.find((e) => e.effect === EEffects.POISON))) {
         const invocation = new Actor('Vaccin', EClass.INVOCATION, false);
-        invocation.stats$ = new Stats(4, 1, 42);
-        invocation.health = new Health(37);
+        invocation.stats$ = new Stats(6, 0, 38);
+        invocation.health = new Health(30);
+        invocation.spells.push(new SpellDescription(ESPells.BASIC));
         invocation.spells.push(new SpellDescription(ESPells.INJECTION));
 
         return [invocation];
@@ -587,11 +590,13 @@ export const ESPells = {
       Si la cible est déjà <strong class="effect-decorator">étourdit</strong>, invoque Covid.`
     },
     cooldown: 2,
+    timer: 1,
     invocation: ($this) => {
-      if ($this.targets[0].effects.find((e) => e.effect === EEffects.STUN).timer > 1) {
+      if (exists($this._combatActors.target.effects.find((e) => e.effect === EEffects.STUN))) {
         const invocation = new Actor('Covid', EClass.INVOCATION, false);
-        invocation.stats$ = new Stats(1, 4, 23);
+        invocation.stats$ = new Stats(6, 6, 32);
         invocation.health = new Health(26);
+        invocation.spells.push(new SpellDescription(ESPells.BASIC));
         invocation.spells.push(new SpellDescription(ESPells.DELTA));
 
         return [invocation];
@@ -614,20 +619,20 @@ export const ESPells = {
     name: 'Cris stridents',
     price: 16,
     description: (damageInstances, owner?, healInstances?) => {
-      return `Les enfants foutent un bordel monstre perçant les tympans de 3 enemis et infligeant  <dmg-deco amount="${damageInstances[0].amount}" stat="${owner.stats.attack}" type="physical"></dmg-deco>. <br/><br/>
+      return `Les enfants foutent un bordel monstre perçant les tympans de 2 enemis et infligeant  <dmg-deco amount="${damageInstances[0].amount}" stat="${owner.stats.attack}" type="physical"></dmg-deco>. <br/><br/>
       Les cibles perdent <eff-deco effect="DOWN_AD" with-time></eff-deco>.`
     },
     cooldown: 0,
     timer: 0,
     damageInstances: [{
       targetsType: ETargetTypes.RANDOM_ENEMY,
-      targetsAmount: 3,
+      targetsAmount: 2,
       damageType: EDamageType.PHYSIC,
-      amount: 0.5
+      amount: 0.8
     }],
     effectInstances: [{
       targetsType: ETargetTypes.RANDOM_ENEMY,
-      targetsAmount: 3,
+      targetsAmount: 2,
       effect: EEffects.DOWN_AD
     }],
     healInstances: []
@@ -636,16 +641,15 @@ export const ESPells = {
     name: 'Reproche',
     price: 19,
     description: (damageInstances, owner?, healInstances?) => {
-      return `La jalousie pousse ${owner.name} a faire un reproche mesquin à sa cible qui perd <eff-deco effect="DOWN_AP" with-time></eff-deco>. <br/><br>
-      Si la cible a plus de points de vie, elle perd aussi  <eff-deco effect="DOWN_AD" with-time></eff-deco>`
+      return `La jalousie pousse ${owner.name} a faire un reproche mesquin à sa cible et gagne <eff-deco effect="UP_AD" with-time></eff-deco>. <br/><br>
+      Si la cible a plus de points de vie, elle perd  <eff-deco effect="DOWN_AD" with-time></eff-deco>`
     },
     cooldown: 1,
     timer: 0,
     damageInstances: [],
     effectInstances: [{
-      targetsType: ETargetTypes.RANDOM_ENEMY,
-      targetsAmount: 3,
-      effect: EEffects.DOWN_AP
+      targetsType: ETargetTypes.SELF,
+      effect: EEffects.UP_AD
     }, {
       targetsType: ETargetTypes.TARGET,
       effect: EEffects.DOWN_AD,
@@ -683,15 +687,16 @@ export const ESPells = {
     name: 'Insultes',
     price: 11,
     description: (damageInstances, owner?, healInstances?) => {
-      return `"Ta mère c'est une pute" inflige  <dmg-deco amount="${damageInstances[0].amount}" stat="${owner.stats.attack}" type="physical"></dmg-deco> à tous les enemis. <br><br>
+      return `"Ta mère c'est une pute" inflige  <dmg-deco amount="${damageInstances[0].amount}" stat="${owner.stats.attack}" type="physical"></dmg-deco> à 2 enemis. <br><br>
       Chaque fois que l'insulte est ratée, ${owner.name} subit les dégâts à la place.`
     },
     cooldown: 1,
     timer: 0,
     damageInstances: [{
-      targetsType: ETargetTypes.ALL_ENEMIES,
+      targetsType: ETargetTypes.RANDOM_ENEMY,
+      targetsAmount: 2,
       damageType: EDamageType.PHYSIC,
-      amount: 0.6,
+      amount: 0.7,
       onMissed: ($this, damageInstance?) => {
         $this.createDamageInstances([{
           targetsType: $this._caster,
@@ -715,7 +720,7 @@ export const ESPells = {
     damageInstances: [{
       targetsType: ETargetTypes.TARGET,
       damageType: EDamageType.PHYSIC,
-      amount: 1.2
+      amount: 0.8
     }],
     effectInstances: [{
       targetsType: ETargetTypes.TARGET,
@@ -1033,12 +1038,13 @@ export const ESPells = {
     name: 'Course de tracteur',
     price: 0,
     description: (damageInstances, owner?, healInstances?) => {
-      return `Francis Lalane prend son tracteur et poursuit ses adversaires infligeant <dmg-deco amount="${damageInstances[0].amount}" stat="${owner.stats.attack}" type="physical"></dmg-deco> à tous les enemis`
+      return `Francis Lalane prend son tracteur et poursuit ses adversaires infligeant <dmg-deco amount="${damageInstances[0].amount}" stat="${owner.stats.attack}" type="physical"></dmg-deco> à 3 enemis`
     },
     cooldown: 2,
     timer: 0,
     damageInstances: [{
-      targetsType: ETargetTypes.ALL_ENEMIES,
+      targetsType: ETargetTypes.RANDOM_ENEMY,
+      targetsAmount: 3,
       damageType: EDamageType.PHYSIC,
       amount: 1
     }],
@@ -1049,14 +1055,17 @@ export const ESPells = {
     name: 'Rugissment',
     price: 0,
     description: (damageInstances, owner?, healInstances?) => {
-      return `Gueule tellement fort que les enemis perdent <eff-deco effect="DOWN_AD" with-time></eff-deco>.`
+      return `Gueule tellement fort que les enemis perdent <eff-deco effect="DOWN_AD" with-time></eff-deco> alors que lui gagne <eff-deco effect="UP_AD" with-time></eff-deco>.`
     },
-    cooldown: 2,
+    cooldown: 1,
     timer: 1,
     damageInstances: [],
     effectInstances: [{
       targetsType: ETargetTypes.ALL_ENEMIES,
       effect: EEffects.DOWN_AD,
+    },{
+      targetsType: ETargetTypes.SELF,
+      effect: EEffects.UP_AD,
     }],
     healInstances: []
   },
@@ -1066,7 +1075,7 @@ export const ESPells = {
     description: (damageInstances, owner?, healInstances?) => {
       return `Francis Lalane tente de convaincre la mairie de lui donner plus de pouvoirs. Il invoque deux conseillers municipaux.`
     },
-    cooldown: 4,
+    cooldown: 3,
     timer: 0,
     invocation: ($this) => {
       let inv = [];

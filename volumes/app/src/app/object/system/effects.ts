@@ -52,7 +52,7 @@ export class Effects implements ISystemEffect {
   }
 
   runPoison(): ISystemDamage {
-    return new Damage(this.attacker, this.target, EDamageType.MAGIC, this.getPoisonDamage());
+    return new Damage(this.attacker, this.target, EDamageType.DOT, this.getPoisonDamage());
   }
 
   getPoisonDamage() {

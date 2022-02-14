@@ -19,7 +19,7 @@ import {
   ViewChildren,
   ViewContainerRef
 } from '@angular/core';
-import {ECombatState, ELevelType} from '../../sharedScript/enums';
+import {ECombatState, EDamageType, ELevelType} from '../../sharedScript/enums';
 import {exists, getRandomInArray} from '../../sharedScript/helpers';
 import {CharactersService} from '../../services/characters.service';
 import {Router} from '@angular/router';
@@ -51,7 +51,7 @@ export class CombatComponent implements OnInit, OnDestroy {
   public actorSubscription;
 
   constructor(private scoreService: ScoreService, private queue: CombatQueueService, private combatService: CombatService, private _router: Router, private ms: MapService, private cs: CharactersService, private cfs: ComponentFactoryService) {
-    this.actorSubscription = this.combatService.actors$.subscribe((actors) => this.actors = actors);
+
   }
 
   // STATE MACHINE
@@ -74,6 +74,7 @@ export class CombatComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.ms.antiCheat([ELevelType.COMBAT_TIER_1, ELevelType.COMBAT_TIER_2, ELevelType.COMBAT_TIER_3]);
+    this.actorSubscription = this.combatService.actors$.subscribe((actors) => this.actors = actors);
     this.combatService.initCombat(this.ms.currentLevel);
     this.queue.createQueue(this.actors);
   }
@@ -91,6 +92,9 @@ export class CombatComponent implements OnInit, OnDestroy {
 
   // WAITING
   selectNextActorTurn(): void {
+    if(this.cs.isPartyDead()){
+      this._router.navigate(['end']);
+    }
     this.setTarget(this.target);
     this.queue.findNextActorTurn((nextActor) => {
       this.actorTurn = nextActor;
@@ -115,9 +119,9 @@ export class CombatComponent implements OnInit, OnDestroy {
 
   abstractTurn(spell: SpellCast): void {
     this.populateLog(spell);
+    this.invoke(spell.invocations);
     this.applyHeals(spell.heals);
     this.applyDamages(spell.damages);
-    this.invoke(spell.invocations);
     this.setCombatMode();
   }
 
@@ -155,7 +159,9 @@ export class CombatComponent implements OnInit, OnDestroy {
     let caster: DamageAnimationDirective = actors.find((c) => c.id === cast.caster.id);
     let target: DamageAnimationDirective = actors.find((c) => c.id === cast.target.id);
     if (cast instanceof Damage) {
-      caster.animateHit(cast);
+      if(cast.damageType !== EDamageType.DOT){
+        caster.animateHit(cast);
+      }
       target.animateHurt(cast);
     }
     if (cast instanceof Heal) {

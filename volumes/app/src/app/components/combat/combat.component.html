@@ -21,7 +21,10 @@
         <char-deco [attr.character]="actorTurn.name" [attr.big]="true"></char-deco>
         <civ-progress-bar [current]="actorTurn.health.current" [max]="actorTurn.health.max" [color]="'#eb4444'"></civ-progress-bar>
         <div class="turn-wrapper">
-            <civ-spell-list *ngIf="mode === 2" [actor]="actorTurn" [target]="target" [allies]="getAllies()" [enemies]="getEnemies()" (damageDone)="endPlayerTurn($event)"></civ-spell-list>
+            <div class="flex">
+                <civ-spell-list *ngIf="mode === 2" [actor]="actorTurn" [target]="target" [allies]="getAllies()" [enemies]="getEnemies()" (damageDone)="endPlayerTurn($event)"></civ-spell-list>
+            </div>
+            <div class="text">{{ actorTurn.name }}</div>
         </div>
     </div>
     <div class="versus" *ngIf="mode === 2">vs</div>
@@ -31,7 +34,11 @@
         <char-deco [attr.character]="target.name" [attr.big]="true"></char-deco>
         <civ-progress-bar [current]="target.health.current" [max]="target.health.max" [color]="'#eb4444'"></civ-progress-bar>
         <div class="turn-wrapper">
-            <civ-spells class="square-wrapper" *ngFor="let spell of target.spells" [spell]="spell" [civ-tooltip]="spell" [civ-tooltip-owner]="target"></civ-spells>
+            <div class="flex row-reverse">
+                <civ-spells class="square-wrapper" *ngFor="let spell of target.spells" [spell]="spell" [civ-tooltip]="spell" [civ-tooltip-owner]="target"></civ-spells>
+            </div>
+            <div class="text">{{ target.name }}</div>
+
         </div>
     </div>
 </div>

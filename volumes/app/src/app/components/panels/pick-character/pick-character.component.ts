@@ -17,6 +17,10 @@ export class PickCharacterComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    const adri = this.charService.createAdrien(false);
+    adri.health.hurt(73);
+    this.charService.characters.push(adri);
+
     this.pickableCharacters.push(this.charService.createClement(false));
     this.pickableCharacters.push(this.charService.createAdrien(false));
     this.pickableCharacters.push(this.charService.createLoic(false));

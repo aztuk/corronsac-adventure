@@ -31,7 +31,8 @@ export enum EAttackStatus {
 
 export enum EDamageType {
   'MAGIC',
-  'PHYSIC'
+  'PHYSIC',
+  'DOT'
 }
 
 export enum ECombatState {

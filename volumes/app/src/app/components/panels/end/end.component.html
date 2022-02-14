@@ -1,1 +1,142 @@
-<civ-tooltip-score [entity]="score"></civ-tooltip-score>
+<div class="loot-wrapper">
+    <div class="title">La partie est terminée !</div>
+    <div class="description">
+        L'aventure se termine ici. Voici votre score:
+    </div>
+    <div class="flex space-between total">
+        <strong class="name">Score</strong>
+        <div class="value">
+            {{ total }}
+        </div>
+    </div>
+    <div class="loot-table flex">
+        <div>
+            <div class="score-item">
+                <!--<div class="score-item" *ngIf="score.score.floorsClimbed > 0">-->
+                <div>
+                    <div class="title">Ascension</div>
+                    <div class="stat">{{ score.stats.floorsClimbed }} étages franchis</div>
+                </div>
+                <div class="value">
+                    {{ score.score.floorsClimbed }}
+                </div>
+            </div>
+
+            <div class="score-item">
+                <!--<div class="score-item" *ngIf="score.score.tierOneKilled > 0">-->
+                <div class="">
+                    <div class="title">Tueur de monstres</div>
+                    <div class="stat">{{ score.stats.tierOneKilled }} monstres basiques tués</div>
+                </div>
+                <div class="value">
+                    {{ score.score.tierOneKilled }}
+                </div>
+            </div>
+
+            <div class="score-item">
+                <div class="">
+                    <div class="title">David contre Goliath</div>
+                    <div class="stat">{{ score.stats.tierTwoKilled }} Nemesis tués</div>
+                </div>
+                <div class="value">
+                    {{ score.score.tierTwoKilled }}
+                </div>
+            </div>
+            <div class="score-item">
+                <div class="">
+                    <div class="title">Victoire</div>
+                    <div class="stat">Boss tué</div>
+                </div>
+                <div class="value">
+                    {{ score.score.tierThreeKilled }}
+                </div>
+            </div>
+            <div class="score-item">
+                <div class="">
+                    <div class="title">Riche comme cresus</div>
+                    <div class="stat">{{ score.stats.goldAcquired }} euros gagnés</div>
+                </div>
+                <div class="value">
+                    {{ score.score.goldAcquired }}
+                </div>
+            </div>
+            <div class="score-item">
+                <div class="">
+                    <div class="title">Reine du shopping</div>
+                    <div class="stat">{{ score.stats.goldSpent }} euros dépensés</div>
+                </div>
+                <div class="value">
+                    {{ score.score.goldSpent }}
+                </div>
+            </div>
+        </div>
+        <div>
+            <div class="score-item">
+                <div class="">
+                    <div class="title">Plus on est de fous</div>
+                    <div class="stat">{{ score.stats.sizeTeam }} aventuriers</div>
+                </div>
+                <div class="value">
+                    {{ score.score.sizeTeam }}
+                </div>
+            </div>
+
+            <div class="score-item">
+                <div class="">
+                    <div class="title">Plus on rit</div>
+                    <div class="stat">{{ score.stats.fullStuffCharacters }} aventuriers suréquipés</div>
+                </div>
+                <div class="value">
+                    {{ score.score.fullStuffCharacters }}
+                </div>
+            </div>
+
+            <div class="score-item">
+                <div class="">
+                    <div class="title">Dévastateur</div>
+                    <div class="stat">{{ score.stats.damageInflicted }} dégâts infligés</div>
+                </div>
+                <div class="value">
+                    {{ score.score.damageInflicted }}
+                </div>
+            </div>
+            <div class="score-item">
+                <div class="">
+                    <div class="title">Bouclier humain</div>
+                    <div class="stat">{{ score.stats.damageReceived }} dégâts reçus</div>
+                </div>
+                <div class="value">
+                    {{ score.score.damageReceived }}
+                </div>
+            </div>
+            <div class="score-item">
+                <div class="">
+                    <div class="title">Aucun instinct de survie</div>
+                    <div class="stat">{{ score.stats.death }} morts au combat</div>
+                </div>
+                <div class="value">
+                    {{ score.score.death }}
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="flex">
+        <input type="text" (keyup)="isUsernameOk($event)" />
+        <button (click)="saveScore()" [class.disabled]="!usernameValid">Enregistrer son score</button>
+        <button (click)="showRanking()">Classement</button>
+        <button (click)="restart()">Recommencer</button>
+    </div>
+</div>
+<div class="loot-wrapper" *ngIf="showRankingBool">
+    <div class="title">Classement</div>
+    <div class="ranking-wrapper">
+        <div *ngFor="let rank of leaderboard" class="rank-item">
+            <div class="ranking">{{ rank.rank }}</div>
+            <div class="name">{{ rank.name }}</div>
+            <div class="score">{{ rank.value }}</div>
+        </div>
+    </div>
+    <button (click)="hideRanking()">Fermer</button>
+</div>
+<div class="overlay"></div>

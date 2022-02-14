@@ -1,7 +1,7 @@
 import { EquipmentDecoratorComponent } from './components/decorators/equipment-decorator/equipment-decorator.component';
 import {CharacterDecoratorComponent} from './components/decorators/character-decorator/character-decorator.component';
 import {DamageDecoratorComponent} from './components/decorators/damage-decorator/damage-decorator.component';
-import {Component, Injector} from '@angular/core';
+import { Component, HostListener, Injector, OnDestroy } from '@angular/core';
 import {createCustomElement} from '@angular/elements';
 import {EffectDecoratorComponent} from './components/decorators/effect-decorator/effect-decorator.component';
 
@@ -10,8 +10,8 @@ import {EffectDecoratorComponent} from './components/decorators/effect-decorator
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
-  title = 'civilisation';
+export class AppComponent implements OnDestroy {
+  title = 'Corronsac Adventures';
 
   constructor(private injector: Injector) {
     const effectDecorator = createCustomElement(EffectDecoratorComponent, {injector});
@@ -26,4 +26,8 @@ export class AppComponent {
 
   ngOnInit() {
   }
+
+  ngOnDestroy() {
+  }
+
 }

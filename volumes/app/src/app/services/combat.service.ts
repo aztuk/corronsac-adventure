@@ -29,7 +29,9 @@ export class CombatService {
   public characters: Array<IEntityActor>;
 
   constructor(private es: EnemiesService, private characterService: CharactersService, private _router: Router) {
-    this.characterService.characters$.subscribe((characters) => this.characters = characters);
+    this.characterService.characters$.subscribe((characters) => {
+      this.characters = characters;
+  });
   }
 
   resetCombat() {
@@ -61,6 +63,9 @@ export class CombatService {
 
   aiTurn(ai: IEntityActor): SpellCast {
     const spells = this.getAiAvailableSpells(ai);
+    if(spells.length === 0) {
+      console.log('No spells available on cooldown for: ' + ai);
+    }
     const spell = spells[getRandomInt(0, spells.length - 1)];
 
     const potentialSpellTarget = {

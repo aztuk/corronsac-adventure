@@ -48,9 +48,9 @@ export class SpellCast {
     this._combatActors = _combatActors;
     this.spellDescription = spell;
     this.createDamageInstances(spell.damageInstances);
-    this.createEffectInstances(spell.effectInstances);
     this.createHealInstances(spell.healInstances);
     this.invocations = spell.invocation ? spell.invocation(this) : [];
+    this.createEffectInstances(spell.effectInstances);
     if (exists(spell.onSpellCast)) {
       spell.onSpellCast(this);
     }

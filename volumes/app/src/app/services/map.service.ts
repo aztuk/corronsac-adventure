@@ -17,7 +17,7 @@ export class MapService {
   //public mapPhysionomy: ELevelType[] = [];
 
   public mapSizeX: number = 7;
-  public mapSizeY: number = 15;
+  public mapSizeY: number = 21;
   public map$: BehaviorSubject<ILevel[]> = new BehaviorSubject([]);
   public currentLevel: ICombat;
 
@@ -32,8 +32,8 @@ export class MapService {
   typeBucket = {
     'shop': 8,
     'heal': 12,
-    'event': 22,
-    'elite': 8,
+    'event': 17,
+    'elite': 9,
     'normal': 53
   }
 
@@ -84,17 +84,17 @@ export class MapService {
   }
 
   forcedTypes() {
-    this.map[8].forEach(combat => {
+    this.map[10].forEach(combat => {
       if (exists(combat)) {
         combat.type = ELevelType.TREASURE;
       }
     });
-    this.map[9].forEach(combat => {
+    this.map[11].forEach(combat => {
       if (exists(combat)) {
         combat.type = ELevelType.SHOP;
       }
     });
-    this.map[13].forEach(combat => {
+    this.map[19].forEach(combat => {
       if (exists(combat)) {
         combat.type = ELevelType.HEAL;
       }
@@ -103,7 +103,7 @@ export class MapService {
 
   applyTypes() {
     this.map.forEach((floor, floorIndex) => {
-      if (floorIndex !== 0 && floorIndex !== 8 && floorIndex !== 9 && floorIndex !== 13) {
+      if (floorIndex !== 0 && floorIndex !== 10 && floorIndex !== 11 && floorIndex !== 19) {
         floor.forEach((node, room) => {
           if (node instanceof Combat && node.type === undefined) {
             this.setTypeWithRules(floorIndex, room, node);

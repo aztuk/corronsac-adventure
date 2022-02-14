@@ -53,7 +53,7 @@ export class MapComponent implements OnInit, OnDestroy, AfterViewInit {
       this._router.navigate(['']);
     }
 
-    if(this.charService.isPartyDead()) {
+    if(this.characters.length > 0 && this.charService.isPartyDead()) {
       this._router.navigate(['end']);
     }
 

@@ -10,7 +10,7 @@
     .value {
         position: absolute;
         bottom: -8px;
-        right: 1px;
+        left: 1px;
         font-weight: bold;
         color: white;
     }
@@ -21,29 +21,28 @@
         background-image: url('../../../../assets/images/effects/stun.png');
     }
     &.effect-UP_DODGE {
-        background-image: url('../../../../assets/images/effects/dodge.png');
+        background-image: url('../../../../assets/images/effects/up_dodge.png');
     }
     &.effect-DOWN_DODGE {
-        background-image: url('../../../../assets/images/effects/dodge.png');
+        background-image: url('../../../../assets/images/effects/down_dodge.png');
     }
     &.effect-UP_CRIT {
-        background-image: url('../../../../assets/images/effects/crit.png');
+        background-image: url('../../../../assets/images/effects/up_crit.png');
     }
     &.effect-UP_CRIT_DMG {
-        background-image: url('../../../../assets/images/effects/crit_dmg.png');
-        filter: hue-rotate(45deg);
+        background-image: url('../../../../assets/images/effects/up_crit-dmg.png');
     }
     &.effect-UP_AP {
-        background-image: url('../../../../assets/images/effects/ap.png');
+        background-image: url('../../../../assets/images/effects/up_ap.png');
     }
     &.effect-DOWN_AP {
-        background-image: url('../../../../assets/images/effects/ap.png');
+        background-image: url('../../../../assets/images/effects/down_ap.png');
     }
     &.effect-UP_AD {
-        background-image: url('../../../../assets/images/effects/ad.png');
+        background-image: url('../../../../assets/images/effects/up_ad.png');
     }
     &.effect-DOWN_AD {
-        background-image: url('../../../../assets/images/effects/ad.png');
+        background-image: url('../../../../assets/images/effects/down_ad.png');
     }
     &.effect-TAUNT {
         background-image: url('../../../../assets/images/effects/taunt.png');

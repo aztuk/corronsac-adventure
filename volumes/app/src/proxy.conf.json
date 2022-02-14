@@ -1,0 +1,11 @@
+{
+    "/api": {
+        "target": "https://api.globalstats.io",
+        "changeOrigin": true,
+        "secure": false,
+
+        "pathRewrite": {
+            "^/api": ""
+        }
+    }
+}

@@ -1,13 +1,13 @@
 @import "../../../../assets/scss/variables";
 @import "../../../../assets/scss/mixins";
 :host {
-    width: 300px;
-    .name {
-        font-size: 30px;
+    width: 350px;
+    .tooltip-wrapper {
+        padding-left: 60px;
     }
-    .available {
-        font-size: 18px;
-        color: map-get($texts, shade-D);
+    .name {
+        font-size: 20px;
+        font-family: $fontFamily;
     }
     .description {
         color: map-get($texts, shade-B);

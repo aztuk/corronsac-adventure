@@ -4,6 +4,7 @@ import { BehaviorSubject } from 'rxjs';
 import { ISystemDamage } from '../sharedScript/interfaces';
 import { CharactersService } from './characters.service';
 import { getRandomInt, objectToArray } from '../sharedScript/helpers';
+import { HttpClient } from '@angular/common/http';
 
 interface scoreComponent {
   floorsClimbed: number
@@ -79,7 +80,7 @@ export class ScoreService {
   constructor() {
   }
 
-  test(){
+  saveScore(){
   }
 
   setDamageInflicted(damage: ISystemDamage) {

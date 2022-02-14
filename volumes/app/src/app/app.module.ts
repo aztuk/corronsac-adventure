@@ -48,6 +48,7 @@ import { ShopComponent } from './components/panels/shop/shop.component';
 import { TreasureComponent } from './components/panels/treasure/treasure.component';
 import { TooltipScoreComponent } from './components/tooltips/tooltip-score/tooltip-score.component';
 import { EndComponent } from './components/panels/end/end.component';
+import { HttpClient, HttpClientJsonpModule, HttpClientModule} from '@angular/common/http';
 
 
 @NgModule({
@@ -106,6 +107,8 @@ import { EndComponent } from './components/panels/end/end.component';
     FormsModule,
     NgScrollbarModule,
     ClickOutsideModule,
+    HttpClientModule,
+    HttpClientJsonpModule
   ],
   entryComponents: [],
   providers: [],

@@ -1,3 +1,4 @@
+import { EDamageType } from './../../../sharedScript/enums';
 import {Heal} from '../../../object/system/heal';
 import {EAttackStatus} from '../../../sharedScript/enums';
 import {Component, ElementRef, EventEmitter, Input, OnInit, Output, Renderer2} from '@angular/core';
@@ -30,13 +31,16 @@ export class DamageComponent implements OnInit {
       text += '-' + Math.round(this.damage.damage);
     }
 
+    if(this.damage.damageType === EDamageType.DOT) {
+      text += ' (poison)'
+    }
 
     return text;
   }
 
 
   get textHeal() {
-    return '+' + this.damage.heal;
+    return '+' + Math.round(this.damage.heal);
   }
 
   constructor(private render: Renderer2, private el: ElementRef) {
