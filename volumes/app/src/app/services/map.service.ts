@@ -17,7 +17,7 @@ export class MapService {
   //public mapPhysionomy: ELevelType[] = [];
 
   public mapSizeX: number = 7;
-  public mapSizeY: number = 21;
+  public mapSizeY: number = 17;
   public map$: BehaviorSubject<ILevel[]> = new BehaviorSubject([]);
   public currentLevel: ICombat;
 
@@ -84,17 +84,21 @@ export class MapService {
   }
 
   forcedTypes() {
-    this.map[10].forEach(combat => {
+    let treasureFloors = Math.floor(this.map.length / 2);
+    let shopFloors = Math.floor(this.map.length / 2) + 1;
+    let penultimumFloor = this.map.length - 2;
+
+    this.map[treasureFloors].forEach(combat => {
       if (exists(combat)) {
         combat.type = ELevelType.TREASURE;
       }
     });
-    this.map[11].forEach(combat => {
+    this.map[shopFloors].forEach(combat => {
       if (exists(combat)) {
         combat.type = ELevelType.SHOP;
       }
     });
-    this.map[19].forEach(combat => {
+    this.map[penultimumFloor].forEach(combat => {
       if (exists(combat)) {
         combat.type = ELevelType.HEAL;
       }
@@ -102,8 +106,12 @@ export class MapService {
   }
 
   applyTypes() {
+    let treasureFloors = Math.floor(this.map.length / 2);
+    let shopFloors = Math.floor(this.map.length / 2) + 1;
+    let penultimumFloor = this.map.length - 2;
+
     this.map.forEach((floor, floorIndex) => {
-      if (floorIndex !== 0 && floorIndex !== 10 && floorIndex !== 11 && floorIndex !== 19) {
+      if (floorIndex !== 0 && floorIndex !== treasureFloors && floorIndex !== shopFloors && floorIndex !== penultimumFloor) {
         floor.forEach((node, room) => {
           if (node instanceof Combat && node.type === undefined) {
             this.setTypeWithRules(floorIndex, room, node);
@@ -141,7 +149,6 @@ export class MapService {
       });
     }
 
-    // Sibling-rooms that are connected to the same parent-room can't be the same type.
     if (floor < 3 && (pickedType === ELevelType.SHOP)) {
       this.setTypeWithRules(floor, room, node);
       return;
@@ -154,7 +161,8 @@ export class MapService {
     }
 
     // RestRoom can't be on 14th floor.
-    if (floor === 12 && pickedType === ELevelType.HEAL) {
+    let penultimumFloor = this.map.length - 3;
+    if (floor === penultimumFloor && pickedType === ELevelType.HEAL) {
       this.setTypeWithRules(floor, room, node);
       return;
     }

@@ -2,7 +2,7 @@ export let EFFECTS_VALUES = {
   UP_DODGE: 20,
   UP_CRIT_DMG: 1.5,
   UP_CRIT: 25,
-  POISON: 2,
+  POISON: 4,
   UP_AP: 5,
   DOWN_AP: 3,
   UP_AD: 5,
@@ -26,13 +26,13 @@ export let STACK_TYPES = {
   TAUNT: 'DURATION'
 }
 export let EFFECT_TIMERS = {
-  UP_DODGE: 2,
-  UP_CRIT_DMG: 2,
-  UP_CRIT: 2,
+  UP_DODGE: 3,
+  UP_CRIT_DMG: 3,
+  UP_CRIT: 3,
   POISON: 3,
-  UP_AP: 2,
+  UP_AP: 3,
   DOWN_AP: 2,
-  UP_AD: 2,
+  UP_AD: 3,
   DOWN_DODGE: 2,
   DOWN_SPEED: 1,
   DOWN_AD: 2,

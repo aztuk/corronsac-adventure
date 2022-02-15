@@ -24,10 +24,12 @@ export class Health implements IComponentHealth {
   }
 
   public heal(amount): void {
-    this.current += amount;
+    if(!this.isDead) {
+      this.current += amount;
 
-    if (this.current >= this.max) {
-      this.current = this.max;
+      if (this.current >= this.max) {
+        this.current = this.max;
+      }
     }
   }
 

@@ -1,4 +1,5 @@
-import {Component, OnInit} from '@angular/core';
+import { SpellDescription } from './../../../object/components/spell-description';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import {Router} from '@angular/router';
 import {CharactersService} from '../../../services/characters.service';
 import {IEntityActor} from '../../../sharedScript/interfaces';
@@ -9,18 +10,19 @@ import {EHero} from "../../../sharedScript/enums";
   templateUrl: './pick-character.component.html',
   styleUrls: ['./pick-character.component.scss']
 })
-export class PickCharacterComponent implements OnInit {
+export class PickCharacterComponent implements OnInit, OnDestroy {
 
   public pickableCharacters: IEntityActor[] = [];
+  public pickedHero: IEntityActor;
+  public pickedSpell: SpellDescription;
+  public characters: IEntityActor[];
+  public charSub;
 
   constructor(private charService: CharactersService, private _router: Router) {
+    this.charSub = this.charService.characters$.subscribe(c => this.characters = c);
   }
 
   ngOnInit(): void {
-    const adri = this.charService.createAdrien(false);
-    adri.health.hurt(73);
-    this.charService.characters.push(adri);
-
     this.pickableCharacters.push(this.charService.createClement(false));
     this.pickableCharacters.push(this.charService.createAdrien(false));
     this.pickableCharacters.push(this.charService.createLoic(false));
@@ -32,6 +34,9 @@ export class PickCharacterComponent implements OnInit {
 
     this._router.navigate(['map']);
     }
+  }
+  ngOnDestroy(): void {
+      this.charSub.unsubscribe();
   }
 
   getDescription(char) {
@@ -63,9 +68,17 @@ export class PickCharacterComponent implements OnInit {
     return text;
   }
 
-  pickHero(char) {
-    this.charService.initCharacterGame(char.name);
+  launchGame() {
+    this.pickedSpell.unlocked = true;
     this._router.navigate(['map']);
+  }
+
+  pickHero(char) {
+    this.pickedHero = this.charService.initCharacterGame(char.name);
+  }
+
+  pickSpell(spell) {
+    this.pickedSpell = spell;
   }
 
   littleSquare(value, div, inverted?) {

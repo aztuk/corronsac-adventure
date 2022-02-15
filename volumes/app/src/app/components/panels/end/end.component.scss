@@ -6,28 +6,19 @@
     width: 100vw;
     height: 100vh;
     display: block;
-    .ranking-wrapper {
-        margin: 50px;
-    }
-    .rank-item {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        min-width: 500px;
-        margin: 20px 30px;
-        .ranking {
+    .actions {
+        margin-bottom: 80px;
+        input {
+            @include insetWrapper();
+            background: rgb(90, 74, 60);
+            border-width: 1px;
+            color: white;
+            padding-left: 10px;
             font-family: $fontFamily;
-            font-size: 25px;
-            width: 60px;
+            font-size: 18px;
         }
-        .name {
-            font-size: 15px;
-            margin-right: 20px;
-            flex: 1;
-        }
-        .score {
-            font-family: $fontFamily;
-            font-size: 25px;
+        button {
+            margin-left: 10px
         }
     }
     .loot-wrapper {

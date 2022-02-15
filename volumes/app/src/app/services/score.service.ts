@@ -34,6 +34,16 @@ export class ScoreService {
     return ScoreService.instance;
   }
 
+  public score$: BehaviorSubject<number> = new BehaviorSubject(0)
+
+  public set scoreTotal(value: any) {
+    this.score$.next(value);
+  }
+
+  public get scoreTotal() {
+    return this.score$.getValue();
+  }
+
   public score:any;
 
   public scoreValues = {
@@ -71,16 +81,16 @@ export class ScoreService {
     },
     set: function(target, name, value) {
       target[name] = value;
+      ScoreService.getInstance().updateScore();
       return true;
     }
   });
 
-
-
   constructor() {
   }
 
-  saveScore(){
+  updateScore(){
+    this.scoreTotal = this.getScore();
   }
 
   setDamageInflicted(damage: ISystemDamage) {

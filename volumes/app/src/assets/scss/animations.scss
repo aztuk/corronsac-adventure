@@ -1,160 +1,158 @@
 @import "variables";
-
 .animation-hurt {
-  -webkit-animation: vibrate-1 0.3s linear both;
-  animation: vibrate-1 0.3s linear both;
-  animation-delay: 200ms;
+    -webkit-animation: vibrate-1 0.3s linear both;
+    animation: vibrate-1 0.3s linear both;
+    animation-delay: 200ms;
+    &:after {
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        opacity: 0;
+        background: $enemy;
+        -webkit-animation: flash 0.3s linear both;
+        animation: flash 0.3s linear both;
+        animation-delay: 200ms;
+    }
+}
 
-  &:after {
+.animation-healing::before {
     content: '';
     position: absolute;
     width: 100%;
     height: 100%;
     top: 0;
     left: 0;
-    opacity: 0;
-    background: $enemy;
-    -webkit-animation: flash 0.3s linear both;
-    animation: flash 0.3s linear both;
-    animation-delay: 200ms;
-  }
-}
-
-.animation-healing::before {
-  content: '';
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  border-radius: 50%;
-  -webkit-animation: healing 0.5s linear both;
-  animation: healing 0.5s linear both;
-  box-shadow: inset 0 0 50px 0 $heal, 0 0 50px 0 $heal;
+    border-radius: 50%;
+    -webkit-animation: healing 0.5s linear both;
+    animation: healing 0.5s linear both;
+    box-shadow: inset 0 0 50px 0 $heal, 0 0 50px 0 $heal;
 }
 
 .animation-healed::after {
-  content: '';
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  -webkit-animation: healed 0.3s linear both;
-  animation: healed 0.3s linear both;
-  animation-delay: 200ms;
-  box-shadow: inset 0 0 50px 0 $heal, 0 0 50px 0 $heal;
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    -webkit-animation: healed 0.3s linear both;
+    animation: healed 0.3s linear both;
+    animation-delay: 200ms;
+    box-shadow: inset 0 0 50px 0 $heal, 0 0 50px 0 $heal;
 }
 
 .animation-hit-bottom {
-  -webkit-animation: hit-bottom 0.5s linear both;
-  animation: hit-bottom 0.5s ease 0s normal none;
+    -webkit-animation: hit-bottom 0.5s linear both;
+    animation: hit-bottom 0.5s ease 0s normal none;
 }
 
 .animation-hit-top {
-  -webkit-animation: hit-top 0.5s linear both;
-  animation: hit-top 0.5s ease 0s normal none;
+    -webkit-animation: hit-top 0.5s linear both;
+    animation: hit-top 0.5s ease 0s normal none;
 }
 
 @keyframes flash {
-  0%,
-  40% {
-    opacity: 0;
-  }
-  20% {
-    opacity: .2;
-  }
+    0%,
+    40% {
+        opacity: 0;
+    }
+    20% {
+        opacity: .2;
+    }
 }
 
 @keyframes healing {
-  0%,
-  100% {
-    opacity: 0;
-    transform: none;
-  }
-  80% {
-    opacity: .5;
-    transform: scale(2);
-  }
+    0%,
+    100% {
+        opacity: 0;
+        transform: none;
+    }
+    80% {
+        opacity: .5;
+        transform: scale(2);
+    }
 }
 
 @keyframes healed {
-  0%,
-  100% {
-    opacity: 0;
-    transform: none;
-  }
-  20% {
-    opacity: .5;
-  }
-  80% {
-    opacity: .5;
-    transform: scale(.2);
-  }
+    0%,
+    100% {
+        opacity: 0;
+        transform: none;
+    }
+    20% {
+        opacity: .5;
+    }
+    80% {
+        opacity: .5;
+        transform: scale(.2);
+    }
 }
 
 @keyframes hit-top {
-  0.0% {
-    transform: translate(0);
-  }
-  100% {
-    transform: translate(0);
-  }
-  30% {
-    transform: translate(100px, 0px);
-    filter: blur(0px);
-  }
-  20% {
-    transform: translate(-10px, 0);
-    filter: blur(3px);
-  }
+    0.0% {
+        transform: translate(0);
+    }
+    100% {
+        transform: translate(0);
+    }
+    30% {
+        transform: translate(300px, 0px);
+        filter: blur(0px);
+    }
+    20% {
+        transform: translate(-10px, 0);
+        filter: blur(3px);
+    }
 }
 
 @keyframes hit-bottom {
-  0.0% {
-    transform: translate(0);
-  }
-  100% {
-    transform: translate(0);
-  }
-  30% {
-    transform: translate(-100px, 0);
-    filter: blur(0px);
-  }
-  20% {
-    transform: translate(10px, 0px);
-    filter: blur(3px);
-  }
+    0.0% {
+        transform: translate(0);
+    }
+    100% {
+        transform: translate(0);
+    }
+    30% {
+        transform: translate(-300px, 0);
+        filter: blur(0px);
+    }
+    20% {
+        transform: translate(10px, 0px);
+        filter: blur(3px);
+    }
 }
 
 @keyframes vibrate-1 {
-  0% {
-    -webkit-transform: translate(0);
-    transform: translate(0);
-  }
-  20% {
-    -webkit-transform: translate(-2px, 2px);
-    transform: translate(-2px, 2px);
-    filter: blur(1px);
-  }
-  40% {
-    -webkit-transform: translate(-2px, -2px);
-    transform: translate(-2px, -2px);
-    filter: blur(1px);
-  }
-  60% {
-    -webkit-transform: translate(2px, 2px);
-    transform: translate(2px, 2px);
-    filter: blur(2px);
-  }
-  80% {
-    -webkit-transform: translate(2px, -2px);
-    transform: translate(2px, -2px);
-    filter: blur(1px);
-  }
-  100% {
-    -webkit-transform: translate(0);
-    transform: translate(0);
-    filter: blur(0px);
-  }
+    0% {
+        -webkit-transform: translate(0);
+        transform: translate(0);
+    }
+    20% {
+        -webkit-transform: translate(-2px, 2px);
+        transform: translate(-2px, 2px);
+        filter: blur(1px);
+    }
+    40% {
+        -webkit-transform: translate(-2px, -2px);
+        transform: translate(-2px, -2px);
+        filter: blur(1px);
+    }
+    60% {
+        -webkit-transform: translate(2px, 2px);
+        transform: translate(2px, 2px);
+        filter: blur(2px);
+    }
+    80% {
+        -webkit-transform: translate(2px, -2px);
+        transform: translate(2px, -2px);
+        filter: blur(1px);
+    }
+    100% {
+        -webkit-transform: translate(0);
+        transform: translate(0);
+        filter: blur(0px);
+    }
 }

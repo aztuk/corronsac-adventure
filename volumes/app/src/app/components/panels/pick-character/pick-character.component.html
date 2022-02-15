@@ -1,68 +1,86 @@
-<div class="flex center-align center-justify char-list">
-    <div class="character " *ngFor="let char of pickableCharacters">
-        <char-deco [attr.character]="char.name"></char-deco>
-        <div class="identity">
-            <div class="name">{{char.name}}</div>
-            <div class="specialty">{{char.specialty | specialtyName}}</div>
-        </div>
-
-        <button class="main-action" (click)="pickHero(char)">Choisir</button>
-
-        <div class="description">
-            {{ getDescription(char.name) }}
-        </div>
-
-        <div class="stats">
-            <div class="stat-item">
-                <civ-stats class="health">
-                </civ-stats>
-                <div class="stat-name">
-                    <span class="label">Points de vie</span>
+<div *ngIf="characters.length === 0">
+    <div class="title"> Choisissez un héro</div>
+    <div class="flex center-align center-justify char-list">
+        <div *ngFor="let char of pickableCharacters">
+            <div class="character">
+                <char-deco [attr.character]="char.name"></char-deco>
+                <div class="identity">
+                    <div class="name">{{char.name}}</div>
+                    <div class="specialty">{{char.specialty | specialtyName}}</div>
                 </div>
-                <div class="value  squares">
-                    <div *ngFor="let item of littleSquare(char.health.max, 13)" class="health-square">
+
+                <button class="main-action" (click)="pickHero(char)">Choisir</button>
+
+                <div class="description">
+                    {{ getDescription(char.name) }}
+                </div>
+
+                <div class="stats">
+                    <div class="stat-item">
+                        <civ-stats class="health">
+                        </civ-stats>
+                        <div class="stat-name">
+                            <span class="label">Points de vie</span>
+                        </div>
+                        <div class="value  squares">
+                            <div *ngFor="let item of littleSquare(char.health.max, 13)" class="health-square">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="stat-item">
+                        <civ-stats class="speed">
+                        </civ-stats>
+                        <div class="stat-name">
+                            <span class="label">Vitesse</span>
+                        </div>
+                        <div class="value  squares">
+                            <div *ngFor="let item of littleSquare(char.stats.speed, 5, true)" class="speed-square">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="stat-item">
+                        <civ-stats class="attack">
+                        </civ-stats>
+                        <div class="stat-name">
+                            <span class="label">Attaque</span>
+                        </div>
+                        <div class="value  squares">
+                            <div *ngFor="let item of littleSquare(char.stats.attack , 2)" class="attack-square">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="stat-item">
+                        <civ-stats class="power">
+                        </civ-stats>
+                        <div class="stat-name">
+                            <span class="label">Puissance</span>
+                        </div>
+                        <div class="value  squares">
+                            <div *ngFor="let item of littleSquare(char.stats.power , 2)" class="power-square">
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="stat-item">
-                <civ-stats class="speed">
-                </civ-stats>
-                <div class="stat-name">
-                    <span class="label">Vitesse</span>
-                </div>
-                <div class="value  squares">
-                    <div *ngFor="let item of littleSquare(char.stats.speed, 5, true)" class="speed-square">
-                    </div>
-                </div>
-            </div>
-            <div class="stat-item">
-                <civ-stats class="attack">
-                </civ-stats>
-                <div class="stat-name">
-                    <span class="label">Attaque</span>
-                </div>
-                <div class="value  squares">
-                    <div *ngFor="let item of littleSquare(char.stats.attack , 2)" class="attack-square">
-                    </div>
-                </div>
-            </div>
-            <div class="stat-item">
-                <civ-stats class="power">
-                </civ-stats>
-                <div class="stat-name">
-                    <span class="label">Puissance</span>
-                </div>
-                <div class="value  squares">
-                    <div *ngFor="let item of littleSquare(char.stats.power , 1)" class="power-square">
-                    </div>
-                </div>
-            </div>
-        </div>
 
-        <div class="spell-list flex">
-            <civ-spells class="spell" [spell]="spell" [civ-tooltip]="spell" [civ-tooltip-owner]="char" *ngFor="let spell of char.spells" [class.disabled]="!spell.unlocked">
-                {{spell.name}}
-            </civ-spells>
+                <div class="spell-list flex">
+                    <civ-spells class="spell" [spell]="spell" [civ-tooltip]="spell" [civ-tooltip-owner]="char" *ngFor="let spell of char.spells" [class.disabled]="!spell.unlocked">
+                        {{spell.name}}
+                    </civ-spells>
+                </div>
+            </div>
         </div>
     </div>
+</div>
+
+<div *ngIf="characters.length > 0" class="spell-selection">
+    <div class="title">Choisissez son sort de départ</div>
+    <div class="flex center-align center-justify">
+        <div *ngFor="let spell of pickedHero.spells">
+            <civ-spells class="square-wrapper pickable-spell" [class.picked]="pickedSpell?.name === spell.name" (click)="pickSpell(spell)" [spell]="spell" [civ-tooltip]="spell" [civ-tooltip-owner]="pickedHero" *ngIf="!spell.unlocked">
+
+            </civ-spells>
+            <div class="name-display" *ngIf="pickedSpell?.name === spell.name"> {{spell.name}}</div>
+        </div>
+    </div>
+    <button (click)="launchGame()" *ngIf="pickedSpell">Commencer la partie</button>
 </div>

@@ -37,8 +37,6 @@ export class MapComponent implements OnInit, OnDestroy, AfterViewInit {
   public charSub;
   public currSub;
 
-  public scoreS = ScoreService.getInstance();
-  public score;
 
   public currency;
 
@@ -58,9 +56,7 @@ export class MapComponent implements OnInit, OnDestroy, AfterViewInit {
     }
 
     this.ms.generateMap();
-    // Update full stuff character stat
     ScoreService.getInstance().stats.fullStuffCharacters = this.charService.countFullStuff();
-    this.score = this.scoreS.getScore();
   }
 
   ngOnDestroy(): void {

@@ -121,22 +121,13 @@
 
         </div>
     </div>
-    <div class="flex">
+    <div class="flex actions">
         <input type="text" (keyup)="isUsernameOk($event)" />
         <button (click)="saveScore()" [class.disabled]="!usernameValid">Enregistrer son score</button>
         <button (click)="showRanking()">Classement</button>
-        <button (click)="restart()">Recommencer</button>
     </div>
+    <button (click)="restart()">Réessayer</button>
 </div>
-<div class="loot-wrapper" *ngIf="showRankingBool">
-    <div class="title">Classement</div>
-    <div class="ranking-wrapper">
-        <div *ngFor="let rank of leaderboard" class="rank-item">
-            <div class="ranking">{{ rank.rank }}</div>
-            <div class="name">{{ rank.name }}</div>
-            <div class="score">{{ rank.value }}</div>
-        </div>
-    </div>
-    <button (click)="hideRanking()">Fermer</button>
-</div>
+
+<civ-ranking *ngIf="showRankingBool" [leaderboard]="leaderboard" (hide)="hideRanking()"></civ-ranking>
 <div class="overlay"></div>

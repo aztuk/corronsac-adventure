@@ -208,7 +208,7 @@ export const ESPells = {
       targetsType: ETargetTypes.RANDOM_ENEMY,
       targetsAmount: 3,
       damageType: EDamageType.MAGIC,
-      amount: 0.5
+      amount: 1.2
     }, {
       targetsType: ETargetTypes.TARGET,
       damageType: EDamageType.MAGIC,
@@ -300,7 +300,7 @@ export const ESPells = {
     cooldown: 1,
     damageInstances: [{
       targetsType: ETargetTypes.RANDOM_ENEMY,
-      targetsAmount: 3,
+      targetsAmount: 1,
       damageType: EDamageType.MAGIC,
       amount: 1,
       onHit: ($this) => {
@@ -327,7 +327,7 @@ export const ESPells = {
     name: 'Fuite',
     price: 45,
     description: (damageInstances, owner?) => {
-      let text = `Ne donne plus de nouvelles, ce qui lui permet de gagner  <eff-deco effect="UP_AP" with-time></eff-deco>.`;
+      let text = `Ne donne plus de nouvelles infligeant <dmg-deco amount="${damageInstances[0].amount}" stat="${owner.stats.power}" type="magical"></dmg-deco> à un personnage aléatoire, mais revient plus fort avec <eff-deco effect="UP_AP" with-time></eff-deco>.`;
       const equipment = owner.equipment.find(e => e.name === EEquipment.DISCORD.name);
 
       if(equipment.unlocked){
@@ -337,7 +337,12 @@ export const ESPells = {
       return text;
     },
     cooldown: 1,
-    damageInstances: [],
+    damageInstances: [{
+      targetsType: ETargetTypes.RANDOM_ENEMY,
+      targetsAmount: 1,
+      damageType: EDamageType.MAGIC,
+      amount: 1.5
+    }],
     effectInstances: [{
       targetsType: ETargetTypes.SELF,
       effect: EEffects.UP_AP,

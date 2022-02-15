@@ -49,6 +49,8 @@ import { TreasureComponent } from './components/panels/treasure/treasure.compone
 import { TooltipScoreComponent } from './components/tooltips/tooltip-score/tooltip-score.component';
 import { EndComponent } from './components/panels/end/end.component';
 import { HttpClient, HttpClientJsonpModule, HttpClientModule} from '@angular/common/http';
+import { TopBarComponent } from './components/main/top-bar/top-bar.component';
+import { RankingComponent } from './components/main/ranking/ranking.component';
 
 
 @NgModule({
@@ -99,6 +101,8 @@ import { HttpClient, HttpClientJsonpModule, HttpClientModule} from '@angular/com
     TreasureComponent,
     TooltipScoreComponent,
     EndComponent,
+    TopBarComponent,
+    RankingComponent,
   ],
   imports: [
     BrowserModule,

@@ -21,13 +21,12 @@
         color: white;
         text-shadow: $textShadow;
     }
-    .spell-icon {
+    .spell {
         position: relative;
         width: 50px;
         height: 50px;
         border-radius: 5px;
-        background-image: url('../../../../assets/images/spells/spell-sprite-1.jpg');
-        background-size: 871px;
+        background: url('../../../../assets/images/spells/default.png');
         z-index: 2;
         &::before {
             content: '';
@@ -40,76 +39,107 @@
             z-index: 3;
             border-radius: 5px;
         }
-        &.spell-ATTAQUE {
+        &.ATTAQUE {
+            background-image: url('../../../../assets/images/spells/spell-sprite-1.jpg');
+            background-size: 871px;
             background-position: -1548px -1131px;
         }
-        &.spell-JONGLAGE {
+        &.JONGLAGE {
+            background-image: url('../../../../assets/images/spells/spell-sprite-1.jpg');
+            background-size: 871px;
             background-position: -1322px -1189px;
         }
-        &.spell-ENTRAINEMENT {
+        &.ENTRAINEMENT {
+            background-image: url('../../../../assets/images/spells/spell-sprite-1.jpg');
+            background-size: 871px;
             background-position: -1015px -1245px;
         }
-        &.spell-SEDUCTION {
+        &.SEDUCTION {
+            background-image: url('../../../../assets/images/spells/spell-sprite-1.jpg');
+            background-size: 871px;
             background-position: -1436px -1131px;
             filter: hue-rotate(-29deg);
         }
-        &.spell-ESCALADE {
+        &.ESCALADE {
+            background-image: url('../../../../assets/images/spells/spell-sprite-1.jpg');
+            background-size: 871px;
             background-position: -1549px -1020px;
             filter: hue-rotate(5deg);
         }
-        &.spell-ECRANDE {
+        &.ECRANDE {
+            background-image: url('../../../../assets/images/spells/spell-sprite-1.jpg');
+            background-size: 871px;
             background-position: -1186px -1358px;
             filter: hue-rotate(114deg);
         }
-        &.spell-AMANDINE {
+        &.AMANDINE {
+            background-image: url('../../../../assets/images/spells/spell-sprite-1.jpg');
+            background-size: 871px;
             background-position: -902px -1077px;
             filter: hue-rotate(-157deg)
         }
-        &.spell-DISCUSSIONINSENSEE {
+        &.DISCUSSIONINSENSEE {
             background-image: url('../../../../assets/images/spells/sprite-3.jpg');
             background-position: -947px -513px;
             background-size: 648px;
         }
-        &.spell-FRONTLISSE {
+        &.FRONTLISSE {
             background-image: url('../../../../assets/images/spells/spell-sprite-2.png');
-            background-position: -1366px -835px
+            background-position: -1366px -835px;
+            background-size: 871px;
         }
-        &.spell-TETELA {
+        &.TETELA {
+            background-image: url('../../../../assets/images/spells/spell-sprite-1.jpg');
+            background-size: 871px;
             background-position: -1549px -1076px;
         }
-        &.spell-MAURICE {
+        &.MAURICE {
             background-image: url('../../../../assets/images/spells/spell-sprite-2.png');
             background-position: -37px -779px;
+            background-size: 871px;
         }
-        &.spell-SERPENTS {
+        &.SERPENTS {
             background-image: url('../../../../assets/images/spells/spell-sprite-2.png');
             background-position: -556px -662px;
+            background-size: 871px;
         }
-        &.spell-PIGEON {
+        &.PIGEON {
+            background-image: url('../../../../assets/images/spells/spell-sprite-1.jpg');
+            background-size: 871px;
             background-position: -1378px -1302px;
         }
-        &.spell-SMARTLIFE {
+        &.SMARTLIFE {
+            background-image: url('../../../../assets/images/spells/spell-sprite-1.jpg');
+            background-size: 871px;
             background-position: -902px -1302px;
         }
-        &.spell-DEBATPOLITIQUE {
+        &.DEBATPOLITIQUE {
             background-image: url('../../../../assets/images/spells/sprite-3.jpg');
             background-position: -947px -612px;
             background-size: 648px;
             filter: hue-rotate(45deg);
         }
-        &.spell-FUITE {
+        &.FUITE {
+            background-image: url('../../../../assets/images/spells/spell-sprite-1.jpg');
+            background-size: 871px;
             background-position: -1185px -1022px;
             filter: hue-rotate(55deg);
         }
-        &.spell-NOOB {
+        &.NOOB {
+            background-image: url('../../../../assets/images/spells/spell-sprite-1.jpg');
+            background-size: 871px;
             background-position: -1376px -1022px;
             filter: hue-rotate(105deg);
         }
-        &.spell-PLAYLIST {
+        &.PLAYLIST {
+            background-image: url('../../../../assets/images/spells/spell-sprite-1.jpg');
+            background-size: 871px;
             background-position: -1071px -1300px;
             filter: hue-rotate(175deg)
         }
-        &.spell-TRAGOSOCIAL {
+        &.TRAGOSOCIAL {
+            background-image: url('../../../../assets/images/spells/spell-sprite-1.jpg');
+            background-size: 871px;
             background-position: -1661px -1357px;
         }
     }

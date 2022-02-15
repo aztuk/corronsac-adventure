@@ -50,7 +50,7 @@ export class LootComponent implements OnInit, OnDestroy {
       spells:  this.cs.getLockedSpells().length,
       // Count available equipment (max is 2 / characters)
       equipment: this.cs.getLockedEquipments().length,
-      gold: 3
+      gold: 1
     }
   }
 
@@ -92,7 +92,7 @@ export class LootComponent implements OnInit, OnDestroy {
         case 'gold':
           this.lootTable.push({
             type: ELootType.GOLD,
-            value: 10 + (this.currentLevel.floor * getRandomInt(12, 15))
+            value: 30 + (this.currentLevel.floor * getRandomInt(12, 15))
           });
         break;
       }

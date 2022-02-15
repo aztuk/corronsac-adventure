@@ -1,0 +1,65 @@
+@import "../../../../assets/scss/variables";
+@import "../../../../assets/scss/mixins";
+:host {
+    z-index: 600;
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    display: block;
+    .loot-wrapper {
+        @include panel();
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        padding: 40px 40px 60px;
+        transform: translate(-50%, -50%);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        z-index: 3;
+    }
+    .title {
+        font-family: $fontFamily;
+        font-size: 28px;
+        margin: 20px 0 15px;
+        color: map-get($texts, shade-B)
+    }
+    .description {
+        font-size: 13px;
+        color: map-get($texts, shade-C);
+    }
+    .loot-table {
+        margin: 20px 0;
+    }
+    .overlay {
+        z-index: 2;
+        backdrop-filter: blur(15px) saturate(0.5) brightness(0.5);
+    }
+}
+
+.ranking-wrapper {
+    margin: 50px;
+}
+
+.rank-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-width: 500px;
+    margin: 20px 30px;
+    .ranking {
+        font-family: $fontFamily;
+        font-size: 25px;
+        width: 60px;
+    }
+    .name {
+        font-size: 15px;
+        margin-right: 20px;
+        flex: 1;
+    }
+    .score {
+        font-family: $fontFamily;
+        font-size: 25px;
+    }
+}

@@ -9,10 +9,18 @@
     justify-content: center;
     position: relative;
     z-index: 2;
+    .title {
+        color: white;
+        font-family: $fontFamily;
+        font-size: 30px;
+        margin-bottom: 30px;
+        text-align: center;
+        filter: drop-shadow(0 0 5px black);
+    }
     .char-list {
         display: flex;
         flex-wrap: wrap;
-        max-width: 1326px;
+        max-width: 1296px;
     }
     char-deco {
         position: absolute;
@@ -24,7 +32,7 @@
     }
     .character {
         @include panel();
-        margin: 10px;
+        margin: 20px;
         padding: 24px 24px 34px;
         width: 260px;
         border-radius: 5px;
@@ -91,5 +99,29 @@
                 margin: 5px;
             }
         }
+    }
+    .spell-selection {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .pickable-spell {
+        position: relative;
+        z-index: 1;
+        margin: 60px;
+        transform: scale(2);
+        &.picked {
+            transform: scale(3);
+            z-index: 2;
+        }
+    }
+    .name-display {
+        color: white;
+        font-family: $fontFamily;
+        font-size: 20px;
+        margin: 10px 0 60px;
+        text-align: center;
+        filter: drop-shadow(0 0 5px black);
     }
 }

@@ -133,8 +133,9 @@
     <div class="spells">
         <civ-spells *ngFor="let spell of entity.spells" class="square-wrapper" [class.disabled]="!spell.unlocked" [spell]="spell" [civ-tooltip]="spell" [civ-tooltip-owner]="entity">{{ spell.name }}</civ-spells>
     </div>
-
-    <div class="section-title">Equipement</div>
-    <div class="equipment">
-        <civ-equipment *ngFor="let equip of entity.equipment" class="square-wrapper" [equipment]="equip" [class.disabled]="!equip.unlocked" [civ-tooltip]="equip" [civ-tooltip-owner]="entity"></civ-equipment>
+    <div *ngIf="entity.equipment.length > 0 ">
+        <div class="section-title">Equipement</div>
+        <div class="equipment">
+            <civ-equipment *ngFor="let equip of entity.equipment" class="square-wrapper" [equipment]="equip" [class.disabled]="!equip.unlocked" [civ-tooltip]="equip" [civ-tooltip-owner]="entity"></civ-equipment>
+        </div>
     </div>

@@ -1,0 +1,12 @@
+<div class="loot-wrapper">
+    <div class="title">Classement</div>
+    <div class="ranking-wrapper">
+        <div *ngFor="let rank of leaderboard" class="rank-item">
+            <div class="ranking">{{ rank.rank }}</div>
+            <div class="name">{{ rank.name }}</div>
+            <div class="score">{{ rank.value }}</div>
+        </div>
+    </div>
+    <button (click)="hideRanking()">Fermer</button>
+</div>
+<div class="overlay"></div>

@@ -125,8 +125,8 @@ export class CharactersService {
 
   createAdrien(full) {
     let character = new Actor(EHero.ADRIEN, EClass.COMBATTANT, true);
-    character.health = new Health(72);
-    character.stats$ = new Stats(8, 0, 35);
+    character.health = new Health(79);
+    character.stats$ = new Stats(9, 0, 35);
 
     // Spells
     character.spells.push(new SpellDescription(ESPells.BASIC));
@@ -147,8 +147,8 @@ export class CharactersService {
 
   createLoic(full):Actor {
     let character = new Actor(EHero.LOIC, EClass.COMBATTANT, true);
-    character.health = new Health(65);
-    character.stats$ = new Stats(9, 0, 30);
+    character.health = new Health(71);
+    character.stats$ = new Stats(10, 0, 30);
     character.spells.push(new SpellDescription(ESPells.BASIC));
     character.spells.push(new SpellDescription(ESPells.DISCUSSION_INSENSEE));
     character.spells.push(new SpellDescription(ESPells.FRONT_LISSE));
@@ -167,8 +167,8 @@ export class CharactersService {
 
   createKevin(full) {
     let character = new Actor(EHero.KEVIN, EClass.MAGE, true);
-    character.health = new Health(54);
-    character.stats$ = new Stats(4, 4, 32);
+    character.health = new Health(68);
+    character.stats$ = new Stats(5, 8, 32);
     character.spells.push(new SpellDescription(ESPells.BASIC));
     character.spells.push(new SpellDescription(ESPells.MAURICE));
     character.spells.push(new SpellDescription(ESPells.SNAKES));
@@ -187,8 +187,8 @@ export class CharactersService {
 
   createQuentin(full) {
     let character = new Actor(EHero.QUENTIN, EClass.MAGE, true);
-    character.health = new Health(47);
-    character.stats$ = new Stats(4, 5, 30);
+    character.health = new Health(66);
+    character.stats$ = new Stats(5, 9, 30);
     character.spells.push(new SpellDescription(ESPells.BASIC));
     character.spells.push(new SpellDescription(ESPells.SMART_LIFE));
     character.spells.push(new SpellDescription(ESPells.DEBAT_POLITIQUE));
@@ -207,8 +207,8 @@ export class CharactersService {
 
   createClement(full) {
     let character = new Actor(EHero.CLEMENT, EClass.TANK, true);
-    character.health = new Health(84);
-    character.stats$ = new Stats(7, 1, 25);
+    character.health = new Health(87);
+    character.stats$ = new Stats(8, 1, 25);
     character.spells.push(new SpellDescription(ESPells.BASIC));
     character.spells.push(new SpellDescription(ESPells.JONGLAGE));
     character.spells.push(new SpellDescription(ESPells.TRAINING));
@@ -226,8 +226,8 @@ export class CharactersService {
 
   createCosty(full) {
     let character = new Actor(EHero.COSTY, EClass.SUPPORT, true);
-    character.health = new Health(59);
-    character.stats$ = new Stats(5, 3, 24);
+    character.health = new Health(65);
+    character.stats$ = new Stats(6, 3, 24);
     character.spells.push(new SpellDescription(ESPells.BASIC));
     character.spells.push(new SpellDescription(ESPells.NOOB));
     character.spells.push(new SpellDescription(ESPells.PLAYLIST));
@@ -245,27 +245,31 @@ export class CharactersService {
     return character;
   }
 
-  initCharacterGame(name) {
+  initCharacterGame(name):IEntityActor {
+    let hero;
+
     switch (name) {
       case EHero.ADRIEN:
-        this.characters.push(this.createAdrien(false));
+       hero = this.createAdrien(false);
         break;
       case EHero.LOIC:
-        this.characters.push(this.createLoic(false));
+        hero = this.createLoic(false);
         break;
       case EHero.KEVIN:
-        this.characters.push(this.createKevin(false));
+        hero = this.createKevin(false);
         break;
       case EHero.QUENTIN:
-        this.characters.push(this.createQuentin(false));
+        hero = this.createQuentin(false);
         break;
       case EHero.COSTY:
-        this.characters.push(this.createCosty(false));
+        hero = this.createCosty(false);
         break;
       case EHero.CLEMENT:
-        this.characters.push(this.createClement(false));
+        hero = this.createClement(false);
         break;
     }
     ScoreService.getInstance().stats.sizeTeam =  this.characters.length;
+    this.characters.push(hero);
+    return hero;
   }
 }

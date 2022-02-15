@@ -10,14 +10,14 @@ export type EEquipment = typeof EEquipment[keyof typeof EEquipment];
 export const EEquipment = {
   GANTS_ESCALADE: {
     name: 'Gants d\'escalade',
-    price: 25,
+    price: 58,
     description: (damageInstances, owner?) => {
       return `Les chances que votre cible soit <eff-deco effect="STUN"></eff-deco> lors d\'une <strong class="spell-decorator">Escalade</strong> passe à 80%.`
     },
     stats: () => {
       const stats = new Stats(0,0,0);
-      stats.speed = -5;
-      stats.dodge = 20;
+      stats.speed = -3;
+      stats.dodge = 15;
       return stats;
     },
     callback: (actor) => {
@@ -32,14 +32,14 @@ export const EEquipment = {
   },
   FREELANCE: {
     name: 'Freelance',
-    price: 20,
+    price: 55,
     description: (damageInstances, owner?) => {
       return `<strong class="spell-decorator">Amandine</strong> vous permet de gagner aussi <eff-deco effect="UP_CRIT"></eff-deco>.`
     },
     stats: () => {
       const stats = new Stats(0,0,0);
-      stats.attack = 5;
-      stats.dodge = 20;
+      stats.attack = 3;
+      stats.dodge = 15;
       return stats;
     },
     callback: (actor) => {
@@ -55,13 +55,13 @@ export const EEquipment = {
   },
   SOURIS: {
     name: 'Souris congelées',
-    price: 30,
+    price: 64,
     description: (damageInstances, owner?) => {
       return `<strong class="spell-decorator">Serpents</strong> invoque un serpent supplémentaire.`
     },
     stats: () => {
       const stats = new Stats(0,0,0);
-      stats.power = 5;
+      stats.power = 3;
       stats.touch = 5;
       return stats;
     },
@@ -89,19 +89,19 @@ export const EEquipment = {
   },
   BALLANTINES: {
     name: 'Ballantines',
-    price: 28,
+    price: 67,
     description: (damageInstances, owner?) => {
       return `<strong class="spell-decorator">Pigeon</strong> applique <eff-deco effect="POISON" power="${owner.stats.power}"></eff-deco> une fois supplémentaire.`
     },
     stats: () => {
       const stats = new Stats(0,0,0);
-      stats.power = 5;
+      stats.power = 3;
       return stats;
     },
-    health: 15,
+    health: 12,
     callback: (actor) => {
-      actor.health.current += 15;
-      actor.health.max += 15;
+      actor.health.heal(12);
+      actor.health.max += 12;
 
       let spellUpgrade = actor.spells.find(s => s.name === ESPells.PIGEON.name);
 
@@ -115,14 +115,14 @@ export const EEquipment = {
   },
   CASQUE: {
     name: 'Casque',
-    price: 34,
+    price: 72,
     description: (damageInstances, owner?) => {
       return `<strong class="spell-decorator">Tête la première</strong> n'inflige plus de dégâts collatéraux.`
     },
     stats: () => {
       const stats = new Stats(0,0,0);
-      stats.critical = 5;
-      stats.criticalDamage = 0.5;
+      stats.critical = 8;
+      stats.criticalDamage = 1.5;
       return stats;
     },
     callback: (actor) => {
@@ -135,14 +135,14 @@ export const EEquipment = {
   },
   ALCOTEST: {
     name: 'Alcotest',
-    price: 22,
+    price: 63,
     description: (damageInstances, owner?) => {
       return `<strong class="spell-decorator">Discussion insensée</strong> inflige désormais 180% au lieu de 120% de l'attaque.`
     },
     stats: () => {
       const stats = new Stats(0,0,0);
-      stats.attack = 5;
-      stats.critical = 5;
+      stats.attack = 3;
+      stats.critical = 8;
       return stats;
     },
     callback: (actor) => {
@@ -155,9 +155,9 @@ export const EEquipment = {
   },
   EXTENSION_SMARTLIFE: {
     name: 'Risk',
-    price: 26,
+    price: 63,
     description: (damageInstances, owner?) => {
-      return `<strong class="spell-decorator">Smart life</strong> obtient un bonus de 15% au lieu de 8% à chaque utilisation.`
+      return `<strong class="spell-decorator">Smart life</strong> touche maintenant 2 cibles.`
     },
     stats: () => {
       const stats = new Stats(0,0,0);
@@ -168,21 +168,19 @@ export const EEquipment = {
       let spellUpgrade = actor.spells.find(s => s.name === ESPells.SMART_LIFE.name);
 
       if(exists(spellUpgrade)) {
-        spellUpgrade.damageInstances[0].onHit =  ($this) => {
-          $this.spellDescription.damageInstances[0].amount += 0.15;
-        }
+        spellUpgrade.damageInstances[0].targetsAmount =  2;
       }
     }
   },
   DISCORD: {
     name: 'Discord',
-    price: 25,
+    price: 59,
     description: (damageInstances, owner?) => {
       return `<strong class="spell-decorator">Fuite</strong> donne aussi <eff-deco effect="UP_AP"></eff-deco> à 3 alliés.`
     },
     stats: () => {
       const stats = new Stats(0,0,0);
-      stats.power = 10;
+      stats.power = 6;
       return stats;
     },
     callback: (actor) => {
@@ -199,18 +197,18 @@ export const EEquipment = {
   },
   PROTEGE_TIBIA: {
     name: 'Protège tibia',
-    price: 39,
+    price: 79,
     description: (damageInstances, owner?) => {
       return `<strong class="spell-decorator">Jonglage</strong> ne nécessite plus de tuer sa cible pour récupérer des points de vie.`
     },
-    health: 60,
+    health: 25,
     stats: () => {
       const stats = new Stats(0,0,0);
       return stats;
     },
     callback: (actor) => {
-      actor.health.current += 60;
-      actor.health.max += 60;
+      actor.health.current += 25;
+      actor.health.max += 25;
 
       let spellUpgrade = actor.spells.find(s => s.name === ESPells.JONGLAGE.name);
 
@@ -221,19 +219,19 @@ export const EEquipment = {
   },
   VESTE_MARQUE: {
     name: 'Veste de marque',
-    price: 31,
+    price: 62,
     description: (damageInstances, owner?) => {
       return `<strong class="spell-decorator">Seduction</strong> soigne de 10% de la santé maximale au lieu de 5%.`
     },
-    health: 30,
+    health: 15,
     stats: () => {
       const stats = new Stats(0,0,0);
-      stats.attack = 5;
+      stats.attack = 3;
       return stats;
     },
     callback: (actor) => {
-      actor.health.current += 30;
-      actor.health.max += 30;
+      actor.health.current += 15;
+      actor.health.max += 15;
 
       let spellUpgrade = actor.spells.find(s => s.name === ESPells.SEDUCTION.name);
 
@@ -244,19 +242,19 @@ export const EEquipment = {
   },
   MANETTE_XBOX: {
     name: 'Manette',
-    price: 29,
+    price: 61,
     description: (damageInstances, owner?) => {
       return `<strong class="spell-decorator">Noob</strong> applique <eff-deco effect="UP_DODGE"></eff-deco> à tous ses alliés.`
     },
-    health: 15,
+    health: 8,
     stats: () => {
       const stats = new Stats(0,0,0);
       stats.speed = -4;
       return stats;
     },
     callback: (actor) => {
-      actor.health.current += 15;
-      actor.health.max += 15;
+      actor.health.heal(8);
+      actor.health.max += 8;
 
       let spellUpgrade = actor.spells.find(s => s.name === ESPells.NOOB.name);
 
@@ -270,19 +268,19 @@ export const EEquipment = {
   },
   SPOTIFY: {
     name: 'Compte Deezer',
-    price: 37,
+    price: 66,
     description: (damageInstances, owner?) => {
       return `<strong class="spell-decorator">Playlist</strong> fait maintenant gagner <eff-deco effect="TAUNT"></eff-deco>.`
     },
-    health: 30,
+    health: 8,
     stats: () => {
       const stats = new Stats(0,0,0);
       stats.speed = -2;
       return stats;
     },
     callback: (actor) => {
-      actor.health.current += 30;
-      actor.health.max += 30;
+      actor.health.heal(12);
+      actor.health.max += 12;
 
       let spellUpgrade = actor.spells.find(s => s.name === ESPells.PLAYLIST.name);
 

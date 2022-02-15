@@ -22,6 +22,9 @@ export class Damage implements ISystemDamage {
 
   // TODO Use this instead of hurt() in components
   applyDamage(): boolean {
+    if(this.target.health.isDead) {
+      return true;
+    }
     let score = ScoreService.getInstance();
     const isDead = this.target.health.hurt(this.damage);
 

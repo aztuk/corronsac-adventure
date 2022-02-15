@@ -35,7 +35,7 @@ export const EVENTS: IEvent[] = [
     {
       name: `Soupe indienne`,
       text: () => {
-        return `Clément est <span class="heal">soigné à 100%</span>`;
+        return `Clément est soigné à 100%`;
       },
       reward: (characters: CharactersService, currency: ShopService) => {
         const actor = characters.getCharacterByName(EHero.CLEMENT);
@@ -48,14 +48,14 @@ export const EVENTS: IEvent[] = [
       },
       reward: (characters: CharactersService, currency: ShopService) => {
         const actor = characters.getCharacterByName(EHero.CLEMENT);
-        actor.health.current+=10;
+        actor.health.heal(10);
         actor.health.max+=10;
       }
     },{
       name: `Vitamines D3`,
       text: () => {
-        return `Clément apprend <span class="spell-decorator">Entraînement</span>
-        mais <span class="enemy-decorator">perd 50% points de vie</span>`;
+        return `Clément apprend Entraînement
+        mais perd 50% points de vie`;
       },
       reward: (characters: CharactersService, currency: ShopService) => {
         const actor = characters.getCharacterByName(EHero.CLEMENT);
@@ -81,7 +81,7 @@ export const EVENTS: IEvent[] = [
     {
       name: `Jouer le match`,
       text: () => {
-        return `Clément perd <span class="enemy-decorator"> 10 points de vie</span>. Vous gagnez 10 euros.`;
+        return `Clément perd  10 points de vie. Vous gagnez 40 euros.`;
       },
       reward: (characters: CharactersService, currency: ShopService) => {
         const actor = characters.getCharacterByName(EHero.CLEMENT);
@@ -91,7 +91,7 @@ export const EVENTS: IEvent[] = [
     },{
       name: `Inventer une excuse`,
       text: () => {
-        return `Clément récupère <span class="heal">10 points de vie</span>. Vous perdez 10 euros.`;
+        return `Clément récupère 10 points de vie. Vous perdez 40 euros.`;
       },
       reward: (characters: CharactersService, currency: ShopService) => {
         const actor = characters.getCharacterByName(EHero.CLEMENT);
@@ -124,8 +124,7 @@ export const EVENTS: IEvent[] = [
     {
       name: `Ouverture Queens Gambit`,
       text: () => {
-        return `Costy apprend <span class="spell-decorator">Noob</span>
-        mais <span class="enemy-decorator">perd 50% points de vie</span>`;
+        return `Costy apprend Noob maisperd 50% points de vie`;
       },
       reward: (characters: CharactersService, currency: ShopService) => {
         const actor = characters.getCharacterByName(EHero.COSTY);
@@ -242,7 +241,7 @@ export const EVENTS: IEvent[] = [
       },
       reward: (characters: CharactersService, currency: ShopService) => {
         characters.characters.forEach(c=> {
-          c.health.current += 7;
+          c.health.heal(7);
           c.health.max += 7;
         });
       }
@@ -279,12 +278,12 @@ export const EVENTS: IEvent[] = [
     {
       name: `Dormir sur place`,
       text: () => {
-        return `Tout le monde est soigné de 10 PV mais vous perdez 80 euros`;
+        return `Tout le monde est soigné de 20 PV mais vous perdez 80 euros`;
       },
       reward: (characters: CharactersService, currency: ShopService) => {
         currency.removeCurrency(80);
         characters.characters.forEach(c=> {
-          c.health.heal(10);
+          c.health.heal(20);
         });
       },
       condition: (actors, currency) => {
@@ -369,12 +368,12 @@ export const EVENTS: IEvent[] = [
     },{
       name: `Accepter juste une partie`,
       text: () => {
-        return `Vous gagnez 80 euros mais Adrien perd 50% de ses PV actuels`;
+        return `Vous gagnez 100 euros mais Adrien perd 30% de ses PV actuels`;
       },
       reward: (characters: CharactersService, currency: ShopService) => {
         const actor = characters.getCharacterByName(EHero.ADRIEN);
-        actor.health.current = actor.health.current * 0.5;
-        currency.addCurrency(80);
+        actor.health.current = actor.health.current * 0.3;
+        currency.addCurrency(100);
       }
     },{
       name: `En accepter aucun`,
@@ -435,7 +434,7 @@ export const EVENTS: IEvent[] = [
 },{
   owners: [EHero.LOIC],
   title: 'Je vous aime !',
-  description: 'Loïc boit tropet atteint un stade de son alcolémie où il propage son amour à son entourage.',
+  description: 'Loïc boit trop et atteint un stade de son alcolémie où il propage son amour à son entourage.',
   condition: (actors, $this) => {
     return actors.some(a => $this.owners.some(owner => owner === a.name));
   },
@@ -443,11 +442,11 @@ export const EVENTS: IEvent[] = [
     {
       name: `Stade 3`,
       text: () => {
-        return `Tout le monde est soigné à 100% mais Loic perd 50% de ses PV`;
+        return `Tout le monde est soigné à 100% mais Loic perd 40% de ses PV`;
       },
       reward: (characters: CharactersService, currency: ShopService) => {
         characters.characters.filter(c => c.name !== EHero.LOIC).forEach(c => c.health.heal(1000));
-        characters.getCharacterByName(EHero.LOIC).health.current *= 0.5;
+        characters.getCharacterByName(EHero.LOIC).health.current *= 0.4;
       }
     },{
       name: `Stade 2`,
@@ -490,6 +489,9 @@ export const EVENTS: IEvent[] = [
         characters.characters.forEach(c => {
           new Effects(actor, c, EEffects.POISON);
         });
+      },
+      condition: (actors, currency) => {
+        return !actors.getCharacterByName(EHero.QUENTIN).hasSpell(ESPells.DEBAT_POLITIQUE);
       }
     },{
       name: `Débat en famille`,
@@ -500,6 +502,9 @@ export const EVENTS: IEvent[] = [
         const actor = characters.getCharacterByName(EHero.QUENTIN);
         actor.spells.find(s => s.name === ESPells.FUITE.name).unlocked = true;
         characters.characters.forEach(c => new Effects(actor, c, EEffects.POISON));
+      },
+      condition: (actors, currency) => {
+        return !actors.getCharacterByName(EHero.QUENTIN).hasSpell(ESPells.FUITE);
       }
     },{
       name: `Jouons plutôt`,
@@ -510,6 +515,9 @@ export const EVENTS: IEvent[] = [
         const actor = characters.getCharacterByName(EHero.QUENTIN);
         actor.spells.find(s => s.name === ESPells.SMART_LIFE.name).unlocked = true;
         characters.characters.forEach(c => new Effects(actor, c, EEffects.POISON));
+      },
+      condition: (actors, currency) => {
+        return !actors.getCharacterByName(EHero.QUENTIN).hasSpell(ESPells.SMART_LIFE);
       }
     }
   ]
@@ -543,5 +551,4 @@ export const EVENTS: IEvent[] = [
       }
     }
   ]
-},
-]
+}]

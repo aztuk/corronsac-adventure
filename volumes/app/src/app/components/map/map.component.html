@@ -11,22 +11,3 @@
         </div>
     </ng-scrollbar>
 </div>
-<div class="top-bar">
-    <div class="flex center-aligned">
-        <div class="score" [civ-tooltip]="scoreS">
-            Score: {{ score }}
-        </div>
-        <div class="money">
-            {{ currency }} euros
-        </div>
-    </div>
-    <div class="characters-content">
-        <div *ngFor="let character of characters" [civ-tooltip]="character" [on-click]="true">
-            <div class="char-wrapper">
-                <char-deco [attr.character]="character.name" [class.dead]="character.health.isDead"></char-deco>
-                <div class="name">{{ character.name }}</div>
-                <civ-progress-bar [current]="character.health.current" [max]="character.health.max" [color]="'#eb4444'"></civ-progress-bar>
-            </div>
-        </div>
-    </div>
-</div>
