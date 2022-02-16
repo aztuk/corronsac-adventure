@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 })
 export class GlobalstatsService {
 
-  public apiUrl = 'http://localhost:4200/api';
+  public apiUrl = 'https://api.globalstats.io';
   public accessToken;
   public gtd = 'highs';
 
