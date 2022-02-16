@@ -60,6 +60,10 @@ export class CombatService {
     this.actors = this.characters.concat(this.enemies);
   }
 
+  removeActor(actor) {
+    const indexToRemove = this.actors.findIndex(a => a.id === actor.id);
+   this.actors.splice(indexToRemove, 1);
+  }
 
   aiTurn(ai: IEntityActor): SpellCast {
     const spells = this.getAiAvailableSpells(ai);

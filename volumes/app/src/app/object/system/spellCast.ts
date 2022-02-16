@@ -147,6 +147,26 @@ export class SpellCast {
           amount = this._combatActors.enemies.length;
         }
         return getRandomElementsInArray(this._combatActors.enemies, amount);
+      case ETargetTypes.LOWEST_ALLY:
+        let lowestA = 1000;
+        let lowestAlly;
+        for (let ally of this._combatActors.allies) {
+            if (ally.health.current < lowestA) {
+              lowestA = ally.health.current;
+              lowestAlly = ally;
+            }
+        }
+        return [lowestAlly];
+      case ETargetTypes.LOWEST_ENEMY:
+        let lowestE = 1000;
+        let lowestEnemy;
+        for (let enemy of this._combatActors.enemies) {
+            if (enemy.health.current < lowestE) {
+              lowestE = enemy.health.current;
+              lowestEnemy = enemy;
+            }
+        }
+        return [lowestEnemy];
       default:
         return [this._combatActors.target];
     }

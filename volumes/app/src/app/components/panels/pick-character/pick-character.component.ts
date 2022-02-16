@@ -23,6 +23,14 @@ export class PickCharacterComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    /*
+    let hero1 = this.charService.createAdrien(false);
+    let hero2 = this.charService.createQuentin(true);
+    let hero3 = this.charService.createQuentin(false);
+    let hero4 = this.charService.createClement(false);
+
+
+    this.charService.characters = [hero1,hero2,hero3,hero4];*/
 
     this.pickableCharacters.push(this.charService.createClement(false));
     this.pickableCharacters.push(this.charService.createAdrien(false));

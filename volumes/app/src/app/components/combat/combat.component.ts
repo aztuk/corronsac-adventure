@@ -136,6 +136,9 @@ export class CombatComponent implements OnInit, OnDestroy {
     (damages ?? []).forEach((d, i) => {
       if (d.applyDamage()) {
         this.queue.removeActorFromQueue(d.target);
+        setTimeout(() => {
+          this.combatService.removeActor(d.target);
+         },1000);
       }
       this.animateActor(d);
       this.createDamageView(d);

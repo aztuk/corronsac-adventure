@@ -41,8 +41,7 @@ export const ESPells = {
     price: 82,
     description: (damageInstances, owner?) => {
       let text = `Escalade la cible infligeant <dmg-deco amount="${damageInstances[0].amount}" stat="${owner.stats.attack}" type="physical"></dmg-deco>.
-      Si la cible est déjà <eff-deco effect="STUN"></eff-deco>, l'escalade inflige <dmg-deco amount="${damageInstances[1].amount}" stat="${owner.stats.attack}" type="physical"></dmg-deco> supplémentaire. <br/><br/>
-      Cette attaque a 50% de chances de rendre la cible <eff-deco effect="STUN" with-time></eff-deco>.`
+      Escalade inflige <dmg-deco amount="${damageInstances[1].amount}" stat="${owner.stats.attack}" type="physical"></dmg-deco> supplémentaire aux cibles ayant plus de points de vie que Adrien.`
 
       const equipment = owner.equipment.find(e => e.name === EEquipment.GANTS_ESCALADE.name);
 
@@ -56,41 +55,29 @@ export const ESPells = {
     damageInstances: [{
       targetsType: ETargetTypes.TARGET,
       damageType: EDamageType.PHYSIC,
-      amount: 1.4
+      amount: 1.2
     }, {
       targetsType: ETargetTypes.TARGET,
       damageType: EDamageType.PHYSIC,
-      amount: 1.4,
+      amount: 0.6,
       condition: ($this) => {
-        return $this.targets[0].effects.some((e) => e.effect === EEffects.STUN)
+        return $this.targets[0].health.current < $this._caster.health.current;
       }
     }],
-    effectInstances: [{
-      targetsType: ETargetTypes.TARGET,
-      effect: EEffects.STUN,
-      diceAmount: 50,
-      condition: ($this) => {
-        return dice(50)
-      }
-    }]
+    effectInstances: []
 
   },
   SMOKE_SCREEN: {
     name: 'Ecran de fumée',
     price: 38,
     description: (damageInstances, owner?) => {
-      return `Fume aggressivement, provoquant un nuage de fumée permettant de gagner
-      <eff-deco effect="UP_DODGE" with-time></eff-deco>
-      et d'empoisonner la cible infligeant
-      <eff-deco effect="POISON" with-time power="${owner.stats.power}"></eff-deco>.`
+      return `Fume aggressivement, provoquant un nuage de fumée permettant à tous les alliés de gagner
+      <eff-deco effect="UP_DODGE" with-time></eff-deco>`
     },
     cooldown: 1,
     damageInstances: [],
     effectInstances: [{
-      targetsType: ETargetTypes.TARGET,
-      effect: EEffects.POISON,
-    }, {
-      targetsType: ETargetTypes.SELF,
+      targetsType: ETargetTypes.ALL_ALLIES,
       effect: EEffects.UP_DODGE,
     }]
 
@@ -99,8 +86,7 @@ export const ESPells = {
     name: 'Amandine',
     price: 74,
     description: (damageInstances, owner?) => {
-      let text = `Appelle Amandine à la rescousse qui par sa présence inattendue inflige <dmg-deco amount="${damageInstances[0].amount}" stat="${owner.stats.attack}" type="physical"></dmg-deco> à tous les enemis.<br/><br/>
-      ${owner.name} gagne <eff-deco effect="UP_CRIT_DMG" with-time></eff-deco>`;
+      let text = `Appelle Amandine à la rescousse qui par sa présence inattendue inflige <dmg-deco amount="${damageInstances[0].amount}" stat="${owner.stats.attack}" type="physical"></dmg-deco> à tous les enemis.`;
 
 
       const equipment = owner.equipment.find(e => e.name === EEquipment.FREELANCE.name);
@@ -117,10 +103,7 @@ export const ESPells = {
       damageType: EDamageType.PHYSIC,
       amount: 0.7
     }],
-    effectInstances: [{
-      targetsType: ETargetTypes.SELF,
-      effect: EEffects.UP_CRIT_DMG,
-    }]
+    effectInstances: []
 
   },
 
@@ -169,9 +152,10 @@ export const ESPells = {
   },
   TETE_PREMIERE: {
     name: 'Tête la première',
-    price: 62,
+    price: 89,
     description: (damageInstances, owner?) => {
-      let text = `Envoie un violent coup de tête vers l'avant, sans réfléchir, s'infligeant au passage  <dmg-deco amount="${damageInstances[0].amount}" stat="${owner.stats.attack}" type="physical"></dmg-deco>
+      let text = `Envoie un violent coup de tête vers l'avant, sans réfléchir, s'infligeant au passage
+      <dmg-deco amount="${damageInstances[0].amount}" stat="${owner.stats.attack}" type="physical"></dmg-deco>
        mais aussi <dmg-deco amount="${damageInstances[1].amount}" stat="${owner.stats.attack}" type="physical"></dmg-deco> à tous les enemis`;
 
        const equipment = owner.equipment.find(e => e.name === EEquipment.CASQUE.name);
@@ -200,24 +184,19 @@ export const ESPells = {
     name: 'Maurice',
     price: 66,
     description: (damageInstances, owner?) => {
-      return `Fait goûter une portion de Maurice à ${damageInstances[0].targetsAmount} de ses adversaires leur infligeant <dmg-deco amount="${damageInstances[0].amount}" stat="${owner.stats.power}" type="magical"></dmg-deco>.<br/><br/>
-      Si la cible sélectionnée est empoisonnée, inflige   <dmg-deco amount="${damageInstances[1].amount}" stat="${owner.stats.power}" type="magical"></dmg-deco> supplémentaires.`
+      return `Fait goûter une portion de Maurice à sa cible lui infligeant <dmg-deco amount="${damageInstances[0].amount}" stat="${owner.stats.power}" type="magical"></dmg-deco>
+      et empoisonne la cible lui infligeant <eff-deco effect="POISON" with-time power="${owner.stats.power}"></eff-deco>`
     },
     cooldown: 1,
     damageInstances: [{
-      targetsType: ETargetTypes.RANDOM_ENEMY,
-      targetsAmount: 3,
-      damageType: EDamageType.MAGIC,
-      amount: 1.2
-    }, {
       targetsType: ETargetTypes.TARGET,
       damageType: EDamageType.MAGIC,
-      amount: 2,
-      condition: ($this) => {
-        return $this.targets[0].effects.some((e) => e.effect === EEffects.POISON)
-      }
+      amount: 0.8
     }],
-    effectInstances: []
+    effectInstances: [{
+      targetsType: ETargetTypes.TARGET,
+      effect: EEffects.POISON,
+    }]
   },
   PIGEON: {
     name: 'Pigeon',
@@ -241,7 +220,7 @@ export const ESPells = {
   },
   SNAKES: {
     name: 'Serpents',
-    price: 60,
+    price: 83,
     description: (damageInstances, owner?) => {
       let text = `Invoque 1 serpent rabougri qui rejoindra l'équipe.`;
       const equipment = owner.equipment.find(e => e.name === EEquipment.SOURIS.name);
@@ -252,7 +231,7 @@ export const ESPells = {
 
       return text;
     },
-    cooldown: 2,
+    cooldown: 3,
     invocation: ($this) => {
       const snake = new Actor('Serpent', EClass.INVOCATION, true);
       snake.stats$ = new Stats(2, 0, 25);
@@ -285,10 +264,10 @@ export const ESPells = {
   /* SORTS DE QUENTIN */
   SMART_LIFE: {
     name: 'Smart life',
-    price: 67,
+    price: 81,
     description: (damageInstances, owner?) => {
-      let text = `Propose un smart life à ${damageInstances[0].targetsAmount} de ses adversaires leur infligeant <dmg-deco amount="${damageInstances[0].amount}" stat="${owner.stats.power}" type="magical"></dmg-deco>.<br/><br/>
-      Chaque cible touché augmente les dégâts de 8% pour la prochaine utilisation de ce sort.`;
+      let text = `Propose un smart life à ${damageInstances[0].targetsAmount} adversaire aléatoire leur infligeant <dmg-deco amount="${damageInstances[0].amount}" stat="${owner.stats.power}" type="magical"></dmg-deco>.<br/><br/>
+      Chaque cible touchée augmente définitivement les dégâts de 8% de ce sort.`;
       const equipment = owner.equipment.find(e => e.name === EEquipment.EXTENSION_SMARTLIFE.name);
 
       if(equipment.unlocked){
@@ -297,7 +276,7 @@ export const ESPells = {
 
       return text;
     },
-    cooldown: 1,
+    cooldown: 2,
     damageInstances: [{
       targetsType: ETargetTypes.RANDOM_ENEMY,
       targetsAmount: 1,
@@ -313,13 +292,13 @@ export const ESPells = {
     name: 'Débat politique',
     price: 73,
     description: (damageInstances, owner?) => {
-      return `Lance un ennuyeux débat politique à sa cible lui infligeant <dmg-deco amount="${damageInstances[0].amount}" stat="${owner.stats.power}" type="magical"></dmg-deco>.`
+      return `Lance un ennuyeux débat politique à l'adversaire le plus faible et inflige <dmg-deco amount="${damageInstances[0].amount}" stat="${owner.stats.power}" type="magical"></dmg-deco>.`
     },
-    cooldown: 1,
+    cooldown: 2,
     damageInstances: [{
-      targetsType: ETargetTypes.TARGET,
+      targetsType: ETargetTypes.LOWEST_ENEMY,
       damageType: EDamageType.MAGIC,
-      amount: 2
+      amount: 1.3
     }],
     effectInstances: []
   },
@@ -368,7 +347,7 @@ export const ESPells = {
     damageInstances: [{
       targetsType: ETargetTypes.TARGET,
       damageType: EDamageType.PHYSIC,
-      amount: 0.8
+      amount: 0.7
     }],
     effectInstances: [],
     healInstances: [{
@@ -383,13 +362,14 @@ export const ESPells = {
     name: 'Entraînement',
     price: 53,
     description: (damageInstances, owner?, healInstances?) => {
-      return `Se lance dans un coaching individuel pour chaque membre de son équipe, ce qui leur font gagner  <eff-deco effect="UP_AD" with-time></eff-deco>.<br/><br/>
+      return `Se lance dans un coaching individuel, ce qui fait gagner <eff-deco effect="UP_AD" with-time></eff-deco> à un allié aléatoire.<br/><br/>
       ${owner.name} en profite pour se reposer et récupère <strong class="heal">${Math.round(healInstances[0].amount * owner.health.max)} PV</strong>.`
     },
     cooldown: 2,
     damageInstances: [],
     effectInstances: [{
-      targetsType: ETargetTypes.ALL_ALLIES,
+      targetsType: ETargetTypes.RANDOM_ALLY,
+      targetsAmount: 1,
       effect: EEffects.UP_AD,
     }],
     healInstances: [{
@@ -419,7 +399,7 @@ export const ESPells = {
     }],
     healInstances: [{
       targetsType: ETargetTypes.SELF,
-      amount: 0.05,
+      amount: 0.08,
     }]
   },
 
@@ -428,7 +408,7 @@ export const ESPells = {
     name: 'Noob',
     price: 61,
     description: (damageInstances, owner?, healInstances?) => {
-      let text = `Essaye un nouveau jeu sans lire les règles, faisant n'importe quoi. Ses adversaires sont abasourdis et perdent <eff-deco effect="DOWN_DODGE" with-time></eff-deco>.`;
+      let text = `Essaye un nouveau jeu sans lire les règles, faisant n'importe quoi. Le rire provoqué soigne la cible de <strong class="heal">${Math.round(healInstances[0].amount * owner.health.max)} PV</strong>.`;
       const equipment = owner.equipment.find(e => e.name === EEquipment.MANETTE_XBOX.name);
 
       if(equipment.unlocked){
@@ -440,11 +420,11 @@ export const ESPells = {
     },
     cooldown: 2,
     damageInstances: [],
-    effectInstances: [{
-      targetsType: ETargetTypes.ALL_ENEMIES,
-      effect: EEffects.DOWN_DODGE,
-    }],
-    healInstances: []
+    effectInstances: [],
+    healInstances: [{
+      targetsType: ETargetTypes.LOWEST_ALLY,
+      amount: 0.08,
+    }]
   },
   PLAYLIST: {
     name: 'Playlist',

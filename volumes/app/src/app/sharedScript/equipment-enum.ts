@@ -12,7 +12,7 @@ export const EEquipment = {
     name: 'Gants d\'escalade',
     price: 58,
     description: (damageInstances, owner?) => {
-      return `Les chances que votre cible soit <eff-deco effect="STUN"></eff-deco> lors d\'une <strong class="spell-decorator">Escalade</strong> passe à 80%.`
+      return `Les dégâts supplémentaires infligés passent à <dmg-deco amount="1.2" stat="${owner.stats.attack}" type="physical"></dmg-deco>.`
     },
     stats: () => {
       const stats = new Stats(0,0,0);
@@ -24,9 +24,7 @@ export const EEquipment = {
       let spellUpgrade = actor.spells.find(s => s.name === ESPells.ESCALADE.name);
 
       if(exists(spellUpgrade)) {
-        spellUpgrade.effectInstances[0].condition = ($this) => {
-          return dice(80)
-        }
+        spellUpgrade.damageInstances[1].amount = 1.2
       }
     }
   },
@@ -244,7 +242,7 @@ export const EEquipment = {
     name: 'Manette',
     price: 61,
     description: (damageInstances, owner?) => {
-      return `<strong class="spell-decorator">Noob</strong> applique <eff-deco effect="UP_DODGE"></eff-deco> à tous ses alliés.`
+      return `<strong class="spell-decorator">Noob</strong> applique <eff-deco effect="UP_DODGE"></eff-deco> l'adversaire le plus faible.`
     },
     health: 8,
     stats: () => {
@@ -260,7 +258,7 @@ export const EEquipment = {
 
       if(exists(spellUpgrade)) {
         spellUpgrade.effectInstances.push({
-          targetsType: ETargetTypes.ALL_ALLIES,
+          targetsType: ETargetTypes.LOWEST_ALLY,
           effect: EEffects.UP_DODGE
         });
       }

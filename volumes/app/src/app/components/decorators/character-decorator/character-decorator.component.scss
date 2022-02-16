@@ -35,7 +35,8 @@
     &.SANDIE {
         background-image: url('../../../../assets/images/characters/sandie.png');
     }
-    &.PATRONLOURD {
+    &.PATRONLOURD,
+    &.CONSEILLERMUNICIPAL {
         background-image: url('../../../../assets/images/characters/patron.png');
     }
     &.PETITERACAILLE {
@@ -80,6 +81,9 @@
     &.IVOIRIEN {
         background-image: url('../../../../assets/images/characters/ivoirien.png');
     }
+    &.SERPENT {
+        background-image: url('../../../../assets/images/characters/serpent.png');
+    }
     &.big {
         width: 90px;
         height: 120px;
@@ -107,7 +111,8 @@
         &.SANDIE {
             background-image: url('../../../../assets/images/characters/sandie@2x.png');
         }
-        &.PATRONLOURD {
+        &.PATRONLOURD,
+        &.CONSEILLERMUNICIPAL {
             background-image: url('../../../../assets/images/characters/patron@2x.png');
         }
         &.PETITERACAILLE {
@@ -151,6 +156,9 @@
         }
         &.IVOIRIEN {
             background-image: url('../../../../assets/images/characters/ivoirien@2x.png');
+        }
+        &.SERPENT {
+            background-image: url('../../../../assets/images/characters/serpent@2x.png');
         }
     }
 }

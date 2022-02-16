@@ -128,7 +128,7 @@
         &.NOOB {
             background-image: url('../../../../assets/images/spells/spell-sprite-1.jpg');
             background-size: 871px;
-            background-position: -1376px -1022px;
+            background-position: -1378px -1020px;
             filter: hue-rotate(105deg);
         }
         &.PLAYLIST {
@@ -141,6 +141,11 @@
             background-image: url('../../../../assets/images/spells/spell-sprite-1.jpg');
             background-size: 871px;
             background-position: -1661px -1357px;
+        }
+        &.MORSUREDE {
+            background-image: url('../../../../assets/images/spells/spell-sprite-2.png');
+            background-position: -615px -720px;
+            background-size: 871px;
         }
     }
 }

@@ -27,8 +27,8 @@ export let STACK_TYPES = {
 }
 export let EFFECT_TIMERS = {
   UP_DODGE: 3,
-  UP_CRIT_DMG: 3,
-  UP_CRIT: 3,
+  UP_CRIT_DMG: 4,
+  UP_CRIT: 4,
   POISON: 3,
   UP_AP: 3,
   DOWN_AP: 2,

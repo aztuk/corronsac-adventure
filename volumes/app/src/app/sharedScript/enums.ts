@@ -51,6 +51,8 @@ export enum ETargetTypes {
   'TARGET' = 'TARGET',
   'RANDOM_ENEMY' = 'RANDOM_ENEMY',
   'RANDOM_ALLY' = 'RANDOM_ALLY',
+  'LOWEST_ALLY' = 'LOWEST_ALLY',
+  'LOWEST_ENEMY' = 'LOWEST_ENEMY',
 }
 
 export enum ELevelType {

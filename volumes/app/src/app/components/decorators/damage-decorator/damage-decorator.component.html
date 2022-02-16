@@ -4,7 +4,7 @@
   <span *ngIf="type === 'physical'">physiques</span>
   <span *ngIf="type === 'magical'">magiques</span>
 </span>
-  <span class="small">
+  <span class="small hide">
   ({{amount * 100}}%
   <civ-stats class="attack" *ngIf="type === 'physical'"></civ-stats>
   <civ-stats class="power" *ngIf="type === 'magical'"></civ-stats>
