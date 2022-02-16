@@ -1,0 +1,90 @@
+@import 'variables';
+@mixin panel() {
+    /* background: rgba(map-get($backgrounds, shade-C), .95);
+    border: 2px solid map-get($backgrounds, shade-B);
+    box-shadow: inset 0 0 0px 1px map-get($backgrounds, shade-A), inset 0 5px 10px 0px map-get($backgrounds, shade-C), 0 3px 0 0 map-get($backgrounds, shade-A), 0 0px 0px 1px map-get($backgrounds, shade-A), 0 2px 4px rgba(map-get($backgrounds, shade-A), .5), 0 5px 10px rgba(map-get($backgrounds, shade-A), .5), 0 10px 30px rgba(map-get($backgrounds, shade-A), .5);
+    text-shadow: $textShadow;
+    color: map-get($texts, shade-A);*/
+    filter: drop-shadow(0px 0px 36px black);
+    &:before {
+        background: url('../images/map/map_background.png') no-repeat;
+        content: '';
+        position: absolute;
+        top: 0;
+        bottom: 60px;
+        left: 0;
+        right: 0;
+        background-size: cover;
+        z-index: -1;
+        filter: saturate(0.6) brightness(0.9)
+    }
+    &:after {
+        background: url('../images/map/map_background.png') no-repeat;
+        background-position: bottom;
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 61px;
+        background-size: cover;
+        z-index: -1;
+        filter: saturate(0.6) brightness(0.9)
+    }
+}
+
+@mixin button($color,
+$text) {
+    color: map-get($texts, shade-A);
+    font-family: $fontFamily;
+    padding: 5px 15px;
+    border-radius: 0px;
+    border: 2px solid #efefef;
+    border-top-color: #ffaa3a;
+    border-bottom-color: #965a0d;
+    border-left-color: #c0710b;
+    border-right-color: #c0710b;
+    box-shadow: 0 0 20px 0px rgba(#0b0806, .2), 0 5px 10px 0px rgba(#0b0806, .2), 0 0 0px 1px #0b0806;
+    position: relative;
+    background: #dd810a;
+}
+
+@mixin wrapper($background: #362d24) {
+    border: 2px solid #efefef;
+    border-top-color: #bb9d77;
+    border-bottom-color: #68513c;
+    border-left-color: #7e6147;
+    border-right-color: #7e6147;
+    box-shadow: 0 0 20px 0px rgba(#0b0806, .2), 0 5px 10px 0px rgba(#0b0806, .2), 0 0 0px 1px #0b0806;
+    position: relative;
+    padding: 1px;
+    background: $background;
+    /* &::before {
+      content: '';
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      position: absolute;
+  }*/
+}
+
+@mixin insetWrapper() {
+    border: 2px solid #efefef;
+    border-top-color: #68513c;
+    border-bottom-color: #bb9d77;
+    border-left-color: #7e6147;
+    border-right-color: #7e6147;
+    box-shadow: inset 0 0 20px 0px rgba(#0b0806, .2), inset 0 5px 10px 0px rgba(#0b0806, .2), 0 0 0px 1px #0b0806;
+    position: relative;
+    padding: 1px;
+    background: #816343;
+    /* &::before {
+      content: '';
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      position: absolute;
+  }*/
+}
