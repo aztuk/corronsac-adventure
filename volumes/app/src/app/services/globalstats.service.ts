@@ -17,7 +17,7 @@ export class GlobalstatsService {
 
   getAccessToken() {
     const headers = new HttpHeaders({
-      'Cache-Control': 'no-cache',
+      //'Cache-Control': 'no-cache',
       'Content-Type': 'application/x-www-form-urlencoded'
     });
     const body = 'grant_type=client_credentials&scope=endpoint_client&client_id=Z49NOgXFA61fCo3mIGKN24aGjVahAebAjln8BlNc&client_secret=Pr4evqWbaKefVUyQ5Qqk21DnoLZKzbbpDfD8GAjQ';
@@ -34,7 +34,7 @@ export class GlobalstatsService {
 
   getScore():any {
     const headers = new HttpHeaders({
-      'Cache-Control': 'no-cache',
+      //'Cache-Control': 'no-cache',
       'Content-Type': 'application/json',
       'Authorization': this.accessToken
     });
@@ -48,7 +48,7 @@ export class GlobalstatsService {
 
   saveScore(username, highscore) {
     const headers = new HttpHeaders({
-      'Cache-Control': 'no-cache',
+      //'Cache-Control': 'no-cache',
       'Content-Type': 'application/json',
       'Authorization': this.accessToken
     });
