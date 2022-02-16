@@ -13,7 +13,7 @@ import {getRandomInArray} from '../sharedScript/helpers';
 })
 export class EnemiesService {
 
-  private enemyBucketTierOne = [
+  public enemyBucketTierOne = [
     () => {
       return [this.createPatron()]
     },

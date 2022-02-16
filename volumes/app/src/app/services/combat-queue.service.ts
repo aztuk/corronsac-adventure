@@ -28,6 +28,7 @@ export class CombatQueueService {
   }
 
   public actorTurn: any;
+  public turnTimeout: number = 100;
 
   private actors: IEntityActor[];
 
@@ -70,7 +71,7 @@ export class CombatQueueService {
 
       this.currentTurn++;
       this.findNextActorTurn(_callback);
-    }, 100);
+    }, this.turnTimeout);
   }
 
   spendTurnPlay(index) {

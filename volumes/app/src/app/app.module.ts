@@ -51,6 +51,7 @@ import { EndComponent } from './components/panels/end/end.component';
 import { HttpClient, HttpClientJsonpModule, HttpClientModule} from '@angular/common/http';
 import { TopBarComponent } from './components/main/top-bar/top-bar.component';
 import { RankingComponent } from './components/main/ranking/ranking.component';
+import { TestsComponent } from './components/main/tests/tests.component';
 
 
 @NgModule({
@@ -103,6 +104,7 @@ import { RankingComponent } from './components/main/ranking/ranking.component';
     EndComponent,
     TopBarComponent,
     RankingComponent,
+    TestsComponent,
   ],
   imports: [
     BrowserModule,

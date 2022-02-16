@@ -1,3 +1,4 @@
+import { TestsComponent } from './components/main/tests/tests.component';
 import {PickCharacterComponent} from './components/panels/pick-character/pick-character.component';
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
@@ -37,6 +38,9 @@ const routes: Routes = [{
 }, {
   path: 'end',
   component: EndComponent
+}, {
+  path: 'test',
+  component: TestsComponent
 }];
 
 @NgModule({

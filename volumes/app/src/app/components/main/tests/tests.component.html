@@ -1,0 +1,42 @@
+<div class="flex space-between">
+    <div class="test-wrapper">
+        Ajouter héro
+        <div class="selected-heroes">
+            <div class="hero" *ngFor="let hero of heroes">
+                <div class="name" [civ-tooltip]="hero">
+                    {{ hero.name }} </div>
+                <div class="spells">
+                    <civ-spells class="square-wrapper" [civ-tooltip]="spell" [civ-tooltip-owner]="hero" [spell]="spell" *ngFor="let spell of hero.spells" [class.locked]="!spell.unlocked" (click)="unlockEntity(spell)"></civ-spells>
+                </div>
+                <div class="equipments">
+                    <civ-equipment class="square-wrapper" [civ-tooltip]="equipment" [civ-tooltip-owner]="hero" [equipment]="equipment" *ngFor="let equipment of hero.equipment" [class.locked]="!equipment.unlocked" (click)="unlockEntity(equipment, hero)"></civ-equipment>
+                </div>
+            </div>
+
+            <form #fHero="ngForm">
+                <select name="hero" ngModel>
+            <option *ngFor="let hero of selectableHeroes" [ngValue]="hero.name">{{hero.name}}</option>
+          </select>
+                <button (click)="addHero(fHero.value.hero)">Ajouter</button>
+            </form>
+            <form #fFloor="ngForm">
+                <select name="floor" ngModel>
+                  <option *ngFor="let floor of floors; let i = index"  [ngValue]="i">Etage {{ i }}</option>
+              </select>
+                <select name="type" ngModel>
+                  <option [ngValue]="0">Combat normal</option>
+                  <option [ngValue]="1">Nemesis</option>
+                  <option [ngValue]="2">Boss</option>
+              </select>
+                <button (click)="createLevel(fFloor.value)" [class.disabled]="heroes.length === 0">Créer combat</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="simulation">
+        <div *ngFor="let actor of actorsSimulation">
+            {{ actor.name}} - {{ actor.health.current}}/{{ actor.health.max}}HP
+        </div>
+        <button (click)="simulateCombat(1)" [class.disabled]="enemies.length === 0 || heroes.length === 0">Simuler 1 combat</button>
+    </div>
+</div>

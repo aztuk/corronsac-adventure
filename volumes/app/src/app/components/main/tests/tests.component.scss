@@ -1,0 +1,48 @@
+:host {
+    height: 100vh;
+    padding: 80px;
+    background: #292623;
+    display: block;
+    color: white;
+    font-size: 15px;
+    select,
+    input {
+        height: 40px;
+        padding: 0 10px;
+    }
+    .selected-heroes,
+    .selected-enemies {
+        margin-top: 50px;
+        .hero {
+            display: flex;
+            align-items: center;
+            height: 60px;
+            margin: 10px 0;
+            .name {
+                width: 200px;
+            }
+            civ-spells,
+            civ-equipment {
+                margin-right: 5px;
+            }
+            .spells {
+                margin-right: 20px;
+            }
+            .locked {
+                filter: saturate(0) contrast(.5);
+            }
+        }
+    }
+    .selected-enemies {
+        .hero {
+            flex-direction: row-reverse;
+            .name {
+                text-align: right;
+            }
+            .spells {
+                display: flex;
+                flex-direction: row-reverse;
+            }
+        }
+    }
+}
