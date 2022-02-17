@@ -2,19 +2,32 @@
 .animation-hurt {
     -webkit-animation: vibrate-1 0.3s linear both;
     animation: vibrate-1 0.3s linear both;
-    animation-delay: 200ms;
     &:after {
         content: '';
         position: absolute;
-        width: 100%;
-        height: 100%;
-        top: 0;
-        left: 0;
-        opacity: 0;
-        background: $enemy;
-        -webkit-animation: flash 0.3s linear both;
-        animation: flash 0.3s linear both;
-        animation-delay: 200ms;
+        width: 140px;
+        height: 140px;
+        top: -10px;
+        left: -30px;
+        -webkit-animation: sprite 0.3s steps(6, end) both;
+        animation: sprite 0.3s steps(6, end) both;
+        z-index: 90;
+    }
+    &.smoke:after {
+        background: url('../images/sprites/sprite-smoke.png');
+        background-position-x: 0px;
+    }
+    &.physic:after {
+        background: url('../images/sprites/sprite-hit.png');
+        background-position-x: 0px;
+    }
+    &.poison:after {
+        background: url('../images/sprites/sprite-poison.png');
+        background-position-x: 0px;
+    }
+    &.magic:after {
+        background: url('../images/sprites/sprite-magic.png');
+        background-position-x: 0px;
     }
 }
 
@@ -44,6 +57,22 @@
     box-shadow: inset 0 0 50px 0 $heal, 0 0 50px 0 $heal;
 }
 
+.animation-effect {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    -webkit-animation: effect linear both;
+    animation: effect 1s linear both;
+    animation-delay: 0ms;
+    z-index: 50;
+    filter: drop-shadow(0 0 8px black);
+}
+
 .animation-hit-bottom {
     -webkit-animation: hit-bottom 0.5s linear both;
     animation: hit-bottom 0.5s ease 0s normal none;
@@ -54,13 +83,26 @@
     animation: hit-top 0.5s ease 0s normal none;
 }
 
-@keyframes flash {
-    0%,
-    40% {
-        opacity: 0;
+.animation-critical {
+    -webkit-animation: vibrate-2 0.1s linear both;
+    animation: vibrate-2 0.1s linear both;
+    animation-delay: 200ms;
+}
+
+@keyframes sprite {
+    to {
+        background-position-x: -840px;
     }
-    20% {
-        opacity: .2;
+}
+
+@keyframes effect {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+        transform: scale(.5);
     }
 }
 
@@ -148,6 +190,38 @@
     80% {
         -webkit-transform: translate(2px, -2px);
         transform: translate(2px, -2px);
+        filter: blur(1px);
+    }
+    100% {
+        -webkit-transform: translate(0);
+        transform: translate(0);
+        filter: blur(0px);
+    }
+}
+
+@keyframes vibrate-2 {
+    0% {
+        -webkit-transform: translate(0);
+        transform: translate(0);
+    }
+    20% {
+        -webkit-transform: translate(-6px, 6px);
+        transform: translate(-6px, 6px);
+        filter: blur(1px);
+    }
+    40% {
+        -webkit-transform: translate(-6px, -6px);
+        transform: translate(-6px, -6px);
+        filter: blur(1px);
+    }
+    60% {
+        -webkit-transform: translate(6px, 6px);
+        transform: translate(6px, 6px);
+        filter: blur(6px) saturate(0);
+    }
+    80% {
+        -webkit-transform: translate(6px, -6px);
+        transform: translate(6px, -6px);
         filter: blur(1px);
     }
     100% {
