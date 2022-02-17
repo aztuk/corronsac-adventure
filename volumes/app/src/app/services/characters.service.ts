@@ -64,7 +64,6 @@ export class CharactersService {
   }
 
   addCharacter(name: EHero) {
-    ScoreService.getInstance().stats.sizeTeam =  this.characters.length;
     this.characters.push(this.createCharacterByName(name));
   }
 
@@ -167,7 +166,7 @@ export class CharactersService {
 
   createKevin(full) {
     let character = new Actor(EHero.KEVIN, EClass.MAGE, true);
-    character.health = new Health(68);
+    character.health = new Health(70);
     character.stats$ = new Stats(5, 8, 32);
     character.spells.push(new SpellDescription(ESPells.BASIC));
     character.spells.push(new SpellDescription(ESPells.MAURICE));
@@ -187,7 +186,7 @@ export class CharactersService {
 
   createQuentin(full) {
     let character = new Actor(EHero.QUENTIN, EClass.MAGE, true);
-    character.health = new Health(66);
+    character.health = new Health(61);
     character.stats$ = new Stats(5, 9, 30);
     character.spells.push(new SpellDescription(ESPells.BASIC));
     character.spells.push(new SpellDescription(ESPells.SMART_LIFE));
@@ -268,7 +267,6 @@ export class CharactersService {
         hero = this.createClement(false);
         break;
     }
-    ScoreService.getInstance().stats.sizeTeam =  this.characters.length;
     this.characters.push(hero);
     return hero;
   }

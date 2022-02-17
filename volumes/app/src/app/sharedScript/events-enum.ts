@@ -221,6 +221,13 @@ export const EVENTS: IEvent[] = [
       condition: (actors) => {
         return !actors.isInParty(EHero.CLEMENT);
       }
+    },{
+      name: `Ranger son téléphone`,
+      text: () => {
+        return `Rien ne se passe`;
+      },
+      reward: (characters: CharactersService, currency: ShopService) => {
+      }
     }
   ]
 },
@@ -518,6 +525,13 @@ export const EVENTS: IEvent[] = [
       },
       condition: (actors, currency) => {
         return !actors.getCharacterByName(EHero.QUENTIN).hasSpell(ESPells.SMART_LIFE);
+      }
+    },{
+      name: `Se taire`,
+      text: () => {
+        return `Rien ne se passe`;
+      },
+      reward: (characters: CharactersService, currency: ShopService) => {
       }
     }
   ]

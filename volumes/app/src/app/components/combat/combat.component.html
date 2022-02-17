@@ -28,7 +28,7 @@
         </div>
     </div>
     <div class="versus" *ngIf="mode === 2">vs</div>
-    <div *ngIf="target && mode === 2" class="target">
+    <div *ngIf="target" class="target">
         <!--<civ-log [log]="combatLog" class="combat-log"></civ-log> -->
         <!--<button (click)="getLoot()" class="debug">Fin du combat</button>-->
         <char-deco [attr.character]="target.name" [attr.big]="true"></char-deco>

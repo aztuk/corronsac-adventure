@@ -7,7 +7,7 @@ export class Effects implements ISystemEffect {
 
   public effect: EEffects;
   public target: IEntityActor;
-  public attacker: IEntityActor;
+  public caster: IEntityActor;
   public timer: number;
   public maxTime: number;
   public stackType: string;
@@ -29,7 +29,7 @@ export class Effects implements ISystemEffect {
   constructor(caster: IEntityActor, target: IEntityActor, effect: EEffects) {
     this.effect = effect;
     this.target = target;
-    this.attacker = caster;
+    this.caster = caster;
     this.timer = EFFECT_TIMERS[this.effect];
     this.maxTime = this.timer;
     this.stackType = STACK_TYPES[this.effect];
@@ -52,11 +52,11 @@ export class Effects implements ISystemEffect {
   }
 
   runPoison(): ISystemDamage {
-    return new Damage(this.attacker, this.target, EDamageType.DOT, this.getPoisonDamage());
+    return new Damage(this.caster, this.target, EDamageType.DOT, this.getPoisonDamage());
   }
 
   getPoisonDamage() {
-    return Math.round((EFFECTS_VALUES.POISON + this.attacker.stats.power * 0.2) * this.stacks);
+    return Math.round((EFFECTS_VALUES.POISON + this.caster.stats.power * 0.2) * this.stacks);
   }
 
   getBuffValue(value) {

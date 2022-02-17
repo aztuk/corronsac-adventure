@@ -41,7 +41,7 @@ export interface ISystemEffect {
 
   effect: EEffects;
   target: IEntityActor;
-  attacker: IEntityActor;
+  caster: IEntityActor;
   timer: number;
   stackType: string;
   stacks: number;

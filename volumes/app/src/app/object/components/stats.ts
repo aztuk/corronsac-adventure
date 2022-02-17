@@ -23,9 +23,9 @@ export class Stats implements IComponentStats {
       this.attack = attack;
       this.speed = speed;
       this.power = power;
-      this.critical = 5;
+      this.critical = 10;
       this.criticalDamage = 1.5;
-      this.dodge = 10;
+      this.dodge = 8;
       this.touch = 0;
     }
   }

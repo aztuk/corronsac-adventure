@@ -84,7 +84,7 @@ export class EnemiesService {
       return [this.createPetitBonhomme(), this.createMilou(), this.createRacaille()]
     },
     () => {
-      return [this.createAlberge(), this.createEnfants(), this.createEnfants(), this.createEnfants()]
+      return [this.createAlberge(), this.createEnfants(), this.createEnfants()]
     },
     () => {
       return [this.createPatron(), this.createIvoirien(), this.createKaren()]
@@ -106,7 +106,8 @@ export class EnemiesService {
       const max = (level.floor + 2 > bucket.length) ? bucket.length : level.floor + 2;
       enemies = getRandomInArray(bucket, min, max)();
     } else if (level.type === ELevelType.COMBAT_TIER_2) {
-      enemies = getRandomInArray(this.enemyBucketTierTwo, 0, this.enemyBucketTierTwo.length)();
+      let f = getRandomInArray(this.enemyBucketTierTwo);
+      enemies = f();
     } else if (level.type === ELevelType.COMBAT_TIER_3)  {
       enemies = [this.createFrancis()];
     }
@@ -222,7 +223,7 @@ export class EnemiesService {
   createSandie() {
     let enemy = new Actor('Sandie', EClass.TIER_2, false);
     enemy.health = new Health(235);
-    enemy.stats$ = new Stats(11, 5, 32);
+    enemy.stats$ = new Stats(11, 11, 32);
     enemy.spells.push(new SpellDescription(ESPells.BASIC));
     enemy.spells.push(new SpellDescription(ESPells.INTERDICTION_SORTIE));
     enemy.spells.push(new SpellDescription(ESPells.TROMPERIE));
@@ -281,7 +282,6 @@ export class EnemiesService {
     enemy.stats$ = new Stats(19, 0, 33);
     enemy.spells.push(new SpellDescription(ESPells.BASIC));
     enemy.spells.push(new SpellDescription(ESPells.COURSE_TRACTEUR));
-    enemy.spells.push(new SpellDescription(ESPells.RUGISSEMENT));
     enemy.spells.push(new SpellDescription(ESPells.GAME_OF_THRONES));
 
     return enemy;

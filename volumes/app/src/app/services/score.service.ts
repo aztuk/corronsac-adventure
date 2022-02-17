@@ -109,11 +109,11 @@ export class ScoreService {
     this.score.tierTwoKilled=this.stats.tierTwoKilled * this.scoreValues.tierTwoKilled;
     this.score.tierThreeKilled=this.stats.tierThreeKilled * this.scoreValues.tierThreeKilled;
     this.score.death=this.stats.death * this.scoreValues.death;
-    this.score.damageInflicted=Math.floor(this.stats.damageInflicted / 500) * this.scoreValues.damageInflicted;
-    this.score.damageReceived=Math.floor(this.stats.damageReceived / 500) * this.scoreValues.damageReceived;
-    this.score.goldAcquired=Math.floor(this.stats.goldAcquired / 300) * this.scoreValues.goldAcquired;
-    this.score.goldSpent = Math.floor(this.stats.goldSpent / 300) * this.scoreValues.goldSpent;
-    this.score.sizeTeam= Math.floor(this.stats.sizeTeam  / 3) * this.scoreValues.sizeTeam;
+    this.score.damageInflicted=Math.floor(this.stats.damageInflicted / 300) * this.scoreValues.damageInflicted;
+    this.score.damageReceived=Math.floor(this.stats.damageReceived / 300) * this.scoreValues.damageReceived;
+    this.score.goldAcquired=Math.floor(this.stats.goldAcquired / 200) * this.scoreValues.goldAcquired;
+    this.score.goldSpent = Math.floor(this.stats.goldSpent / 150) * this.scoreValues.goldSpent;
+    this.score.sizeTeam = (this.stats.sizeTeam === 0) ? 0 : (this.stats.sizeTeam - 1) * this.scoreValues.sizeTeam;
     this.score.fullStuffCharacters = this.stats.fullStuffCharacters * this.scoreValues.fullStuffCharacters;
   }
 

@@ -1,3 +1,4 @@
+import { Effects } from './../../object/system/effects';
 import { LootComponent } from './../panels/loot/loot.component';
 import { ComponentFactoryService } from './../../services/component-factory.service';
 import {MapService} from '../../services/map.service';
@@ -99,10 +100,12 @@ export class CombatComponent implements OnInit, OnDestroy {
     this.queue.findNextActorTurn((nextActor) => {
       this.actorTurn = nextActor;
       this.actorTurn.runCooldowns();
-      const timeout = (this.actorTurn.possessed) ? 1 : 1000;
+      const timeout = (this.actorTurn.possessed) ? 1 : 700;
       setTimeout(() => {
         this.applyDamages(this.actorTurn.runDots());
-        this.setCombatMode();
+        setTimeout(() => {
+          this.setCombatMode();
+        }, timeout)
       }, timeout);
     });
   }
@@ -122,6 +125,7 @@ export class CombatComponent implements OnInit, OnDestroy {
     this.invoke(spell.invocations);
     this.applyHeals(spell.heals);
     this.applyDamages(spell.damages);
+    this.animateEffects(spell.effects);
     this.setCombatMode();
   }
 
@@ -132,7 +136,7 @@ export class CombatComponent implements OnInit, OnDestroy {
     });
   }
 
-  applyDamages(damages: ISystemDamage[]): void {
+  applyDamages(damages): void {
     (damages ?? []).forEach((d, i) => {
       if (d.applyDamage()) {
         this.queue.removeActorFromQueue(d.target);
@@ -142,6 +146,12 @@ export class CombatComponent implements OnInit, OnDestroy {
       }
       this.animateActor(d);
       this.createDamageView(d);
+    });
+  }
+
+  animateEffects(effects) {
+    (effects ?? []).forEach((e, i) => {
+      this.animateActor(e);
     });
   }
 
@@ -170,6 +180,9 @@ export class CombatComponent implements OnInit, OnDestroy {
     if (cast instanceof Heal) {
       caster.animateHealing();
       target.animateHealed();
+    }
+    if(cast instanceof Effects) {
+      target.animateEffect(cast.effect);
     }
   }
 

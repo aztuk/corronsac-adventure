@@ -46,7 +46,7 @@ export const ESPells = {
       const equipment = owner.equipment.find(e => e.name === EEquipment.GANTS_ESCALADE.name);
 
       if(equipment.unlocked){
-        text += `<br/><br/><strong class="equipment-effect">${equipment.description()}</strong>`;
+        text += `<br/><br/><strong class="equipment-effect">${equipment.description(damageInstances, owner)}</strong>`;
       }
 
       return text;
@@ -92,7 +92,7 @@ export const ESPells = {
       const equipment = owner.equipment.find(e => e.name === EEquipment.FREELANCE.name);
 
       if(equipment.unlocked){
-        text += `<br/><br/><strong class="equipment-effect">${equipment.description()}</strong>`;
+        text += `<br/><br/><strong class="equipment-effect">${equipment.description(damageInstances, owner)}</strong>`;
       }
 
       return text;
@@ -118,7 +118,7 @@ export const ESPells = {
       const equipment = owner.equipment.find(e => e.name === EEquipment.ALCOTEST.name);
 
       if(equipment.unlocked){
-        text += `<br/><br/><strong class="equipment-effect">${equipment.description()}</strong>`;
+        text += `<br/><br/><strong class="equipment-effect">${equipment.description(damageInstances, owner)}</strong>`;
       }
 
       return text;
@@ -161,7 +161,7 @@ export const ESPells = {
        const equipment = owner.equipment.find(e => e.name === EEquipment.CASQUE.name);
 
        if(equipment.unlocked){
-         text += `<br/><br/><strong class="equipment-effect">${equipment.description()}</strong>`;
+         text += `<br/><br/><strong class="equipment-effect">${equipment.description(damageInstances, owner)}</strong>`;
        }
 
        return text;
@@ -206,7 +206,7 @@ export const ESPells = {
       const equipment = owner.equipment.find(e => e.name === EEquipment.BALLANTINES.name);
 
       if(equipment.unlocked){
-        text += `<br/><br/><strong class="equipment-effect">${equipment.description()}</strong>`;
+        text += `<br/><br/><strong class="equipment-effect">${equipment.description(damageInstances, owner)}</strong>`;
       }
 
       return text;
@@ -226,7 +226,7 @@ export const ESPells = {
       const equipment = owner.equipment.find(e => e.name === EEquipment.SOURIS.name);
 
       if(equipment.unlocked){
-        text += `<br/><br/><strong class="equipment-effect">${equipment.description()}</strong>`;
+        text += `<br/><br/><strong class="equipment-effect">${equipment.description(damageInstances, owner)}</strong>`;
       }
 
       return text;
@@ -271,7 +271,7 @@ export const ESPells = {
       const equipment = owner.equipment.find(e => e.name === EEquipment.EXTENSION_SMARTLIFE.name);
 
       if(equipment.unlocked){
-        text += `<br/><br/><strong class="equipment-effect">${equipment.description()}</strong>`;
+        text += `<br/><br/><strong class="equipment-effect">${equipment.description(damageInstances, owner)}</strong>`;
       }
 
       return text;
@@ -310,7 +310,7 @@ export const ESPells = {
       const equipment = owner.equipment.find(e => e.name === EEquipment.DISCORD.name);
 
       if(equipment.unlocked){
-        text += `<br/><br/><strong class="equipment-effect">${equipment.description()}</strong>`;
+        text += `<br/><br/><strong class="equipment-effect">${equipment.description(damageInstances, owner)}</strong>`;
       }
 
       return text;
@@ -338,7 +338,7 @@ export const ESPells = {
       const equipment = owner.equipment.find(e => e.name === EEquipment.PROTEGE_TIBIA.name);
 
       if(equipment.unlocked){
-        text += `<br/><br/><strong class="equipment-effect">${equipment.description()}</strong>`;
+        text += `<br/><br/><strong class="equipment-effect">${equipment.description(damageInstances, owner)}</strong>`;
       }
 
       return text;
@@ -386,7 +386,7 @@ export const ESPells = {
       const equipment = owner.equipment.find(e => e.name === EEquipment.VESTE_MARQUE.name);
 
       if(equipment.unlocked){
-        text += `<br/><br/><strong class="equipment-effect">${equipment.description()}</strong>`;
+        text += `<br/><br/><strong class="equipment-effect">${equipment.description(damageInstances, owner)}</strong>`;
       }
 
       return text;
@@ -408,11 +408,11 @@ export const ESPells = {
     name: 'Noob',
     price: 61,
     description: (damageInstances, owner?, healInstances?) => {
-      let text = `Essaye un nouveau jeu sans lire les règles, faisant n'importe quoi. Le rire provoqué soigne la cible de <strong class="heal">${Math.round(healInstances[0].amount * owner.health.max)} PV</strong>.`;
+      let text = `Essaye un nouveau jeu sans lire les règles, faisant n'importe quoi. Le rire provoqué soigne l'allié le plus faible de <strong class="heal">${Math.round(healInstances[0].amount * owner.health.max)} PV</strong>.`;
       const equipment = owner.equipment.find(e => e.name === EEquipment.MANETTE_XBOX.name);
 
       if(equipment.unlocked){
-        text += `<br/><br/><strong class="equipment-effect">${equipment.description()}</strong>`;
+        text += `<br/><br/><strong class="equipment-effect">${equipment.description(damageInstances, owner)}</strong>`;
       }
 
       return text;
@@ -434,7 +434,7 @@ export const ESPells = {
       const equipment = owner.equipment.find(e => e.name === EEquipment.MANETTE_XBOX.name);
 
       if(equipment.unlocked){
-        text += `<br/><br/><strong class="equipment-effect">${equipment.description()}</strong>`;
+        text += `<br/><br/><strong class="equipment-effect">${equipment.description(damageInstances, owner)}</strong>`;
       }
 
       return text;
@@ -462,7 +462,7 @@ export const ESPells = {
     effectInstances: [],
     healInstances: [{
       targetsType: ETargetTypes.ALL_ALLIES,
-      amount: 0.05,
+      amount: 0.09,
     }]
   },
 

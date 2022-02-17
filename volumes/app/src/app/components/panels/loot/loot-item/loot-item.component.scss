@@ -1,12 +1,19 @@
 @import "../../../../../assets/scss/variables.scss";
 @import "../../../../../assets/scss/mixins.scss";
 :host {
-    @include hoverEffect();
-    @include wrapper(#b79067);
+    &:not(.no-style) {
+        @include hoverEffect();
+        @include wrapper(#b79067);
+        .loot-content .reward-icon-wrapper {
+            @include insetWrapper();
+            background-color: #3b362f;
+            position: absolute;
+        }
+    }
     display: block;
     position: relative;
-    width: 180px;
-    height: 230px;
+    width: 200px;
+    height: 240px;
     margin: 10px;
     padding-bottom: 20px;
     border-radius: 10px;
@@ -16,10 +23,6 @@
     .loot-content {
         height: 100%;
         .reward-icon-wrapper {
-            @include insetWrapper();
-            background-color: #3b362f;
-            position: absolute;
-            top: 0;
             border-radius: 5px;
             height: 153px;
             top: 4px;
@@ -42,7 +45,7 @@
         }
         .title {
             position: absolute;
-            bottom: 20px;
+            bottom: 13px;
             width: 100%;
         }
         strong {

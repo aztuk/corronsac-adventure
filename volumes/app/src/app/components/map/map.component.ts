@@ -56,6 +56,7 @@ export class MapComponent implements OnInit, OnDestroy, AfterViewInit {
     }
 
     this.ms.generateMap();
+    ScoreService.getInstance().stats.sizeTeam =  this.characters.length;
     ScoreService.getInstance().stats.fullStuffCharacters = this.charService.countFullStuff();
   }
 

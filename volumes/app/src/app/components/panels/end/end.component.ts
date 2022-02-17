@@ -29,6 +29,8 @@ export class EndComponent implements OnInit, OnDestroy {
     if (this.cs.characters.length === 0) {
       this._router.navigate(['']);
     }
+    this.score.stats.sizeTeam =  this.cs.characters.length;
+    this.score.stats.fullStuffCharacters = this.cs.countFullStuff();
 
     this.scoreSub = this.score.score$.subscribe(c => {
       this.total = c;

@@ -4,7 +4,7 @@
     </div>
     <div class="loot-table flex">
         <div *ngFor="let item of treasure">
-            <civ-loot-item [loot]="item.value" [type]="item.type"></civ-loot-item>
+            <civ-loot-item class="no-style" [loot]="item.value" [type]="item.type"></civ-loot-item>
         </div>
     </div>
     <button (click)="reroll()" class="reroll" [class.disabled]="currentMoney < rerollPrice">Relancer <span class="money">{{ rerollPrice }}</span></button>
