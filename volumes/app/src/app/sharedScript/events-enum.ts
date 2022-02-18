@@ -330,15 +330,15 @@ export const EVENTS: IEvent[] = [
     {
       name: `Prévenir tout le monde`,
       text: () => {
-        return `Réanime tous les personnages mort pour 120 euros`;
+        return `Réanime tous les personnages mort pour 220 euros`;
       },
       reward: (characters: CharactersService, currency: ShopService) => {
         const actors = characters.getDeadActors();
         actors.forEach(a => a.health.ressucitate())
-        currency.removeCurrency(120);
+        currency.removeCurrency(220);
       },
       condition: (actors, currency) => {
-        return currency.hasEnough(120) && actors.getDeadActors().length > 0;
+        return currency.hasEnough(220) && actors.getDeadActors().length > 0;
       }
 
     },{
@@ -375,12 +375,12 @@ export const EVENTS: IEvent[] = [
     },{
       name: `Accepter juste une partie`,
       text: () => {
-        return `Vous gagnez 100 euros mais Adrien perd 30% de ses PV actuels`;
+        return `Vous gagnez 70 euros mais Adrien perd 30% de ses PV actuels`;
       },
       reward: (characters: CharactersService, currency: ShopService) => {
         const actor = characters.getCharacterByName(EHero.ADRIEN);
         actor.health.current = actor.health.current * 0.3;
-        currency.addCurrency(100);
+        currency.addCurrency(70);
       }
     },{
       name: `En accepter aucun`,

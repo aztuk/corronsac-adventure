@@ -34,6 +34,7 @@ export interface IComponentStats {
   dodge: number
   touch: number
   speed: number
+  damageMultiplier: number
 }
 
 export interface ISystemEffect {
@@ -88,10 +89,11 @@ export interface IEntityActor extends IEntity{
   spells: ISpellDescription[]
   equipment: IEquipmentDescription[]
   effects: ISystemEffect[]
-  runCooldowns: () => void
-  isIncapacitated: () => boolean
-  runDots: () => ISystemDamage[]
-  hasSpell: (param: ESPells) => boolean
+  runCooldowns: () => void;
+  isIncapacitated: () => boolean;
+  runDots: () => ISystemDamage[];
+  hasSpell: (param: ESPells) => boolean;
+  spellTimers: () => void;
 }
 
 export interface ISpellDescription {

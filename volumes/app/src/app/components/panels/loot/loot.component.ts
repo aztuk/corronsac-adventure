@@ -33,7 +33,7 @@ export class LootComponent implements OnInit, OnDestroy {
     if(this.combatService.getEnemies().some(a => !a.health.isDead)) {
       this._router.navigate(['combat']);
     }
-    this.forcedCurrencyEarning = 3 + (this.currentLevel.floor * getRandomInt(4, 6));
+    this.forcedCurrencyEarning = 30 + (this.currentLevel.floor * getRandomInt(4, 6));
     this.generateLootRates();
     this.generateLootTable();
   }

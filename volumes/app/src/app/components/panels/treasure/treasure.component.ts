@@ -31,8 +31,7 @@ export class TreasureComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.ms.antiCheat([ELevelType.TREASURE, ELevelType.COMBAT_TIER_2]);
     this.generateLootTable();
-    this.treasure = getRandomElementsInArray(this.lootTable, 3);
-    this.ss.addCurrency(200);
+    this.treasure = getRandomElementsInArray(this.lootTable, 2);
   }
 
 
@@ -63,7 +62,7 @@ export class TreasureComponent implements OnInit, OnDestroy {
   reroll() {
     if(this.ss.hasEnough(this.rerollPrice)) {
       this.ss.removeCurrency(this.rerollPrice);
-      this.treasure = getRandomElementsInArray(this.lootTable, 3);
+      this.treasure = getRandomElementsInArray(this.lootTable, 2);
     }
   }
 

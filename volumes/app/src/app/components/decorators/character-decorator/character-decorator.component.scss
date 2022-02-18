@@ -36,25 +36,30 @@
         background-image: url('../../../../assets/images/characters/sandie.png');
     }
     &.PATRONLOURD,
-    &.CONSEILLERMUNICIPAL {
+    &.CONSEILLERMUNICIPAL,
+    &.PATRONABUSIF {
         background-image: url('../../../../assets/images/characters/patron.png');
     }
     &.PETITERACAILLE {
         background-image: url('../../../../assets/images/characters/racaille.png');
     }
-    &.VIEILLECONNAISSANCE {
+    &.VIEILLECONNAISSANCE,
+    &.FAUXAMI {
         background-image: url('../../../../assets/images/characters/connaissance.png');
     }
     &.COVID {
         background-image: url('../../../../assets/images/characters/covid.png');
     }
-    &.VACCIN {
+    &.VACCIN,
+    &.ASTRA-ZENECA {
         background-image: url('../../../../assets/images/characters/vaccin.png');
     }
-    &.WHISKY {
+    &.WHISKY,
+    &.MAGNUM {
         background-image: url('../../../../assets/images/characters/whisky.png');
     }
-    &.KAREN {
+    &.KAREN,
+    &.KARENSURMONTEE {
         background-image: url('../../../../assets/images/characters/karen.png');
     }
     &.PETITBONHOMME {
@@ -115,28 +120,33 @@
             background-image: url('../../../../assets/images/characters/sandie@2x.png');
         }
         &.PATRONLOURD,
-        &.CONSEILLERMUNICIPAL {
+        &.CONSEILLERMUNICIPAL,
+        &.PATRONABUSIF {
             background-image: url('../../../../assets/images/characters/patron@2x.png');
         }
         &.PETITERACAILLE {
             background-image: url('../../../../assets/images/characters/racaille@2x.png');
         }
-        &.VIEILLECONNAISSANCE {
+        &.VIEILLECONNAISSANCE,
+        &.FAUXAMI {
             background-image: url('../../../../assets/images/characters/connaissance@2x.png');
         }
         &.COVID {
             background-image: url('../../../../assets/images/characters/covid@2x.png');
         }
-        &.VACCIN {
+        &.VACCIN,
+        &.ASTRA-ZENECA {
             background-image: url('../../../../assets/images/characters/vaccin@2x.png');
         }
         &.MILOU {
             background-image: url('../../../../assets/images/characters/milou@2x.png');
         }
-        &.WHISKY {
+        &.WHISKY,
+        &.MAGNUM {
             background-image: url('../../../../assets/images/characters/whisky@2x.png');
         }
-        &.KAREN {
+        &.KAREN,
+        &.KARENSURMONTEE {
             background-image: url('../../../../assets/images/characters/karen@2x.png');
         }
         &.PETITBONHOMME {
@@ -162,6 +172,9 @@
         }
         &.VIRGINIE {
             background-image: url('../../../../assets/images/characters/virginie@2x.png');
+        }
+        &.SERPENT {
+            background-image: url('../../../../assets/images/characters/serpent@2x.png');
         }
     }
 }

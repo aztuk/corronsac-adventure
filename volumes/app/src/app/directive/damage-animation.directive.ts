@@ -44,7 +44,6 @@ export class DamageAnimationDirective {
       setTimeout(() => {
         this.renderer.addClass(this.el.nativeElement, 'animation-hurt');
         this.renderer.addClass(this.el.nativeElement, this.getSprite(damage.damageType));
-        console.log(this.getSprite(damage.damageType))
       },200);
       setTimeout(() => {
         this.renderer.removeClass(this.el.nativeElement, 'animation-hurt');

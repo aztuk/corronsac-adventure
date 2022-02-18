@@ -1,0 +1,9 @@
+<div *ngIf="small">
+
+</div>
+
+<div *ngIf="!small">
+
+    <strong>Passif:</strong>
+    <span [injectHTML]="getPassiveDescription(actor)"></span>
+</div>

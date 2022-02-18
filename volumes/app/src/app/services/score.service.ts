@@ -80,7 +80,7 @@ export class ScoreService {
       return target[name];
     },
     set: function(target, name, value) {
-      target[name] = value;
+      target[name] = Math.round(value);
       ScoreService.getInstance().updateScore();
       return true;
     }
@@ -109,8 +109,8 @@ export class ScoreService {
     this.score.tierTwoKilled=this.stats.tierTwoKilled * this.scoreValues.tierTwoKilled;
     this.score.tierThreeKilled=this.stats.tierThreeKilled * this.scoreValues.tierThreeKilled;
     this.score.death=this.stats.death * this.scoreValues.death;
-    this.score.damageInflicted=Math.floor(this.stats.damageInflicted / 300) * this.scoreValues.damageInflicted;
-    this.score.damageReceived=Math.floor(this.stats.damageReceived / 300) * this.scoreValues.damageReceived;
+    this.score.damageInflicted=Math.floor(this.stats.damageInflicted / 300 * this.scoreValues.damageInflicted);
+    this.score.damageReceived=Math.floor(this.stats.damageReceived / 300 * this.scoreValues.damageReceived);
     this.score.goldAcquired=Math.floor(this.stats.goldAcquired / 200) * this.scoreValues.goldAcquired;
     this.score.goldSpent = Math.floor(this.stats.goldSpent / 150) * this.scoreValues.goldSpent;
     this.score.sizeTeam = (this.stats.sizeTeam === 0) ? 0 : (this.stats.sizeTeam - 1) * this.scoreValues.sizeTeam;

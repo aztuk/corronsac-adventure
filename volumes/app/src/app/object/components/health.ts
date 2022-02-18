@@ -15,7 +15,7 @@ export class Health implements IComponentHealth {
     this.current -= amount;
 
     if (this.current <= 0) {
-      this.current = 0;
+      //this.current = 0;
       this.isDead = true;
       return true
     }

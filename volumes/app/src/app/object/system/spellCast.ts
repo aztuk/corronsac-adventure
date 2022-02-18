@@ -34,8 +34,8 @@ type effectInstances = effectInstance[];
 
 export class SpellCast {
 
-  private _caster: IEntityActor;
-  private _combatActors: any;
+  public _caster: IEntityActor;
+  public _combatActors: any;
   public damages: Damage[] = [];
   public effects: ISystemEffect[] = [];
   public heals: ISystemHeal[] = [];
@@ -151,8 +151,8 @@ export class SpellCast {
         let lowestA = 1000;
         let lowestAlly;
         for (let ally of this._combatActors.allies) {
-            if (ally.health.current < lowestA) {
-              lowestA = ally.health.current;
+            if (ally.health.current / ally.health.max < lowestA) {
+              lowestA = ally.health.current / ally.health.max;
               lowestAlly = ally;
             }
         }
@@ -161,8 +161,8 @@ export class SpellCast {
         let lowestE = 1000;
         let lowestEnemy;
         for (let enemy of this._combatActors.enemies) {
-            if (enemy.health.current < lowestE) {
-              lowestE = enemy.health.current;
+            if (enemy.health.current  / enemy.health.max < lowestE) {
+              lowestE = enemy.health.current  / enemy.health.max;
               lowestEnemy = enemy;
             }
         }

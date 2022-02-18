@@ -1,3 +1,4 @@
+import { PassiveService } from './../../services/passive.service';
 import { Effects } from './../../object/system/effects';
 import { LootComponent } from './../panels/loot/loot.component';
 import { ComponentFactoryService } from './../../services/component-factory.service';
@@ -51,7 +52,7 @@ export class CombatComponent implements OnInit, OnDestroy {
   public mode$ = ECombatState.BEGIN;
   public actorSubscription;
 
-  constructor(private scoreService: ScoreService, private queue: CombatQueueService, private combatService: CombatService, private _router: Router, private ms: MapService, private cs: CharactersService, private cfs: ComponentFactoryService) {
+  constructor(private scoreService: ScoreService, private passive: PassiveService, private queue: CombatQueueService, private combatService: CombatService, private _router: Router, private ms: MapService, private cs: CharactersService, private cfs: ComponentFactoryService) {
 
   }
 
@@ -112,21 +113,40 @@ export class CombatComponent implements OnInit, OnDestroy {
 
   // AI_TURN
   launchAiAttack(): void {
-    this.abstractTurn(this.combatService.aiTurn(this.actorTurn));
+    let spell = this.combatService.aiTurn(this.actorTurn)
+      this.abstractTurn(spell);
+      this.setCombatMode();
   }
 
   // PLAYER_TURN
   endPlayerTurn(spell: SpellCast): void {
-    this.abstractTurn(spell);
+      this.abstractTurn(spell);
+      this.setCombatMode();
   }
 
   abstractTurn(spell: SpellCast): void {
-    this.populateLog(spell);
-    this.invoke(spell.invocations);
-    this.applyHeals(spell.heals);
-    this.applyDamages(spell.damages);
-    this.animateEffects(spell.effects);
-    this.setCombatMode();
+    if (this.combatService.isCombatWin()) {
+      this.mode = ECombatState.WIN;
+      return;
+    } else {
+      this.setTarget(this.target);
+      this.populateLog(spell);
+      this.invoke(spell.invocations);
+      this.applyHeals(spell.heals);
+      this.applyDamages(spell.damages);
+      this.animateEffects(spell.effects);
+      this.passives(spell);
+    }
+  }
+
+  passives(spell) {
+    let newSpells = this.passive.runPassives(spell);
+
+    newSpells.forEach(s => {
+      setTimeout(() =>{
+        this.abstractTurn(s);
+      }, 300);
+    });
   }
 
   invoke(newActors: IEntityActor[]): void {
@@ -141,7 +161,9 @@ export class CombatComponent implements OnInit, OnDestroy {
       if (d.applyDamage()) {
         this.queue.removeActorFromQueue(d.target);
         setTimeout(() => {
-          this.combatService.removeActor(d.target);
+          if(this.combatService.exists(d.target)) {
+            this.combatService.removeActor(d.target);
+          }
          },1000);
       }
       this.animateActor(d);
@@ -201,6 +223,11 @@ export class CombatComponent implements OnInit, OnDestroy {
 
     // WAITING
     if (this.mode === ECombatState.AI_TURN || this.mode === ECombatState.PLAYER_TURN) {
+      this.mode = ECombatState.WAITING;
+      return;
+    }
+
+    if (!exists(this.actorTurn) || this.actorTurn.health.isDead) {
       this.mode = ECombatState.WAITING;
       return;
     }

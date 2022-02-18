@@ -5,7 +5,7 @@
     <div class="loot-table">
         <div class="choice" (click)="healAll()">
             <strong class="choice-name">Soigner</strong>
-            <span>Tous les personnages blessés sont soignés à 100%</span>
+            <span>Tous les personnages blessés sont soignés à 50%</span>
         </div>
         <div class="choice" *ngFor="let actor of deadCharacters" (click)="ressucitate(actor)">
             <strong class="choice-name">Réanimer {{ actor.name }}</strong>

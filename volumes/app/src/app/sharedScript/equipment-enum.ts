@@ -12,7 +12,7 @@ export const EEquipment = {
     name: 'Gants d\'escalade',
     price: 58,
     description: (damageInstances, owner?) => {
-      return `Les dégâts supplémentaires infligés passent à <dmg-deco amount="1.2" stat="${owner.stats.attack}" type="physical"></dmg-deco>.`
+      return `Les dégâts supplémentaires infligés passent à <dmg-deco amount="1.2" stat="${owner.stats.attack * owner.stats.damageMultiplier}" type="physical"></dmg-deco>.`
     },
     stats: () => {
       const stats = new Stats(0,0,0);
@@ -89,7 +89,7 @@ export const EEquipment = {
     name: 'Ballantines',
     price: 67,
     description: (damageInstances, owner?) => {
-      return `<strong class="spell-decorator">Pigeon</strong> applique <eff-deco effect="POISON" power="${owner.stats.power}"></eff-deco> une fois supplémentaire.`
+      return `<strong class="spell-decorator">Pigeon</strong> applique poison une fois supplémentaire.`
     },
     stats: () => {
       const stats = new Stats(0,0,0);

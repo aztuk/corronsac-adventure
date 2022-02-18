@@ -16,7 +16,7 @@ export class TooltipEffectComponent implements OnInit {
   public get description() {
     switch (this.entity.effect) {
       case EEffects.POISON:
-        return `Inflige ${this.entity.getPoisonDamage()} dégâts au prochain tour`;
+        return `Inflige ${Math.round(this.entity.getPoisonDamage() * this.entity.caster.stats.damageMultiplier)} dégâts au prochain tour`;
       case EEffects.UP_DODGE:
         return `Augmente l'esquive de ${this.entity.getBuffValue(EFFECTS_VALUES.UP_DODGE)}%`;
       case EEffects.DOWN_DODGE:

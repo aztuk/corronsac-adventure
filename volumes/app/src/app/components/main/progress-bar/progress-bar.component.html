@@ -1,2 +1,2 @@
-<div class="bar" [style.background-color]="color" [style.width]="current / max * 100 + '%'"></div>
+<div class="bar" [style.background-color]="color" [style.width]="(current < 0) ? 0 : current / max * 100 + '%'"></div>
 <ng-content></ng-content>

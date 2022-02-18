@@ -39,6 +39,10 @@ export class CombatService {
     this.actors = [];
   }
 
+  exists(actor: IEntityActor): boolean {
+    return this.actors.some(a => a.id === actor.id);
+  }
+
   initCombat(level: ICombat) {
     // Redirect if no character picked yet
     if (this.characterService.characters.length === 0) {

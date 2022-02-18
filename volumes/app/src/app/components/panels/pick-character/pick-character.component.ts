@@ -1,3 +1,4 @@
+import { PassiveService } from './../../../services/passive.service';
 import { SpellDescription } from './../../../object/components/spell-description';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import {Router} from '@angular/router';
@@ -18,19 +19,19 @@ export class PickCharacterComponent implements OnInit, OnDestroy {
   public characters: IEntityActor[];
   public charSub;
 
-  constructor(private charService: CharactersService, private _router: Router) {
+  constructor(private charService: CharactersService, private _router: Router, private passive: PassiveService) {
     this.charSub = this.charService.characters$.subscribe(c => this.characters = c);
   }
 
   ngOnInit(): void {
-    /*
-    let hero1 = this.charService.createAdrien(false);
-    let hero2 = this.charService.createQuentin(true);
-    let hero3 = this.charService.createQuentin(false);
+
+    //let hero1 = this.charService.createAdrien(false);
+    //let hero2 = this.charService.createQuentin(true);
+   /* let hero3 = this.charService.createQuentin(false);
     let hero4 = this.charService.createClement(false);
 
 
-    this.charService.characters = [hero1,hero2,hero3,hero4];*/
+    this.charService.characters = [hero3, hero4];*/
 
     this.pickableCharacters.push(this.charService.createClement(false));
     this.pickableCharacters.push(this.charService.createAdrien(false));

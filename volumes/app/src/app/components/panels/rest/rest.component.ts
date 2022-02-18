@@ -27,7 +27,8 @@ export class RestComponent implements OnInit {
 
   healAll() {
     this.characters.filter(a => !a.health.isDead).forEach(a => {
-      a.health.heal(1000);
+      let heal = a.health.max * 0.5;
+      a.health.heal(heal);
     });
     this.ms.finished();
     this._router.navigate(['map']);

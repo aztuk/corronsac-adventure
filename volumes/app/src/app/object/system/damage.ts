@@ -71,10 +71,10 @@ export class Damage implements ISystemDamage {
       this.damage = 0;
     }
     if (this.status === EAttackStatus.HIT) {
-      this.damage = damage;
+      this.damage = damage * this.caster.stats.damageMultiplier;
     }
     if (this.status === EAttackStatus.CRITICAL) {
-      this.damage = damage * this.caster.stats.criticalDamage;
+      this.damage = damage * this.caster.stats.criticalDamage * this.caster.stats.damageMultiplier;
     }
   }
 

@@ -93,12 +93,15 @@
             margin: 15px 0;
         }
         .spell-list {
-            margin-top: 40px;
+            margin-top: 10px;
             .spell {
                 @include wrapper();
                 margin: 5px;
             }
         }
+    }
+    .passive {
+        margin-top: 30px;
     }
     .spell-selection {
         display: flex;

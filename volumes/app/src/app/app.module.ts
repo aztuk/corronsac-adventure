@@ -52,6 +52,7 @@ import { HttpClient, HttpClientJsonpModule, HttpClientModule} from '@angular/com
 import { TopBarComponent } from './components/main/top-bar/top-bar.component';
 import { RankingComponent } from './components/main/ranking/ranking.component';
 import { TestsComponent } from './components/main/tests/tests.component';
+import { PassiveDecoratorComponent } from './components/decorators/passive-decorator/passive-decorator.component';
 
 
 @NgModule({
@@ -105,6 +106,7 @@ import { TestsComponent } from './components/main/tests/tests.component';
     TopBarComponent,
     RankingComponent,
     TestsComponent,
+    PassiveDecoratorComponent,
   ],
   imports: [
     BrowserModule,

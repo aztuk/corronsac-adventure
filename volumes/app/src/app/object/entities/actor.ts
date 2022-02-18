@@ -12,7 +12,6 @@ import {
 } from '../../sharedScript/interfaces';
 import {EClass, EEffects} from '../../sharedScript/enums';
 import {EFFECTS_VALUES} from '../../sharedScript/resources';
-import {Damage} from "../system/damage";
 
 export class Actor extends AbstractEntity implements IEntityActor {
 
@@ -68,6 +67,7 @@ export class Actor extends AbstractEntity implements IEntityActor {
     buffs.attack = attackUpEffect - attackDownEffect;
     buffs.touch = 0;
     buffs.speed = 0;
+    buffs.damageMultiplier = 0;
 
     const equipment =  this.equipment.filter(e => e.unlocked);
     Object.keys(buffs).map(function(key, index) {
@@ -114,7 +114,7 @@ export class Actor extends AbstractEntity implements IEntityActor {
     this.effectTimers();
   }
 
-  private spellTimers() {
+  spellTimers() {
     this.spells.forEach((s) => {
       s.timer--;
       if (s.timer <= 0) {

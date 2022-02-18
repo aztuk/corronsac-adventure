@@ -62,6 +62,10 @@
                     </div>
                 </div>
 
+                <div class="passive">
+                    <civ-passive-decorator [actor]="char" [small]="false"></civ-passive-decorator>
+                </div>
+
                 <div class="spell-list flex">
                     <civ-spells class="spell" [spell]="spell" [civ-tooltip]="spell" [civ-tooltip-owner]="char" *ngFor="let spell of char.spells" [class.disabled]="!spell.unlocked">
                         {{spell.name}}

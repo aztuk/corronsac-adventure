@@ -9,6 +9,7 @@ export class Stats implements IComponentStats {
   criticalDamage: number;
   dodge: number;
   touch: number;
+  damageMultiplier: number;
 
   constructor(attack, power, speed) {
     if (attack === 0 && power === 0 && speed === 0) {
@@ -19,6 +20,7 @@ export class Stats implements IComponentStats {
       this.criticalDamage = 0;
       this.dodge = 0;
       this.touch = 0;
+      this.damageMultiplier = 0;
     } else {
       this.attack = attack;
       this.speed = speed;
@@ -27,6 +29,7 @@ export class Stats implements IComponentStats {
       this.criticalDamage = 1.5;
       this.dodge = 8;
       this.touch = 0;
+      this.damageMultiplier = 1;
     }
   }
 }

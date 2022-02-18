@@ -1,3 +1,4 @@
+import { IEntityActor } from './../../../sharedScript/interfaces';
 import {ChangeDetectionStrategy, Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
 
 @Component({
@@ -9,16 +10,16 @@ import {ChangeDetectionStrategy, Component, Input, OnInit, ViewEncapsulation} fr
 })
 export class DamageDecoratorComponent implements OnInit {
 
-  @Input() type;
-  @Input() stat;
-  @Input() amount;
+  @Input() type: string;
+  @Input() amount: number;
+  @Input() stat: number;
   damage;
 
   constructor() {
   }
 
   ngOnInit(): void {
-    this.damage = Math.round(Number(this.stat) * Number(this.amount));
+    this.damage = Math.round(this.amount * this.stat);
   }
 
 }
