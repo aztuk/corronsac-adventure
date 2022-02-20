@@ -1,3 +1,5 @@
+import { SpellDescription } from './../object/components/spell-description';
+import { IEntityActor, ISpellDescription } from './../sharedScript/interfaces';
 import { ESPells } from './../sharedScript/spells-enum';
 import { EHero } from './../sharedScript/enums';
 import { SpellCast } from './../object/system/spellCast';
@@ -7,13 +9,12 @@ import { BehaviorSubject } from 'rxjs';
 interface ISpellStat{
   spell: string,
   damage: number,
-  heal: number,
-  invocations: number
+  heal: number
 }
 
 interface IHeroStat {
-  hero: EHero,
-  //spellStats: ISpellStat[]
+  hero: string,
+  spellStats: ISpellStat[]
 }
 
 @Injectable({
@@ -36,33 +37,57 @@ export class StatisticsService {
 
 
 
-  processHeroStats():IHeroStat[] {
-    let heroes = this.getHeroes();
+  processHeroStats(heroes: IEntityActor[]):IHeroStat[] {
     let heroStat: IHeroStat[] = [];
 
     heroes.forEach(hero => {
-      let stat:IHeroStat = {
-        hero: hero
-      };
+      const name = hero.name;
+      let spellStats: ISpellStat[] = [];
 
-      heroStat.push(stat);
+      this.getAllSpellCastFrom(hero.name).forEach(spell => { //hero.spells to change to detected in this.spells
+        spellStats.push(this.getSpellStats(name, spell));
+      });
+
+      heroStat.push({hero: name, spellStats:spellStats})
     });
-
-    console.log(heroStat);
 
     return heroStat;
   }
 
-  getHeroes():EHero[] {
-    let heroes: EHero[] = [];
+  getSpellStats(hero:string, spell:string):ISpellStat{
+    let totalDamages = 0, totalHeals = 0;
+    this.getHeroSpellsOfName(hero, spell).forEach(spell => {
+      totalDamages += this.sumProperties(spell.damages, 'damage');
+      totalDamages += this.sumProperties(spell.heals, 'heal');
+    });
 
-    this.spells.forEach(spellCast => {
-      if(!heroes.includes(spellCast.caster)) {
-        heroes.push(spellCast.caster);
+    let spellStat:ISpellStat = {
+      spell: spell,
+      damage: Math.round(totalDamages),
+      heal: Math.round(totalHeals),
+    };
+
+    return spellStat;
+  }
+
+  sumProperties(array, property):number {
+    return array.reduce((p, c) => { return p + c[property]; }, 0);
+  }
+
+  getHeroSpellsOfName(hero:string, name:string):SpellCast[] {
+   return this.spells.filter(s => s.spellDescription.name === name && s._caster.name === hero);
+  }
+
+  getAllSpellCastFrom(hero: string):string[] {
+    let spells = [];
+
+    this.spells.forEach(spell => {
+      if(spell._caster.name === hero && !spells.includes(spell.spellDescription.name)) {
+        spells.push(spell.spellDescription.name);
       }
     });
 
-    return heroes;
+    return spells;
   }
 
 

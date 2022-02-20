@@ -15,7 +15,7 @@ export class PassiveService {
 
   public costyHealIncrement: number = 0;
   public costyTotalBonus: number = 0;
-  public costyHealThreshold: number = 15;
+  public costyHealThreshold: number = 10;
   public kevinPassiveCurrentPoisonned: number  = 0;
   public kevinPassiveDamageIncrement: number  = 0.2;
   public clementPassiveProcThreshold: number  = 0.2;
@@ -159,13 +159,17 @@ export class PassiveService {
       }
 
       if(d.caster.name === EHero.ADRIEN &&  this.adrienBlackPantherPassive > 0) {
-
         const aliveEnemies = cast._combatActors.enemies.filter(e => e.id !== d.target.id && !e.isDead);
         cast._combatActors.enemies = aliveEnemies;
+        if(aliveEnemies.length > 0) {
+          if(cast._combatActors.target.health.isDead) {
+            cast._combatActors.target = getRandomInArray(aliveEnemies);
+          }
 
-        spell = new SpellCast(d.caster, cast._combatActors, new SpellDescription(ESPells.ADRIEN_PASSIVE_PROC));
-        spell.damages.push(new Damage(cast._caster, cast._combatActors.target, EDamageType.PHYSIC, this.adrienBlackPantherPassive));
-        this.adrienBlackPantherPassive = 0;
+          spell = new SpellCast(d.caster, cast._combatActors, new SpellDescription(ESPells.ADRIEN_PASSIVE_PROC));
+          spell.damages.push(new Damage(cast._caster, cast._combatActors.target, EDamageType.PHYSIC, this.adrienBlackPantherPassive));
+          this.adrienBlackPantherPassive = 0;
+        }
       }
     });
 

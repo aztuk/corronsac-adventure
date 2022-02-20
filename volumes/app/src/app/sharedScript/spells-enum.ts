@@ -47,12 +47,12 @@ export const ESPells = {
     effectInstances: [],
     healInstances: []
   },
-    ESCALADE: {
+  ESCALADE: {
       name: 'Escalade',
       price: 82,
       description: (damageInstances, owner?) => {
         let text = `Escalade la cible infligeant <dmg-deco amount="${damageInstances[0].amount}" stat="${owner.stats.attack * owner.stats.damageMultiplier}" type="physical"></dmg-deco>.
-        Escalade inflige <dmg-deco amount="${damageInstances[1].amount}" stat="${owner.stats.attack * owner.stats.damageMultiplier}" type="physical"></dmg-deco> supplémentaire aux cibles ayant plus de points de vie que Adrien.`
+        Escalade inflige <dmg-deco amount="${damageInstances[1].amount}" stat="${owner.stats.attack * owner.stats.damageMultiplier}" type="physical"></dmg-deco> supplémentaire à sa cible pour chaque adversaire vivant.`
 
         const equipment = owner.equipment.find(e => e.name === EEquipment.GANTS_ESCALADE.name);
 
@@ -70,9 +70,18 @@ export const ESPells = {
     }, {
       targetsType: ETargetTypes.TARGET,
       damageType: EDamageType.PHYSIC,
-      amount: 1.6,
-      condition: ($this) => {
-        return $this.targets[0].health.current > $this._caster.health.current;
+      amount: 0.5,
+      onHit: ($this) => {
+        let bonusDamages = [];
+        for(let newInstance of Array($this._combatActors.enemies.length - 1)) {
+          bonusDamages.push({
+            targetsType: ETargetTypes.TARGET,
+            damageType: EDamageType.PHYSIC,
+            amount: 0.5
+          });
+        }
+
+        $this.createDamageInstances(bonusDamages)
       }
     }],
     effectInstances: []
@@ -371,7 +380,7 @@ export const ESPells = {
     effectInstances: [],
     healInstances: [{
       targetsType: ETargetTypes.SELF,
-      amount: 0.05,
+      amount: 0.03,
       condition: ($this) => {
         return $this.damages[0].damage >= $this.damages[0].target.health.current;
       }
@@ -417,7 +426,7 @@ export const ESPells = {
     }],
     healInstances: [{
       targetsType: ETargetTypes.SELF,
-      amount: 0.08,
+      amount: 0.04,
     }]
   },
 
@@ -834,7 +843,7 @@ export const ESPells = {
     invocation: ($this) => {
       const inv = new Actor('Amant', EClass.INVOCATION, false);
       inv.stats$ = new Stats(8, 0, 28);
-      inv.health = new Health(30);
+      inv.health = new Health(95);
       inv.spells.push(new SpellDescription(ESPells.BASIC));
       inv.spells.push(new SpellDescription(ESPells.REPROCHE));
 
@@ -1082,8 +1091,8 @@ export const ESPells = {
 
       for(let i of Array(3)) {
         const actor = new Actor('Conseiller municipal', EClass.INVOCATION, false);
-        actor.stats$ = new Stats(5, 0, 32);
-        actor.health = new Health(40);
+        actor.stats$ = new Stats(10, 0, 32);
+        actor.health = new Health(80);
         actor.spells.push(new SpellDescription(ESPells.BASIC));
         actor.spells.push(new SpellDescription(ESPells.PROTECTION));
 

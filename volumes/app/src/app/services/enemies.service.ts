@@ -90,7 +90,7 @@ export class EnemiesService {
   ];
 
   public level: ICombat;
-  public coeff: number = 0.07;
+  public coeff: number = 0.35;
 
   constructor() {
   }
@@ -126,7 +126,7 @@ export class EnemiesService {
   createRacaille() {
     let enemy = new Actor('Petite racaille', EClass.TIER_1, false);
 
-    this.applyBaseStats(enemy, { health: 20, attack: 4, power: 0, speed: 45});
+    this.applyBaseStats(enemy, { health: 12, attack: 2, power: 0, speed: 45});
 
     enemy.spells.push(new SpellDescription(ESPells.BASIC));
     enemy.spells.push(new SpellDescription(ESPells.INSULTE));
@@ -137,7 +137,7 @@ export class EnemiesService {
   createPatron() {
     let enemy = new Actor('Patron lourd', EClass.TIER_1, false);
 
-    this.applyBaseStats(enemy, { health: 20, attack: 4, power: 0, speed: 45});
+    this.applyBaseStats(enemy, { health: 12, attack: 2, power: 0, speed: 45});
 
     enemy.spells.push(new SpellDescription(ESPells.BASIC));
     enemy.spells.push(new SpellDescription(ESPells.HEURES_SUPP));
@@ -148,7 +148,7 @@ export class EnemiesService {
   createVieilleConnaissance() {
     let enemy = new Actor('Vieille connaissance', EClass.TIER_1, false);
 
-    this.applyBaseStats(enemy, { health: 30, attack: 3, power: 0, speed: 45});
+    this.applyBaseStats(enemy, { health: 13, attack: 2, power: 0, speed: 45});
 
     enemy.spells.push(new SpellDescription(ESPells.BASIC));
     enemy.spells.push(new SpellDescription(ESPells.REPROCHE));
@@ -160,7 +160,7 @@ export class EnemiesService {
   createPetitBonhomme() {
     let enemy = new Actor('Petit Bonhomme', EClass.TIER_1, false);
 
-    this.applyBaseStats(enemy, { health: 40, attack: 4, power: 0, speed: 39});
+    this.applyBaseStats(enemy, { health: 18, attack: 2, power: 0, speed: 39});
 
     enemy.spells.push(new SpellDescription(ESPells.BASIC));
     enemy.spells.push(new SpellDescription(ESPells.POLICE));
@@ -172,7 +172,7 @@ export class EnemiesService {
   createWhisky() {
     let enemy = new Actor('Bouteille de whisky', EClass.TIER_1, false);
 
-    this.applyBaseStats(enemy, { health: 70, attack: 3, power: 0, speed: 39});
+    this.applyBaseStats(enemy, { health: 60, attack: 1, power: 0, speed: 39});
 
     enemy.spells.push(new SpellDescription(ESPells.APPEL_IRRESISTIBLE));
     enemy.spells.push(new SpellDescription(ESPells.APERO_MINUTE));
@@ -183,7 +183,7 @@ export class EnemiesService {
   createVaccin() {
     let enemy = new Actor('Vaccin', EClass.TIER_1, false);
 
-    this.applyBaseStats(enemy, { health: 60, attack: 4, power: 0, speed: 40});
+    this.applyBaseStats(enemy, { health: 25, attack: 3, power: 0, speed: 40});
 
     enemy.spells.push(new SpellDescription(ESPells.BASIC));
     enemy.spells.push(new SpellDescription(ESPells.INJECTION));
@@ -194,7 +194,7 @@ export class EnemiesService {
   createCovid() {
     let enemy = new Actor('Covid', EClass.TIER_1, false);
 
-    this.applyBaseStats(enemy, { health: 55, attack: 4, power: 4, speed: 38});
+    this.applyBaseStats(enemy, { health: 22, attack: 3, power: 3, speed: 38});
 
     enemy.spells.push(new SpellDescription(ESPells.BASIC));
     enemy.spells.push(new SpellDescription(ESPells.DELTA));
@@ -205,7 +205,7 @@ export class EnemiesService {
   createEnfants() {
     let enemy = new Actor('Enfant', EClass.TIER_1, false);
 
-    this.applyBaseStats(enemy, { health: 25, attack: 3, power: 0, speed: 32});
+    this.applyBaseStats(enemy, { health: 15, attack: 2, power: 0, speed: 32});
 
     enemy.spells.push(new SpellDescription(ESPells.BASIC));
     enemy.spells.push(new SpellDescription(ESPells.CRIS));
@@ -217,7 +217,7 @@ export class EnemiesService {
   createKaren() {
     let enemy = new Actor('Karen', EClass.TIER_1, false);
 
-    this.applyBaseStats(enemy, { health: 60, attack: 4, power: 0, speed: 36});
+    this.applyBaseStats(enemy, { health: 30, attack: 3, power: 0, speed: 36});
 
     enemy.spells.push(new SpellDescription(ESPells.BASIC));
     enemy.spells.push(new SpellDescription(ESPells.MANAGER));
@@ -230,7 +230,7 @@ export class EnemiesService {
   createVirginie() {
     let enemy = new Actor('Virginie', EClass.TIER_2, false);
 
-    this.applyBaseStats(enemy, { health: 250, attack: 7, power: 0, speed: 33});
+    this.applyBaseStats(enemy, { health: 95, attack: 3, power: 0, speed: 33});
 
     enemy.spells.push(new SpellDescription(ESPells.BASIC));
     enemy.spells.push(new SpellDescription(ESPells.MOBY_DICK));
@@ -242,7 +242,7 @@ export class EnemiesService {
   createSandie() {
     let enemy = new Actor('Sandie', EClass.TIER_2, false);
 
-    this.applyBaseStats(enemy, { health: 200, attack: 8, power: 0, speed: 32});
+    this.applyBaseStats(enemy, { health: 90, attack: 3, power: 0, speed: 32});
 
     enemy.spells.push(new SpellDescription(ESPells.BASIC));
     enemy.spells.push(new SpellDescription(ESPells.INTERDICTION_SORTIE));
@@ -254,7 +254,7 @@ export class EnemiesService {
   createIvoirien() {
     let enemy = new Actor('Ivoirien', EClass.TIER_2, false);
 
-    this.applyBaseStats(enemy, { health: 200, attack: 8, power: 0, speed: 28});
+    this.applyBaseStats(enemy, { health: 80, attack: 3, power: 0, speed: 28});
 
     enemy.spells.push(new SpellDescription(ESPells.BASIC));
     enemy.spells.push(new SpellDescription(ESPells.FAKE_PHOTO));
@@ -266,7 +266,7 @@ export class EnemiesService {
   createMilou() {
     let enemy = new Actor('Milou', EClass.TIER_2, false);
 
-    this.applyBaseStats(enemy, { health: 210, attack: 9, power: 0, speed: 34});
+    this.applyBaseStats(enemy, { health: 85, attack: 3, power: 0, speed: 34});
 
     enemy.spells.push(new SpellDescription(ESPells.BASIC));
     enemy.spells.push(new SpellDescription(ESPells.CLONE));
@@ -278,7 +278,7 @@ export class EnemiesService {
   createMarie() {
     let enemy = new Actor('Marie', EClass.TIER_2, false);
 
-    this.applyBaseStats(enemy, { health: 200, attack: 8, power: 0, speed: 31});
+    this.applyBaseStats(enemy, { health: 87, attack: 3, power: 0, speed: 31});
 
     enemy.spells.push(new SpellDescription(ESPells.BASIC));
     enemy.spells.push(new SpellDescription(ESPells.SEX_ADDICT));
@@ -290,7 +290,7 @@ export class EnemiesService {
   createAlberge() {
     let enemy = new Actor('Mme Alberge', EClass.TIER_2, false);
 
-    this.applyBaseStats(enemy, { health: 280, attack: 6, power: 0, speed: 42});
+    this.applyBaseStats(enemy, { health: 100, attack: 2, power: 0, speed: 42});
 
     enemy.spells.push(new SpellDescription(ESPells.BASIC));
     enemy.spells.push(new SpellDescription(ESPells.CHEVEUX));

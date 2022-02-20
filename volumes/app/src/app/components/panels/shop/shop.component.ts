@@ -35,7 +35,6 @@ ngOnDestroy(): void {
 }
 
   ngOnInit(): void {
-    this.ss.addCurrency(300);
     this.ms.antiCheat([ELevelType.SHOP]);
     this.equipmentToBuy = this.ss.generateEquipmentShop(this.cs.getLockedEquipments());
     this.spellsToBuy = this.ss.generateSpellShop(this.cs.getLockedSpells());

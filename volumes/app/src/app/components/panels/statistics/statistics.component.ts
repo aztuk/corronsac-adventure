@@ -1,5 +1,6 @@
 import { StatisticsService } from './../../../services/statistics.service';
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { CharactersService } from '../../../services/characters.service';
 
 @Component({
   selector: 'civ-statistics',
@@ -12,11 +13,12 @@ export class StatisticsComponent implements OnInit {
 
   public heroStats = [];
 
-  constructor(private statistics: StatisticsService) { }
+  constructor(private statistics: StatisticsService, private cs: CharactersService) {
+
+  }
 
   ngOnInit(): void {
-    this.heroStats = this.statistics.processHeroStats();
-    console.log(this.heroStats);
+    this.heroStats = this.statistics.processHeroStats(this.cs.characters);
   }
 
   closePanel(){

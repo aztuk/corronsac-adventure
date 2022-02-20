@@ -265,7 +265,7 @@ export const EEquipment = {
     health: 12,
     stats: () => {
       const stats = new Stats(0,0,0);
-      stats.dodge = 10;
+      stats.dodge = 5;
       return stats;
     },
     callback: (actor) => {
@@ -291,7 +291,7 @@ export const EEquipment = {
     health: 6,
     stats: () => {
       const stats = new Stats(0,0,0);
-      stats.dodge = 10;
+      stats.dodge = 5;
       return stats;
     },
     callback: (actor) => {

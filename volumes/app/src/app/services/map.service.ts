@@ -17,7 +17,7 @@ export class MapService {
   //public mapPhysionomy: ELevelType[] = [];
 
   public mapSizeX: number = 7;
-  public mapSizeY: number = 17;
+  public mapSizeY: number = 19;
   public map$: BehaviorSubject<ILevel[]> = new BehaviorSubject([]);
   public currentLevel: ICombat;
 
@@ -32,8 +32,8 @@ export class MapService {
   typeBucket = {
     'shop': 8,
     'heal': 12,
-    'event': 17,
-    'elite': 9,
+    'event': 12,
+    'elite': 10,
     'normal': 53
   }
 

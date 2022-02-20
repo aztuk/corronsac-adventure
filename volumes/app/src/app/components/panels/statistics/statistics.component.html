@@ -4,8 +4,13 @@
 
     </div>
     <div class="flex loot-table">
-        <div class="hero-stat">
-
+        <div class="hero-stat" *ngFor="let hero of heroStats">
+            <div>{{ hero.name }}</div>
+            <div *ngFor="let spell of hero.spellStats">
+                {{ spell.spell }}
+                <div *ngIf="spell.damage > 0">Dégâts: {{ spell.damage }}</div>
+                <div *ngIf="spell.heal > 0">Soins: {{ spell.heal }}</div>
+            </div>
         </div>
     </div>
     <button (click)="closePanel()">Fermer</button>
