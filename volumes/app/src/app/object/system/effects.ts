@@ -56,7 +56,7 @@ export class Effects implements ISystemEffect {
   }
 
   getPoisonDamage() {
-    return Math.round((EFFECTS_VALUES.POISON + this.caster.stats.power * 0.2) * this.stacks);
+    return Math.round((EFFECTS_VALUES.POISON + this.caster.stats.power * this.caster.stats.damageMultiplier * EFFECTS_VALUES.POISON_COEFF) * this.stacks);
   }
 
   getBuffValue(value) {

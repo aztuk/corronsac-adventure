@@ -10,37 +10,43 @@ export type EEquipment = typeof EEquipment[keyof typeof EEquipment];
 export const EEquipment = {
   GANTS_ESCALADE: {
     name: 'Gants d\'escalade',
-    price: 58,
+    price: 72,
     description: (damageInstances, owner?) => {
-      return `Les dégâts supplémentaires infligés passent à <dmg-deco amount="1.2" stat="${owner.stats.attack * owner.stats.damageMultiplier}" type="physical"></dmg-deco>.`
+      return `Les dégâts supplémentaires infligés passent à <dmg-deco amount="2" stat="${owner.stats.attack * owner.stats.damageMultiplier}" type="physical"></dmg-deco>.`
     },
+    health: 8,
     stats: () => {
       const stats = new Stats(0,0,0);
-      stats.speed = -3;
-      stats.dodge = 15;
+      stats.attack = 9;
       return stats;
     },
     callback: (actor) => {
+      actor.health.heal(8);
+      actor.health.max += 8;
+
       let spellUpgrade = actor.spells.find(s => s.name === ESPells.ESCALADE.name);
 
       if(exists(spellUpgrade)) {
-        spellUpgrade.damageInstances[1].amount = 1.2
+        spellUpgrade.damageInstances[1].amount = 2
       }
     }
   },
   FREELANCE: {
     name: 'Freelance',
-    price: 55,
+    price: 78,
     description: (damageInstances, owner?) => {
       return `<strong class="spell-decorator">Amandine</strong> vous permet de gagner aussi <eff-deco effect="UP_CRIT"></eff-deco>.`
     },
+    health: 16,
     stats: () => {
       const stats = new Stats(0,0,0);
-      stats.attack = 3;
-      stats.dodge = 15;
+      stats.speed = -6;
       return stats;
     },
     callback: (actor) => {
+      actor.health.heal(16);
+      actor.health.max += 16;
+
       let spellUpgrade = actor.spells.find(s => s.name === ESPells.AMANDINE.name);
 
       if(exists(spellUpgrade)) {
@@ -57,13 +63,16 @@ export const EEquipment = {
     description: (damageInstances, owner?) => {
       return `<strong class="spell-decorator">Serpents</strong> invoque un serpent supplémentaire.`
     },
+    health: 6,
     stats: () => {
       const stats = new Stats(0,0,0);
-      stats.power = 3;
-      stats.touch = 5;
+      stats.power = 9;
       return stats;
     },
     callback: (actor) => {
+      actor.health.heal(6);
+      actor.health.max += 6;
+
       let spellUpgrade = actor.spells.find(s => s.name === ESPells.SNAKES.name);
 
       if(exists(spellUpgrade)) {
@@ -93,13 +102,13 @@ export const EEquipment = {
     },
     stats: () => {
       const stats = new Stats(0,0,0);
-      stats.power = 3;
+      stats.touch = 8;
       return stats;
     },
-    health: 12,
+    health: 9,
     callback: (actor) => {
-      actor.health.heal(12);
-      actor.health.max += 12;
+      actor.health.heal(9);
+      actor.health.max += 9;
 
       let spellUpgrade = actor.spells.find(s => s.name === ESPells.PIGEON.name);
 
@@ -117,13 +126,15 @@ export const EEquipment = {
     description: (damageInstances, owner?) => {
       return `<strong class="spell-decorator">Tête la première</strong> n'inflige plus de dégâts collatéraux.`
     },
+    health: 7,
     stats: () => {
       const stats = new Stats(0,0,0);
-      stats.critical = 8;
       stats.criticalDamage = 1.5;
       return stats;
     },
     callback: (actor) => {
+      actor.health.heal(7);
+      actor.health.max += 7;
       let spellUpgrade = actor.spells.find(s => s.name === ESPells.TETE_PREMIERE.name);
 
       if(exists(spellUpgrade)) {
@@ -137,13 +148,15 @@ export const EEquipment = {
     description: (damageInstances, owner?) => {
       return `<strong class="spell-decorator">Discussion insensée</strong> inflige désormais 180% au lieu de 120% de l'attaque.`
     },
+    health: 7,
     stats: () => {
       const stats = new Stats(0,0,0);
-      stats.attack = 3;
-      stats.critical = 8;
+      stats.critical = 15;
       return stats;
     },
     callback: (actor) => {
+      actor.health.heal(7);
+      actor.health.max += 7;
       let spellUpgrade = actor.spells.find(s => s.name === ESPells.DISCUSSION_INSENSEE.name);
 
       if(exists(spellUpgrade)) {
@@ -159,7 +172,8 @@ export const EEquipment = {
     },
     stats: () => {
       const stats = new Stats(0,0,0);
-      stats.touch = 10;
+      stats.power = 5;
+      stats.critical = 10;
       return stats;
     },
     callback: (actor) => {
@@ -178,10 +192,14 @@ export const EEquipment = {
     },
     stats: () => {
       const stats = new Stats(0,0,0);
-      stats.power = 6;
+      stats.touch = 8;
       return stats;
     },
+    health: 6,
     callback: (actor) => {
+      actor.health.heal(6);
+      actor.health.max += 6;
+
       let spellUpgrade = actor.spells.find(s => s.name === ESPells.FUITE.name);
 
       if(exists(spellUpgrade)) {
@@ -199,14 +217,14 @@ export const EEquipment = {
     description: (damageInstances, owner?) => {
       return `<strong class="spell-decorator">Jonglage</strong> ne nécessite plus de tuer sa cible pour récupérer des points de vie.`
     },
-    health: 25,
+    health: 35,
     stats: () => {
       const stats = new Stats(0,0,0);
       return stats;
     },
     callback: (actor) => {
-      actor.health.current += 25;
-      actor.health.max += 25;
+      actor.health.current += 35;
+      actor.health.max += 35;
 
       let spellUpgrade = actor.spells.find(s => s.name === ESPells.JONGLAGE.name);
 
@@ -221,15 +239,15 @@ export const EEquipment = {
     description: (damageInstances, owner?) => {
       return `<strong class="spell-decorator">Seduction</strong> soigne de 10% de la santé maximale au lieu de 5%.`
     },
-    health: 15,
+    health: 7,
     stats: () => {
       const stats = new Stats(0,0,0);
-      stats.attack = 3;
+      stats.attack = 6;
       return stats;
     },
     callback: (actor) => {
-      actor.health.current += 15;
-      actor.health.max += 15;
+      actor.health.current += 7;
+      actor.health.max += 7;
 
       let spellUpgrade = actor.spells.find(s => s.name === ESPells.SEDUCTION.name);
 
@@ -244,15 +262,15 @@ export const EEquipment = {
     description: (damageInstances, owner?) => {
       return `<strong class="spell-decorator">Noob</strong> applique <eff-deco effect="UP_DODGE"></eff-deco> l'adversaire le plus faible.`
     },
-    health: 8,
+    health: 12,
     stats: () => {
       const stats = new Stats(0,0,0);
-      stats.speed = -4;
+      stats.dodge = 10;
       return stats;
     },
     callback: (actor) => {
-      actor.health.heal(8);
-      actor.health.max += 8;
+      actor.health.heal(12);
+      actor.health.max += 12;
 
       let spellUpgrade = actor.spells.find(s => s.name === ESPells.NOOB.name);
 
@@ -270,15 +288,15 @@ export const EEquipment = {
     description: (damageInstances, owner?) => {
       return `<strong class="spell-decorator">Playlist</strong> fait maintenant gagner <eff-deco effect="TAUNT"></eff-deco>.`
     },
-    health: 8,
+    health: 6,
     stats: () => {
       const stats = new Stats(0,0,0);
-      stats.speed = -2;
+      stats.dodge = 10;
       return stats;
     },
     callback: (actor) => {
-      actor.health.heal(12);
-      actor.health.max += 12;
+      actor.health.heal(6);
+      actor.health.max += 6;
 
       let spellUpgrade = actor.spells.find(s => s.name === ESPells.PLAYLIST.name);
 

@@ -35,6 +35,7 @@ ngOnDestroy(): void {
 }
 
   ngOnInit(): void {
+    this.ss.addCurrency(300);
     this.ms.antiCheat([ELevelType.SHOP]);
     this.equipmentToBuy = this.ss.generateEquipmentShop(this.cs.getLockedEquipments());
     this.spellsToBuy = this.ss.generateSpellShop(this.cs.getLockedSpells());
@@ -67,8 +68,7 @@ ngOnDestroy(): void {
 
   unlockEquipment(item:IShopItem, price:number){
     if(this.ss.hasEnough(price) && !item.sold) {
-      console.log(item.item.equipment);
-      item.item.equipment.unlocked = true;
+      item.item.equipment.giveEquipmentTo(item.item.actor);
       this.ss.removeCurrency(price);
       item.sold = true;
     }

@@ -78,7 +78,7 @@ export class TreasureComponent implements OnInit, OnDestroy {
         treasure.value.spell.unlocked = true;
       }
       if(treasure.type === ELootType.EQUIPMENT) {
-        treasure.value.equipment.unlocked = true;
+        treasure.value.equipment.giveEquipmentTo(treasure.value.actor);
       }
     });
 

@@ -17,8 +17,11 @@
         </div>
     </div>
     <div class="buttons">
+        <button (click)="showStatistics()">Statistiques</button>
         <button (click)="showRanking()">Classement</button>
         <button (click)="restart()">Recommencer</button>
     </div>
 </div>
 <civ-ranking *ngIf="showRankingBool" [leaderboard]="leaderboard" (hide)="hideRanking()"></civ-ranking>
+
+<template #statisticsContainer></template>

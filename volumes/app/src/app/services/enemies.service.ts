@@ -1,3 +1,4 @@
+import { ICombat } from './../sharedScript/interfaces';
 import {EClass, ELevelType} from '../sharedScript/enums';
 import {IEntityActor} from '../sharedScript/interfaces';
 import {Stats} from '../object/components/stats';
@@ -15,55 +16,52 @@ export class EnemiesService {
 
   public enemyBucketTierOne = [
     () => {
-      return [this.createPatron()]
+      return [this.createPatron(), this.createRacaille()]
     },
     () => {
-      return [this.createRacaille()]
+      return [this.createRacaille(), this.createRacaille()]
     },
     () => {
-      return [this.createVieilleConnaissance()]
+      return [this.createVieilleConnaissance(), this.createRacaille()]
     },
     () => {
       return [this.createPetitBonhomme(), this.createKaren()]
     },
     () => {
+      return [this.createEnfants(), this.createVieilleConnaissance(), this.createEnfants()]
+    },
+    () => {
       return [this.createVaccin(), this.createCovid()]
+    },
+    () => {
+      return [this.createPetitBonhomme(), this.createKaren()]
     },
     () => {
       return [this.createPatron(), this.createPetitBonhomme(), this.createPatron()]
     },
     () => {
+      return [this.createPatron(), this.createVaccin(), this.createVaccin()]
+    },
+    () => {
       return [this.createRacaille(), this.createWhisky(), this.createRacaille()]
     },
     () => {
-      return [this.createPatronUp(), this.createVieilleConnaissance(), this.createVieilleConnaissance()]
+      return [this.createPatron(), this.createVieilleConnaissance(), this.createVieilleConnaissance()]
     },
     () => {
       return [this.createKaren(), this.createVieilleConnaissance(), this.createEnfants(), this.createEnfants()]
     },
     () => {
-      return [this.createVaccinUp(), this.createCovidUp()]
+      return [this.createRacaille(), this.createRacaille(), this.createWhisky(), this.createRacaille(), this.createRacaille()]
     },
     () => {
-      return [this.createPetitBonhommeUp(), this.createKarenUp()]
+      return [this.createEnfants(),this.createEnfants(),this.createEnfants(),this.createEnfants(),this.createEnfants()]
     },
     () => {
-      return [this.createRacaille(), this.createRacaille(), this.createWhiskyUp(), this.createRacaille(), this.createRacaille()]
+      return [this.createWhisky(),this.createWhisky(),this.createPetitBonhomme(),this.createPetitBonhomme()]
     },
     () => {
-      return [this.createEnfants(), this.createVieilleConnaissanceUp(), this.createEnfants()]
-    },
-    () => {
-      return [this.createPatronUp(), this.createVaccinUp(), this.createVaccinUp()]
-    },
-    () => {
-      return [this.createVieilleConnaissance(),this.createVieilleConnaissance(), this.createPatronUp(),this.createVieilleConnaissance(),this.createVieilleConnaissance(),this.createVieilleConnaissance()]
-    },
-    () => {
-      return [this.createEnfants(),this.createEnfants(),this.createEnfantsUp(),this.createEnfants(),this.createEnfants()]
-    },
-    () => {
-      return [this.createWhiskyUp(),this.createWhisky(),this.createPetitBonhommeUp(),this.createPetitBonhomme()]
+      return [this.createVieilleConnaissance(),this.createVieilleConnaissance(), this.createPatron(),this.createVieilleConnaissance(),this.createVieilleConnaissance(),this.createVieilleConnaissance()]
     },
     () => {
       return [this.createKaren(), this.createKaren(), this.createKaren(), this.createEnfants(), this.createEnfants(), this.createEnfants()]
@@ -89,13 +87,17 @@ export class EnemiesService {
     () => {
       return [this.createVaccin(), this.createMarie(), this.createCovid()]
     },
-  ]
+  ];
+
+  public level: ICombat;
+  public coeff: number = 0.07;
 
   constructor() {
   }
 
   generateEnemies(level): IEntityActor[] {
     let enemies;
+    this.level = level;
 
     if (level.type === ELevelType.COMBAT_TIER_1) {
       const bucket = this.enemyBucketTierOne;
@@ -112,10 +114,20 @@ export class EnemiesService {
     return enemies;
   }
 
+  private applyBaseStats(enemy, base) {
+    const health = Math.round(base.health + base.health * this.level.floor * this.coeff)
+    enemy.health = new Health(health);
+
+    const attack = Math.round(base.attack + base.attack * this.level.floor * this.coeff);
+    const power = Math.round(base.power + base.power * this.level.floor * this.coeff);
+    enemy.stats$ = new Stats(attack, power, base.speed);
+  }
+
   createRacaille() {
     let enemy = new Actor('Petite racaille', EClass.TIER_1, false);
-    enemy.health = new Health(24);
-    enemy.stats$ = new Stats(4, 0, 48);
+
+    this.applyBaseStats(enemy, { health: 20, attack: 4, power: 0, speed: 45});
+
     enemy.spells.push(new SpellDescription(ESPells.BASIC));
     enemy.spells.push(new SpellDescription(ESPells.INSULTE));
 
@@ -124,8 +136,9 @@ export class EnemiesService {
 
   createPatron() {
     let enemy = new Actor('Patron lourd', EClass.TIER_1, false);
-    enemy.health = new Health(24);
-    enemy.stats$ = new Stats(4, 0, 48);
+
+    this.applyBaseStats(enemy, { health: 20, attack: 4, power: 0, speed: 45});
+
     enemy.spells.push(new SpellDescription(ESPells.BASIC));
     enemy.spells.push(new SpellDescription(ESPells.HEURES_SUPP));
 
@@ -134,8 +147,9 @@ export class EnemiesService {
 
   createVieilleConnaissance() {
     let enemy = new Actor('Vieille connaissance', EClass.TIER_1, false);
-    enemy.health = new Health(29);
-    enemy.stats$ = new Stats(4, 0, 48);
+
+    this.applyBaseStats(enemy, { health: 30, attack: 3, power: 0, speed: 45});
+
     enemy.spells.push(new SpellDescription(ESPells.BASIC));
     enemy.spells.push(new SpellDescription(ESPells.REPROCHE));
 
@@ -145,8 +159,9 @@ export class EnemiesService {
 
   createPetitBonhomme() {
     let enemy = new Actor('Petit Bonhomme', EClass.TIER_1, false);
-    enemy.health = new Health(52);
-    enemy.stats$ = new Stats(5, 0, 39);
+
+    this.applyBaseStats(enemy, { health: 40, attack: 4, power: 0, speed: 39});
+
     enemy.spells.push(new SpellDescription(ESPells.BASIC));
     enemy.spells.push(new SpellDescription(ESPells.POLICE));
     enemy.spells.push(new SpellDescription(ESPells.POELE));
@@ -156,8 +171,9 @@ export class EnemiesService {
 
   createWhisky() {
     let enemy = new Actor('Bouteille de whisky', EClass.TIER_1, false);
-    enemy.health = new Health(86);
-    enemy.stats$ = new Stats(5, 0, 39);
+
+    this.applyBaseStats(enemy, { health: 70, attack: 3, power: 0, speed: 39});
+
     enemy.spells.push(new SpellDescription(ESPells.APPEL_IRRESISTIBLE));
     enemy.spells.push(new SpellDescription(ESPells.APERO_MINUTE));
 
@@ -166,8 +182,9 @@ export class EnemiesService {
 
   createVaccin() {
     let enemy = new Actor('Vaccin', EClass.TIER_1, false);
-    enemy.health = new Health(47);
-    enemy.stats$ = new Stats(6, 0, 40);
+
+    this.applyBaseStats(enemy, { health: 60, attack: 4, power: 0, speed: 40});
+
     enemy.spells.push(new SpellDescription(ESPells.BASIC));
     enemy.spells.push(new SpellDescription(ESPells.INJECTION));
 
@@ -176,8 +193,9 @@ export class EnemiesService {
 
   createCovid() {
     let enemy = new Actor('Covid', EClass.TIER_1, false);
-    enemy.health = new Health(41);
-    enemy.stats$ = new Stats(6, 6, 36);
+
+    this.applyBaseStats(enemy, { health: 55, attack: 4, power: 4, speed: 38});
+
     enemy.spells.push(new SpellDescription(ESPells.BASIC));
     enemy.spells.push(new SpellDescription(ESPells.DELTA));
 
@@ -186,8 +204,9 @@ export class EnemiesService {
 
   createEnfants() {
     let enemy = new Actor('Enfant', EClass.TIER_1, false);
-    enemy.health = new Health(39);
-    enemy.stats$ = new Stats(6, 0, 30);
+
+    this.applyBaseStats(enemy, { health: 25, attack: 3, power: 0, speed: 32});
+
     enemy.spells.push(new SpellDescription(ESPells.BASIC));
     enemy.spells.push(new SpellDescription(ESPells.CRIS));
 
@@ -197,115 +216,22 @@ export class EnemiesService {
 
   createKaren() {
     let enemy = new Actor('Karen', EClass.TIER_1, false);
-    enemy.health = new Health(55);
-    enemy.stats$ = new Stats(4, 0, 36);
+
+    this.applyBaseStats(enemy, { health: 60, attack: 4, power: 0, speed: 36});
+
     enemy.spells.push(new SpellDescription(ESPells.BASIC));
     enemy.spells.push(new SpellDescription(ESPells.MANAGER));
 
     return enemy;
   }
 
-
-  // --------------------------------
-
-  createRacailleUp() {
-    let enemy = new Actor('Racaille', EClass.TIER_1, false);
-    enemy.health = new Health(87);
-    enemy.stats$ = new Stats(6, 0, 52);
-    enemy.spells.push(new SpellDescription(ESPells.BASIC));
-    enemy.spells.push(new SpellDescription(ESPells.INSULTE));
-
-    return enemy;
-  }
-
-  createPatronUp() {
-    let enemy = new Actor('Patron abusif', EClass.TIER_1, false);
-    enemy.health = new Health(89);
-    enemy.stats$ = new Stats(6, 0, 52);
-    enemy.spells.push(new SpellDescription(ESPells.BASIC));
-    enemy.spells.push(new SpellDescription(ESPells.HEURES_SUPP));
-
-    return enemy;
-  }
-
-  createVieilleConnaissanceUp() {
-    let enemy = new Actor('Faux ami', EClass.TIER_1, false);
-    enemy.health = new Health(88);
-    enemy.stats$ = new Stats(6, 0, 53);
-    enemy.spells.push(new SpellDescription(ESPells.BASIC));
-    enemy.spells.push(new SpellDescription(ESPells.REPROCHE));
-
-    return enemy;
-  }
-
-
-  createPetitBonhommeUp() {
-    let enemy = new Actor('Petit Bonhomme colérique', EClass.TIER_1, false);
-    enemy.health = new Health(117);
-    enemy.stats$ = new Stats(8, 0, 43);
-    enemy.spells.push(new SpellDescription(ESPells.BASIC));
-    enemy.spells.push(new SpellDescription(ESPells.POLICE));
-    enemy.spells.push(new SpellDescription(ESPells.POELE));
-
-    return enemy;
-  }
-
-  createWhiskyUp() {
-    let enemy = new Actor('Magnum', EClass.TIER_1, false);
-    enemy.health = new Health(188);
-    enemy.stats$ = new Stats(10, 0, 41);
-    enemy.spells.push(new SpellDescription(ESPells.APPEL_IRRESISTIBLE));
-    enemy.spells.push(new SpellDescription(ESPells.APERO_MINUTE));
-
-    return enemy;
-  }
-
-  createVaccinUp() {
-    let enemy = new Actor('Astra-zeneca', EClass.TIER_1, false);
-    enemy.health = new Health(112);
-    enemy.stats$ = new Stats(8, 0, 42);
-    enemy.spells.push(new SpellDescription(ESPells.BASIC));
-    enemy.spells.push(new SpellDescription(ESPells.INJECTION));
-
-    return enemy;
-  }
-
-  createCovidUp() {
-    let enemy = new Actor('Covid 20', EClass.TIER_1, false);
-    enemy.health = new Health(108);
-    enemy.stats$ = new Stats(7, 7, 36);
-    enemy.spells.push(new SpellDescription(ESPells.BASIC));
-    enemy.spells.push(new SpellDescription(ESPells.DELTA));
-
-    return enemy;
-  }
-
-  createEnfantsUp() {
-    let enemy = new Actor('Peste', EClass.TIER_1, false);
-    enemy.health = new Health(98);
-    enemy.stats$ = new Stats(6, 0, 32);
-    enemy.spells.push(new SpellDescription(ESPells.BASIC));
-    enemy.spells.push(new SpellDescription(ESPells.CRIS));
-
-    return enemy;
-  }
-
-
-  createKarenUp() {
-    let enemy = new Actor('Karen surmontée', EClass.TIER_1, false);
-    enemy.health = new Health(105);
-    enemy.stats$ = new Stats(7, 0, 34);
-    enemy.spells.push(new SpellDescription(ESPells.BASIC));
-    enemy.spells.push(new SpellDescription(ESPells.MANAGER));
-
-    return enemy;
-  }
 
   // TIER 2
   createVirginie() {
     let enemy = new Actor('Virginie', EClass.TIER_2, false);
-    enemy.health = new Health(308);
-    enemy.stats$ = new Stats(20, 0, 33);
+
+    this.applyBaseStats(enemy, { health: 250, attack: 7, power: 0, speed: 33});
+
     enemy.spells.push(new SpellDescription(ESPells.BASIC));
     enemy.spells.push(new SpellDescription(ESPells.MOBY_DICK));
     enemy.spells.push(new SpellDescription(ESPells.HAMBURGER));
@@ -315,8 +241,9 @@ export class EnemiesService {
 
   createSandie() {
     let enemy = new Actor('Sandie', EClass.TIER_2, false);
-    enemy.health = new Health(274);
-    enemy.stats$ = new Stats(15, 15, 32);
+
+    this.applyBaseStats(enemy, { health: 200, attack: 8, power: 0, speed: 32});
+
     enemy.spells.push(new SpellDescription(ESPells.BASIC));
     enemy.spells.push(new SpellDescription(ESPells.INTERDICTION_SORTIE));
     enemy.spells.push(new SpellDescription(ESPells.TROMPERIE));
@@ -326,8 +253,9 @@ export class EnemiesService {
 
   createIvoirien() {
     let enemy = new Actor('Ivoirien', EClass.TIER_2, false);
-    enemy.health = new Health(269);
-    enemy.stats$ = new Stats(18, 0, 28);
+
+    this.applyBaseStats(enemy, { health: 200, attack: 8, power: 0, speed: 28});
+
     enemy.spells.push(new SpellDescription(ESPells.BASIC));
     enemy.spells.push(new SpellDescription(ESPells.FAKE_PHOTO));
     enemy.spells.push(new SpellDescription(ESPells.SMILEY_COEUR));
@@ -337,8 +265,9 @@ export class EnemiesService {
 
   createMilou() {
     let enemy = new Actor('Milou', EClass.TIER_2, false);
-    enemy.health = new Health(284);
-    enemy.stats$ = new Stats(18, 0, 34);
+
+    this.applyBaseStats(enemy, { health: 210, attack: 9, power: 0, speed: 34});
+
     enemy.spells.push(new SpellDescription(ESPells.BASIC));
     enemy.spells.push(new SpellDescription(ESPells.CLONE));
     enemy.spells.push(new SpellDescription(ESPells.PROTECTION));
@@ -348,8 +277,9 @@ export class EnemiesService {
 
   createMarie() {
     let enemy = new Actor('Marie', EClass.TIER_2, false);
-    enemy.health = new Health(267);
-    enemy.stats$ = new Stats(17, 0, 31);
+
+    this.applyBaseStats(enemy, { health: 200, attack: 8, power: 0, speed: 31});
+
     enemy.spells.push(new SpellDescription(ESPells.BASIC));
     enemy.spells.push(new SpellDescription(ESPells.SEX_ADDICT));
     enemy.spells.push(new SpellDescription(ESPells.MYTHO));
@@ -359,8 +289,9 @@ export class EnemiesService {
 
   createAlberge() {
     let enemy = new Actor('Mme Alberge', EClass.TIER_2, false);
-    enemy.health = new Health(365);
-    enemy.stats$ = new Stats(17, 0, 42);
+
+    this.applyBaseStats(enemy, { health: 280, attack: 6, power: 0, speed: 42});
+
     enemy.spells.push(new SpellDescription(ESPells.BASIC));
     enemy.spells.push(new SpellDescription(ESPells.CHEVEUX));
     enemy.spells.push(new SpellDescription(ESPells.CARTABLE_VIDE));
@@ -371,8 +302,8 @@ export class EnemiesService {
 
   createFrancis() {
     let enemy = new Actor('Francis Lalane', EClass.TIER_3, false);
-    enemy.health = new Health(1100);
-    enemy.stats$ = new Stats(24, 0, 33);
+    enemy.health = new Health(1200);
+    enemy.stats$ = new Stats(25, 0, 33);
     enemy.spells.push(new SpellDescription(ESPells.BASIC));
     enemy.spells.push(new SpellDescription(ESPells.COURSE_TRACTEUR));
     enemy.spells.push(new SpellDescription(ESPells.GAME_OF_THRONES));

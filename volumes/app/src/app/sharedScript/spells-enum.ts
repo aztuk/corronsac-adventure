@@ -45,10 +45,7 @@ export const ESPells = {
     cooldown: 0,
     damageInstances: [],
     effectInstances: [],
-    healInstances: [{
-      targetsType: ETargetTypes.SELF,
-      amount: 0.05
-    }]
+    healInstances: []
   },
     ESCALADE: {
       name: 'Escalade',
@@ -73,9 +70,9 @@ export const ESPells = {
     }, {
       targetsType: ETargetTypes.TARGET,
       damageType: EDamageType.PHYSIC,
-      amount: 0.6,
+      amount: 1.6,
       condition: ($this) => {
-        return $this.targets[0].health.current < $this._caster.health.current;
+        return $this.targets[0].health.current > $this._caster.health.current;
       }
     }],
     effectInstances: []
@@ -115,7 +112,7 @@ export const ESPells = {
     damageInstances: [{
       targetsType: ETargetTypes.ALL_ENEMIES,
       damageType: EDamageType.PHYSIC,
-      amount: 0.7
+      amount: 1.1
     }],
     effectInstances: []
 
@@ -305,7 +302,7 @@ export const ESPells = {
     damageInstances: [{
       targetsType: ETargetTypes.LOWEST_ENEMY,
       damageType: EDamageType.MAGIC,
-      amount: 1.3
+      amount: 1.5
     }],
     effectInstances: []
   },
@@ -327,7 +324,7 @@ export const ESPells = {
       targetsType: ETargetTypes.RANDOM_ENEMY,
       targetsAmount: 1,
       damageType: EDamageType.MAGIC,
-      amount: 1.5
+      amount: 2
     }],
     effectInstances: [{
       targetsType: ETargetTypes.SELF,
@@ -384,18 +381,17 @@ export const ESPells = {
     name: 'Entraînement',
     price: 53,
     description: (damageInstances, owner?, healInstances?) => {
-      return `Se lance dans un coaching individuel, ce qui fait gagner <eff-deco effect="UP_AD" with-time></eff-deco> à un allié aléatoire.<br/><br/>
-      ${owner.name} en profite pour se reposer et récupère <strong class="heal">${Math.round(healInstances[0].amount * owner.health.max)} PV</strong>.`
+      return `Se lance dans un coaching individuel, ce qui fait gagner <eff-deco effect="UP_AD" with-time></eff-deco> à tous ses alliés.<br/><br/>
+      Son allié le plus faible récupère <strong class="heal">${Math.round(healInstances[0].amount * owner.health.max)} PV</strong>.`
     },
     cooldown: 2,
     damageInstances: [],
     effectInstances: [{
-      targetsType: ETargetTypes.RANDOM_ALLY,
-      targetsAmount: 1,
+      targetsType: ETargetTypes.ALL_ALLIES,
       effect: EEffects.UP_AD,
     }],
     healInstances: [{
-      targetsType: ETargetTypes.SELF,
+      targetsType: ETargetTypes.LOWEST_ALLY,
       amount: 0.05,
     }]
   },
@@ -452,7 +448,7 @@ export const ESPells = {
     name: 'Playlist',
     price: 71,
     description: (damageInstances, owner?, healInstances?) => {
-      let text = `Lance une bonne playlist qui encense ses alliés leur permettant de gagner <eff-deco effect="UP_AD" with-time></eff-deco> et <eff-deco effect="UP_AP" with-time></eff-deco>.`;
+      let text = `Lance une bonne playlist qui encense ses alliés leur permettant de gagner <eff-deco effect="UP_AP" with-time></eff-deco>.`;
       const equipment = owner.equipment.find(e => e.name === EEquipment.MANETTE_XBOX.name);
 
       if(equipment.unlocked){
@@ -465,9 +461,6 @@ export const ESPells = {
     cooldown: 1,
     damageInstances: [],
     effectInstances: [{
-      targetsType: ETargetTypes.ALL_ALLIES,
-      effect: EEffects.UP_AD,
-    }, {
       targetsType: ETargetTypes.ALL_ALLIES,
       effect: EEffects.UP_AP,
     }],
@@ -811,13 +804,13 @@ export const ESPells = {
       targetsType: ETargetTypes.RANDOM_ENEMY,
       targetsAmount: 2,
       damageType: EDamageType.MAGIC,
-      amount: 0.5,
+      amount: 1,
       onHit: ($this, damageInstance?) => {
         if (damageInstance.target.name === EHero.QUENTIN) {
           $this.createDamageInstances([{
             targetsType: damageInstance.target,
             damageType: EDamageType.MAGIC,
-            amount: 0.5,
+            amount: 1,
           }]);
         }
         if (dice(50)) {
@@ -1080,14 +1073,14 @@ export const ESPells = {
     name: 'Jeux de pouvoir',
     price: 0,
     description: (damageInstances, owner?, healInstances?) => {
-      return `Francis Lalane tente de convaincre la mairie de lui donner plus de pouvoirs. Il invoque deux conseillers municipaux.`
+      return `Francis Lalane tente de convaincre la mairie de lui donner plus de pouvoirs. Il invoque trois conseillers municipaux.`
     },
     cooldown: 3,
     timer: 0,
     invocation: ($this) => {
       let inv = [];
 
-      for(let i of Array(2)) {
+      for(let i of Array(3)) {
         const actor = new Actor('Conseiller municipal', EClass.INVOCATION, false);
         actor.stats$ = new Stats(5, 0, 32);
         actor.health = new Health(40);

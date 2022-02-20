@@ -2,9 +2,25 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.0.5.
 
-## Development server
+## 19/02
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+* Donner de la santé sur tous les équipements
+* Donner une stat supplémentaire si l'équipement donne déjà de la santé
+* Rendre Quentin plus viable en début de partie
+* Rendre Clément plus viable en support (soigner les autres aussi ?)
+* Passif Adrien : Nouveau passif Black panther style (accumulation dégâts subis et les renvoit)
+* Bug : L'achat d'équipement en boutique en donnait pas les bonus sur les sorts
+
+## Todo
+
+* Passif de Costy : ne pas compter les soins dans le vide ?
+* Passif de Costy : Passer à 10 le threshold
+* Passif de Costy : Possibilité de monter de plusieurs HP en un tour
+* Mettre animation fumée sur les effets
+* Stats service
+* Buffer Amant
+* Rework escalade
+
 
 ## Code scaffolding
 

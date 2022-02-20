@@ -125,7 +125,7 @@ export class CharactersService {
   createAdrien(full) {
     let character = new Actor(EHero.ADRIEN, EClass.COMBATTANT, true);
     character.health = new Health(79);
-    character.stats$ = new Stats(9, 0, 35);
+    character.stats$ = new Stats(9, 0, 24);
 
     // Spells
     character.spells.push(new SpellDescription(ESPells.BASIC));
@@ -226,7 +226,7 @@ export class CharactersService {
   createCosty(full) {
     let character = new Actor(EHero.COSTY, EClass.SUPPORT, true);
     character.health = new Health(65);
-    character.stats$ = new Stats(6, 3, 24);
+    character.stats$ = new Stats(6, 3, 30);
     character.spells.push(new SpellDescription(ESPells.BASIC));
     character.spells.push(new SpellDescription(ESPells.NOOB));
     character.spells.push(new SpellDescription(ESPells.PLAYLIST));

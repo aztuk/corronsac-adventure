@@ -1,3 +1,4 @@
+import { StatisticsService } from './../../services/statistics.service';
 import { PassiveService } from './../../services/passive.service';
 import { Effects } from './../../object/system/effects';
 import { LootComponent } from './../panels/loot/loot.component';
@@ -52,7 +53,7 @@ export class CombatComponent implements OnInit, OnDestroy {
   public mode$ = ECombatState.BEGIN;
   public actorSubscription;
 
-  constructor(private scoreService: ScoreService, private passive: PassiveService, private queue: CombatQueueService, private combatService: CombatService, private _router: Router, private ms: MapService, private cs: CharactersService, private cfs: ComponentFactoryService) {
+  constructor(private statistics: StatisticsService, private passive: PassiveService, private queue: CombatQueueService, private combatService: CombatService, private _router: Router, private ms: MapService, private cs: CharactersService, private cfs: ComponentFactoryService) {
 
   }
 
@@ -187,6 +188,7 @@ export class CombatComponent implements OnInit, OnDestroy {
 
   populateLog(spell): void {
     this.combatLog.unshift({actor: this.actorTurn, spell: spell});
+    this.statistics.spells.push(spell);
   }
 
   animateActor(cast: ISystemCast): void {

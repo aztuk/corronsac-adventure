@@ -53,6 +53,7 @@ import { TopBarComponent } from './components/main/top-bar/top-bar.component';
 import { RankingComponent } from './components/main/ranking/ranking.component';
 import { TestsComponent } from './components/main/tests/tests.component';
 import { PassiveDecoratorComponent } from './components/decorators/passive-decorator/passive-decorator.component';
+import { StatisticsComponent } from './components/panels/statistics/statistics.component';
 
 
 @NgModule({
@@ -107,6 +108,7 @@ import { PassiveDecoratorComponent } from './components/decorators/passive-decor
     RankingComponent,
     TestsComponent,
     PassiveDecoratorComponent,
+    StatisticsComponent,
   ],
   imports: [
     BrowserModule,

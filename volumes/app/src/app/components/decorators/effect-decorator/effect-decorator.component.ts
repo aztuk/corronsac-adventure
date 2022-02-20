@@ -91,7 +91,7 @@ export class EffectDecoratorComponent implements OnInit {
         this.time += (EFFECT_TIMERS.DOWN_AD > 1) ? 's' : '';
         break;
       case 'POISON':
-        this.text = Math.round(EFFECTS_VALUES.POISON + this.power * 0.2 * this.multiplier);
+        this.text = Math.round(EFFECTS_VALUES.POISON + this.power * EFFECTS_VALUES.POISON_COEFF * this.multiplier);
         this.text += ' dégâts';
         this.time = ' à chaque tour pendant ' + EFFECT_TIMERS.POISON + ' tour';
         this.time += (EFFECT_TIMERS.POISON > 1) ? 's' : '';
