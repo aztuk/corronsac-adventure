@@ -204,7 +204,7 @@ export const ESPells = {
     damageInstances: [{
       targetsType: ETargetTypes.TARGET,
       damageType: EDamageType.MAGIC,
-      amount: 0.8
+      amount: 1
     }],
     effectInstances: [{
       targetsType: ETargetTypes.TARGET,
@@ -461,7 +461,7 @@ export const ESPells = {
       const equipment = owner.equipment.find(e => e.name === EEquipment.MANETTE_XBOX.name);
 
       if(equipment.unlocked){
-        text += `<br/><br/><strong class="equipment-effect">${equipment.description(damageInstances, owner)}</strong>`;
+        text += `<br/><br/><strong class="equipment-effect">${equipment.description(damageInstances, owner, healInstances)}</strong>`;
       }
 
       return text;
@@ -501,8 +501,8 @@ export const ESPells = {
     timer: 1,
     invocation: ($this) => {
       const invocation = new Actor('Policier', EClass.INVOCATION, false);
-      invocation.stats$ = new Stats(4, 0, 42);
-      invocation.health = new Health(12);
+      invocation.stats$ = new Stats(6, 0, 42);
+      invocation.health = new Health(15);
       invocation.spells.push(new SpellDescription(ESPells.BASIC));
 
       return [invocation];
@@ -522,7 +522,7 @@ export const ESPells = {
     damageInstances: [{
       targetsType: ETargetTypes.TARGET,
       damageType: EDamageType.PHYSIC,
-      amount: 1.2
+      amount: 0.8
     }],
     effectInstances: [],
     healInstances: []
@@ -559,7 +559,7 @@ export const ESPells = {
     effectInstances: [],
     healInstances: [{
       targetsType: ETargetTypes.SELF,
-      amount: 0.2,
+      amount: 0.15,
     }]
   },
   DELTA: {
@@ -574,7 +574,7 @@ export const ESPells = {
       if (exists($this._combatActors.target.effects.find((e) => e.effect === EEffects.POISON))) {
         const invocation = new Actor('Vaccin', EClass.INVOCATION, false);
         invocation.stats$ = new Stats(6, 0, 38);
-        invocation.health = new Health(30);
+        invocation.health = new Health(50);
         invocation.spells.push(new SpellDescription(ESPells.BASIC));
         invocation.spells.push(new SpellDescription(ESPells.INJECTION));
 
@@ -604,7 +604,7 @@ export const ESPells = {
       if (exists($this._combatActors.target.effects.find((e) => e.effect === EEffects.STUN))) {
         const invocation = new Actor('Covid', EClass.INVOCATION, false);
         invocation.stats$ = new Stats(6, 6, 32);
-        invocation.health = new Health(26);
+        invocation.health = new Health(36);
         invocation.spells.push(new SpellDescription(ESPells.BASIC));
         invocation.spells.push(new SpellDescription(ESPells.DELTA));
 
@@ -637,7 +637,7 @@ export const ESPells = {
       targetsType: ETargetTypes.RANDOM_ENEMY,
       targetsAmount: 2,
       damageType: EDamageType.PHYSIC,
-      amount: 0.8
+      amount: 0.4
     }],
     effectInstances: [{
       targetsType: ETargetTypes.RANDOM_ENEMY,
@@ -680,11 +680,11 @@ export const ESPells = {
     damageInstances: [{
       targetsType: ETargetTypes.TARGET,
       damageType: EDamageType.PHYSIC,
-      amount: 1
+      amount: 0.6
     }, {
       targetsType: ETargetTypes.TARGET,
       damageType: EDamageType.PHYSIC,
-      amount: 1,
+      amount: 0.6,
       condition: ($this) => {
         return $this.targets[0].health.current < $this._caster.health.current;
       }
@@ -705,7 +705,7 @@ export const ESPells = {
       targetsType: ETargetTypes.RANDOM_ENEMY,
       targetsAmount: 2,
       damageType: EDamageType.PHYSIC,
-      amount: 0.7,
+      amount: 0.4,
       onMissed: ($this, damageInstance?) => {
         $this.createDamageInstances([{
           targetsType: $this._caster,
@@ -729,7 +729,7 @@ export const ESPells = {
     damageInstances: [{
       targetsType: ETargetTypes.TARGET,
       damageType: EDamageType.PHYSIC,
-      amount: 0.8
+      amount: 0.4
     }],
     effectInstances: [{
       targetsType: ETargetTypes.TARGET,

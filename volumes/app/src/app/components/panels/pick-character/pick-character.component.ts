@@ -27,11 +27,12 @@ export class PickCharacterComponent implements OnInit, OnDestroy {
 
     //let hero1 = this.charService.createAdrien(false);
     //let hero2 = this.charService.createQuentin(true);
-   /* let hero3 = this.charService.createQuentin(false);
-    let hero4 = this.charService.createClement(false);
+   // let hero3 = this.charService.createQuentin(false);
+   // hero3.health.hurt(5);
+   // let hero4 = this.charService.createLoic(false);
 
 
-    this.charService.characters = [hero3, hero4];*/
+    //this.charService.characters = [ hero4];
 
     this.pickableCharacters.push(this.charService.createClement(false));
     this.pickableCharacters.push(this.charService.createAdrien(false));

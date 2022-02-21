@@ -1,6 +1,26 @@
 # Fuse
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.0.5.
+## 21/02
+
+### Héros
+
+* Kevin: Légère augmentation des dégâts de base de Maurice
+
+### Equipement
+
+* L'équipement Spotify a été modifié, au lieu d'accorder TAUNT à Costy, il soigne l'allié le plus faible de 5% des PV Max de Costy
+
+### Enemis
+
+* Tous les sorts ennemis ont leur dégâts réduits pour compenser l'augmentation de l'attaque
+
+### Evènements
+
+* Ajout de 2 types d'évènements : Un pour réanimer des personnages morts et l'autre pour obtenir des équipements
+
+### Statistiques
+
+* Ajout d'un onglet Statistiques sur les dégats et les soins provoqués par l'équipe
 
 ## 19/02
 

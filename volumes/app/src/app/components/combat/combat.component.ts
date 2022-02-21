@@ -157,8 +157,11 @@ export class CombatComponent implements OnInit, OnDestroy {
     });
   }
 
-  applyDamages(damages): void {
+  applyDamages(damages:ISystemDamage[]): void {
     (damages ?? []).forEach((d, i) => {
+      if(d.damageType === EDamageType.DOT) {
+        this.statistics.dots.push(d);
+      }
       if (d.applyDamage()) {
         this.queue.removeActorFromQueue(d.target);
         setTimeout(() => {

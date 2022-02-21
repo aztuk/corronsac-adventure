@@ -285,8 +285,8 @@ export const EEquipment = {
   SPOTIFY: {
     name: 'Compte Deezer',
     price: 66,
-    description: (damageInstances, owner?) => {
-      return `<strong class="spell-decorator">Playlist</strong> fait maintenant gagner <eff-deco effect="TAUNT"></eff-deco>.`
+    description: (damageInstances, owner?, healInstances?) => {
+      return `<strong class="spell-decorator">Playlist</strong> soigne aussi l'allié le plus faible de <strong class="heal">${Math.round(0.05* owner.health.max)} PV</strong>.`
     },
     health: 6,
     stats: () => {
@@ -301,9 +301,9 @@ export const EEquipment = {
       let spellUpgrade = actor.spells.find(s => s.name === ESPells.PLAYLIST.name);
 
       if(exists(spellUpgrade)) {
-        spellUpgrade.effectInstances.push({
-          targetsType: ETargetTypes.SELF,
-          effect: EEffects.TAUNT
+        spellUpgrade.healInstances.push({
+          targetsType: ETargetTypes.LOWEST_ALLY,
+          amount: 0.05,
         });
       }
     }

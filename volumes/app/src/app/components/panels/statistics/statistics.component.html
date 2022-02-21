@@ -5,11 +5,16 @@
     </div>
     <div class="flex loot-table">
         <div class="hero-stat" *ngFor="let hero of heroStats">
-            <div>{{ hero.name }}</div>
-            <div *ngFor="let spell of hero.spellStats">
-                {{ spell.spell }}
-                <div *ngIf="spell.damage > 0">Dégâts: {{ spell.damage }}</div>
-                <div *ngIf="spell.heal > 0">Soins: {{ spell.heal }}</div>
+            <div>{{ hero.hero }}</div>
+            <div *ngFor="let spell of hero.spellStats" class="spell-stat">
+                <div class="name"> {{spell.spell }}</div>
+                <div *ngIf="spell.damage > 0 || spell.heal > 0">
+                    <div *ngIf="spell.damage > 0" class="flex space-between"><span>Dégâts:</span><span> {{ spell.damage }}</span></div>
+                    <div *ngIf="spell.heal > 0" class="flex space-between"><span>Soins:</span> <span> {{ spell.heal }}</span></div>
+                </div>
+                <div *ngIf="spell.damage === 0 && spell.heal === 0">
+                    Aucune statistique sur ce sort pour le moment.</div>
+
             </div>
         </div>
     </div>

@@ -18,6 +18,17 @@
         align-items: center;
         justify-content: center;
         z-index: 3;
+        .hero-stat {
+            margin: 20px 20px 20px 0;
+            .spell-stat {
+                margin-bottom: 10px;
+                width: 150px;
+                .name {
+                    font-family: $fontFamily;
+                    font-size: 15px;
+                }
+            }
+        }
     }
     .title {
         font-family: $fontFamily;

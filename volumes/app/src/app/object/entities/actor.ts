@@ -1,3 +1,4 @@
+import { EEquipment } from './../../sharedScript/equipment-enum';
 import { ESPells } from './../../sharedScript/spells-enum';
 import { IEquipmentDescription } from './../../sharedScript/interfaces';
 import {Stats} from '../components/stats';
@@ -93,6 +94,13 @@ export class Actor extends AbstractEntity implements IEntityActor {
     return this.spells.find(s => s.name === spell.name).unlocked
   }
 
+  hasEquipment(equipment: EEquipment): boolean {
+    return this.equipment.find(s => s.name === equipment.name).unlocked
+  }
+  getEquipment(equipment: EEquipment): IEquipmentDescription {
+    return this.equipment.find(s => s.name === equipment.name)
+  }
+
   getBuff(effect): ISystemEffect {
     return this.effects.find((e) => e.effect === effect);
   }
@@ -109,7 +117,7 @@ export class Actor extends AbstractEntity implements IEntityActor {
     return dots;
   }
 
-  public runCooldowns() {
+  runCooldowns() {
     this.spellTimers();
     this.effectTimers();
   }

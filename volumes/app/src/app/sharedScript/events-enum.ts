@@ -55,12 +55,12 @@ export const EVENTS: IEvent[] = [
       name: `Vitamines D3`,
       text: () => {
         return `Clément apprend Entraînement
-        mais perd 50% points de vie`;
+        mais perd 30% points de vie`;
       },
       reward: (characters: CharactersService, currency: ShopService) => {
         const actor = characters.getCharacterByName(EHero.CLEMENT);
         actor.spells.find(s => s.name === ESPells.TRAINING.name).unlocked = true;
-        actor.health.current = Math.round(actor.health.current / 2);
+        actor.health.current = Math.round(actor.health.current * 0.66);
       },
       condition: (actors) => {
         const actor = actors.getCharacterByName(EHero.CLEMENT);
@@ -81,25 +81,30 @@ export const EVENTS: IEvent[] = [
     {
       name: `Jouer le match`,
       text: () => {
-        return `Clément perd  10 points de vie. Vous gagnez 40 euros.`;
+        return `Clément perd 10 points de vie max. Vous gagnez 80 euros.`;
       },
       reward: (characters: CharactersService, currency: ShopService) => {
         const actor = characters.getCharacterByName(EHero.CLEMENT);
         actor.health.hurt(10);
-        currency.addCurrency(10);
+        actor.health.max-=10;
+        currency.addCurrency(80);
+      },
+      condition: (actors, currency) => {
+        return actors.getCharacterByName(EHero.CLEMENT).health.current > 10;
       }
     },{
       name: `Inventer une excuse`,
       text: () => {
-        return `Clément récupère 10 points de vie. Vous perdez 40 euros.`;
+        return `Clément gagne 10 points de vie max. Vous perdez 80 euros.`;
       },
       reward: (characters: CharactersService, currency: ShopService) => {
         const actor = characters.getCharacterByName(EHero.CLEMENT);
         actor.health.heal(10);
-        currency.removeCurrency(10);
+        actor.health.max+=10;
+        currency.removeCurrency(80);
       },
       condition: (actors, currency) => {
-        return currency.hasEnough(10);
+        return currency.hasEnough(80);
       }
     },{
       name: `Inviter les amis à voir le match`,
@@ -124,12 +129,12 @@ export const EVENTS: IEvent[] = [
     {
       name: `Ouverture Queens Gambit`,
       text: () => {
-        return `Costy apprend Noob maisperd 50% points de vie`;
+        return `Costy apprend Noob mais perd 30% points de vie`;
       },
       reward: (characters: CharactersService, currency: ShopService) => {
         const actor = characters.getCharacterByName(EHero.COSTY);
         actor.spells.find(s => s.name === ESPells.NOOB.name).unlocked = true;
-        actor.health.current = Math.round(actor.health.current / 2);
+        actor.health.current = Math.round(actor.health.current * 0.66);
       },
       condition: (actors) => {
         const actor = actors.getCharacterByName(EHero.COSTY);
@@ -285,13 +290,13 @@ export const EVENTS: IEvent[] = [
     {
       name: `Dormir sur place`,
       text: () => {
-        return `Tout le monde est soigné de 20 PV mais vous perdez 80 euros`;
+        return `Kevin gagne 5 puissance mais vous perdez 80 euros`;
       },
       reward: (characters: CharactersService, currency: ShopService) => {
         currency.removeCurrency(80);
-        characters.characters.forEach(c=> {
-          c.health.heal(20);
-        });
+
+        const actor = characters.getCharacterByName(EHero.KEVIN);
+        actor.stats$.power +=5;
       },
       condition: (actors, currency) => {
         return currency.hasEnough(80);
@@ -299,12 +304,12 @@ export const EVENTS: IEvent[] = [
     },{
       name: `Rentrer quand même`,
       text: () => {
-        return `Vous gagnez 80 euros mais tout le monde perd 10 PV`;
+        return `Vous gagnez 80 euros mais tout le monde perd 15 PV`;
       },
       reward: (characters: CharactersService, currency: ShopService) => {
         currency.addCurrency(80);
         characters.characters.forEach(c=> {
-          c.health.hurt(10);
+          c.health.hurt(15);
         });
       }
     },{
@@ -405,29 +410,29 @@ export const EVENTS: IEvent[] = [
     {
       name: `Punchin-ball`,
       text: () => {
-        return `Loic apprend Tête la première mais vous perdez 40 euros`;
+        return `Loic apprend Tête la première mais vous perdez 80 euros`;
       },
       reward: (characters: CharactersService, currency: ShopService) => {
         const actor = characters.getCharacterByName(EHero.LOIC);
         actor.spells.find(s => s.name === ESPells.TETE_PREMIERE.name).unlocked = true;
-        currency.removeCurrency(40);
+        currency.removeCurrency(80);
       },
       condition: (actors, currency) => {
-        return currency.hasEnough(40) && !actors.getCharacterByName(EHero.LOIC).hasSpell(ESPells.TETE_PREMIERE);
+        return currency.hasEnough(80) && !actors.getCharacterByName(EHero.LOIC).hasSpell(ESPells.TETE_PREMIERE);
       }
 
     },{
       name: `Buvette`,
       text: () => {
-        return `Loic apprend Discussion Insensée mais vous perdez 30 euros`;
+        return `Loic apprend Discussion Insensée mais vous perdez 60 euros`;
       },
       reward: (characters: CharactersService, currency: ShopService) => {
         const actor = characters.getCharacterByName(EHero.LOIC);
         actor.spells.find(s => s.name === ESPells.DISCUSSION_INSENSEE.name).unlocked = true;
-        currency.removeCurrency(30);
+        currency.removeCurrency(60);
       },
       condition: (actors, currency) => {
-        return currency.hasEnough(30) && !actors.getCharacterByName(EHero.LOIC).hasSpell(ESPells.DISCUSSION_INSENSEE);
+        return currency.hasEnough(60) && !actors.getCharacterByName(EHero.LOIC).hasSpell(ESPells.DISCUSSION_INSENSEE);
       }
     },{
       name: `Annuler la soirée`,
@@ -545,23 +550,396 @@ export const EVENTS: IEvent[] = [
   },
   choices: [
     {
-      name: `Rester jusqu'à l'aubre`,
+      name: `Rester jusqu'à l'aube`,
       text: () => {
-        return `Quentin gagne 5 AP mais perdez 15 PV.`;
+        return `Quentin gagne 5 AP mais perdez 20 PV.`;
       },
       reward: (characters: CharactersService, currency: ShopService) => {
         const actor = characters.getCharacterByName(EHero.QUENTIN);
         actor.stats$.power += 5;
-        actor.health.hurt(15);
+        actor.health.hurt(20);
+      },
+      condition: (actors) => {
+        return !actors.getCharacterByName(EHero.QUENTIN).health.isDead;
       }
     },{
       name: `Se coucher tôt`,
       text: () => {
-        return `Quentin récupère 15 PV`;
+        return `Quentin récupère 20 PV`;
       },
       reward: (characters: CharactersService, currency: ShopService) => {
         const actor = characters.getCharacterByName(EHero.QUENTIN);
-        actor.health.heal(15);
+        actor.health.heal(20);
+      },
+      condition: (actors) => {
+        return !actors.getCharacterByName(EHero.QUENTIN).health.isDead;
+      }
+    },{
+      name: `Ne pas y aller`,
+      text: () => {
+        return `Rien ne se passe`;
+      },
+      reward: (characters: CharactersService, currency: ShopService) => {
+      }
+    }
+  ]
+},
+{
+  owners: [EHero.QUENTIN,EHero.ADRIEN,EHero.CLEMENT,EHero.COSTY,EHero.LOIC,EHero.KEVIN,],
+  title: 'Souvenirs',
+  description: 'Les souvenirs des aventuriers tombés au combat sont évoqué lors d\'une soirée, vous pouvez réanimer un mort.',
+  condition: (actors, $this) => {
+    return actors.some(a => $this.owners.some(owner => owner === a.name) && a.health.isDead);
+  },
+  choices: [
+    {
+      name: `40 minutes`,
+      text: () => {
+        return `Réanimer Quentin`;
+      },
+      reward: (characters: CharactersService, currency: ShopService) => {
+        characters.getCharacterByName(EHero.QUENTIN).health.ressucitate();
+      },
+      condition: (actors) => {
+        return actors.isInParty(EHero.QUENTIN) && actors.getCharacterByName(EHero.QUENTIN).health.isDead;
+      }
+    },{
+      name: `Oiseau fusillé`,
+      text: () => {
+        return `Réanimer Adrien`;
+      },
+      reward: (characters: CharactersService, currency: ShopService) => {
+        characters.getCharacterByName(EHero.ADRIEN).health.ressucitate();
+      },
+      condition: (actors) => {
+        return actors.isInParty(EHero.ADRIEN) && actors.getCharacterByName(EHero.ADRIEN).health.isDead;
+      }
+    },{
+      name: `Internat`,
+      text: () => {
+        return `Réanimer Loïc`;
+      },
+      reward: (characters: CharactersService, currency: ShopService) => {
+        characters.getCharacterByName(EHero.LOIC).health.ressucitate();
+      },
+      condition: (actors) => {
+        return actors.isInParty(EHero.LOIC) && actors.getCharacterByName(EHero.LOIC).health.isDead;
+      }
+    },{
+      name: `Caméra whisky`,
+      text: () => {
+        return `Réanimer Kevin`;
+      },
+      reward: (characters: CharactersService, currency: ShopService) => {
+        characters.getCharacterByName(EHero.KEVIN).health.ressucitate();
+      },
+      condition: (actors) => {
+        return actors.isInParty(EHero.KEVIN) && actors.getCharacterByName(EHero.KEVIN).health.isDead;
+      }
+    },{
+      name: `La bougie`,
+      text: () => {
+        return `Réanimer Clément`;
+      },
+      reward: (characters: CharactersService, currency: ShopService) => {
+        characters.getCharacterByName(EHero.CLEMENT).health.ressucitate();
+      },
+      condition: (actors) => {
+        return actors.isInParty(EHero.CLEMENT) && actors.getCharacterByName(EHero.CLEMENT).health.isDead;
+      }
+    },{
+      name: `Fin de pandémie`,
+      text: () => {
+        return `Réanimer Costy`;
+      },
+      reward: (characters: CharactersService, currency: ShopService) => {
+        characters.getCharacterByName(EHero.COSTY).health.ressucitate();
+      },
+      condition: (actors) => {
+        return actors.isInParty(EHero.COSTY) && actors.getCharacterByName(EHero.COSTY).health.isDead;
+      }
+    },{
+      name: `Rien à dire`,
+      text: () => {
+        return `Rien ne se passe`;
+      },
+      reward: (characters: CharactersService, currency: ShopService) => {
+      }
+    }
+  ]
+},
+{
+  owners: [EHero.QUENTIN],
+  title: 'Jet de dé',
+  description: 'Vous rencontrez un joueur qui vous offre la possibilité de gagner un équipement en jouant au dé.',
+  condition: (actors, $this) => {
+    return actors.some(a => $this.owners.some(owner => owner === a.name));
+  },
+  choices: [
+    {
+      name: `Discord`,
+      text: () => {
+        return `50% de chance de gagner l'équipement Discord.`;
+      },
+      reward: (characters: CharactersService, currency: ShopService) => {
+        if(dice(50)) {
+          const actor = characters.getCharacterByName(EHero.QUENTIN);
+          actor.getEquipment(EEquipment.DISCORD).giveEquipmentTo(actor);
+        }
+      },
+      condition: (actors) => {
+        return !actors.getCharacterByName(EHero.QUENTIN).hasEquipment(EEquipment.DISCORD);
+      }
+    },{
+      name: `Risk`,
+      text: () => {
+        return `50% de chance de gagner l'équipement Risk`;
+      },
+      reward: (characters: CharactersService, currency: ShopService) => {
+        if(dice(50)) {
+          const actor = characters.getCharacterByName(EHero.QUENTIN);
+          actor.getEquipment(EEquipment.EXTENSION_SMARTLIFE).giveEquipmentTo(actor);
+        }
+      },
+      condition: (actors) => {
+        return !actors.getCharacterByName(EHero.QUENTIN).hasEquipment(EEquipment.EXTENSION_SMARTLIFE);
+      }
+    },{
+      name: `Ne pas y aller`,
+      text: () => {
+        return `Rien ne se passe`;
+      },
+      reward: (characters: CharactersService, currency: ShopService) => {
+      }
+    }
+  ]
+},
+{
+  owners: [EHero.CLEMENT],
+  title: 'Jet de dé',
+  description: 'Vous rencontrez un joueur qui vous offre la possibilité de gagner un équipement en jouant au dé.',
+  condition: (actors, $this) => {
+    return actors.some(a => $this.owners.some(owner => owner === a.name));
+  },
+  choices: [
+    {
+      name: `Protège tibia`,
+      text: () => {
+        return `50% de chance de gagner l'équipement Protège tibia.`;
+      },
+      reward: (characters: CharactersService, currency: ShopService) => {
+        if(dice(50)) {
+          const actor = characters.getCharacterByName(EHero.CLEMENT);
+          actor.getEquipment(EEquipment.PROTEGE_TIBIA).giveEquipmentTo(actor);
+        }
+      },
+      condition: (actors) => {
+        return !actors.getCharacterByName(EHero.CLEMENT).hasEquipment(EEquipment.PROTEGE_TIBIA);
+      }
+    },{
+      name: `Risk`,
+      text: () => {
+        return `50% de chance de gagner l'équipement Veste de marque`;
+      },
+      reward: (characters: CharactersService, currency: ShopService) => {
+        if(dice(50)) {
+          const actor = characters.getCharacterByName(EHero.CLEMENT);
+          actor.getEquipment(EEquipment.VESTE_MARQUE).giveEquipmentTo(actor);
+        }
+      },
+      condition: (actors) => {
+        return !actors.getCharacterByName(EHero.CLEMENT).hasEquipment(EEquipment.VESTE_MARQUE);
+      }
+    },{
+      name: `Ne pas y aller`,
+      text: () => {
+        return `Rien ne se passe`;
+      },
+      reward: (characters: CharactersService, currency: ShopService) => {
+      }
+    }
+  ]
+},
+{
+  owners: [EHero.LOIC],
+  title: 'Jet de dé',
+  description: 'Vous rencontrez un joueur qui vous offre la possibilité de gagner un équipement en jouant au dé.',
+  condition: (actors, $this) => {
+    return actors.some(a => $this.owners.some(owner => owner === a.name));
+  },
+  choices: [
+    {
+      name: `Casque`,
+      text: () => {
+        return `50% de chance de gagner l'équipement Casque.`;
+      },
+      reward: (characters: CharactersService, currency: ShopService) => {
+        if(dice(50)) {
+          const actor = characters.getCharacterByName(EHero.LOIC);
+          actor.getEquipment(EEquipment.CASQUE).giveEquipmentTo(actor);
+        }
+      },
+      condition: (actors) => {
+        return !actors.getCharacterByName(EHero.LOIC).hasEquipment(EEquipment.CASQUE);
+      }
+    },{
+      name: `Risk`,
+      text: () => {
+        return `50% de chance de gagner l'équipement Alcotest`;
+      },
+      reward: (characters: CharactersService, currency: ShopService) => {
+        if(dice(50)) {
+          const actor = characters.getCharacterByName(EHero.LOIC);
+          actor.getEquipment(EEquipment.ALCOTEST).giveEquipmentTo(actor);
+        }
+      },
+      condition: (actors) => {
+        return !actors.getCharacterByName(EHero.LOIC).hasEquipment(EEquipment.ALCOTEST);
+      }
+    },{
+      name: `Ne pas y aller`,
+      text: () => {
+        return `Rien ne se passe`;
+      },
+      reward: (characters: CharactersService, currency: ShopService) => {
+      }
+    }
+  ]
+},
+{
+  owners: [EHero.KEVIN],
+  title: 'Jet de dé',
+  description: 'Vous rencontrez un joueur qui vous offre la possibilité de gagner un équipement en jouant au dé.',
+  condition: (actors, $this) => {
+    return actors.some(a => $this.owners.some(owner => owner === a.name));
+  },
+  choices: [
+    {
+      name: `Casque`,
+      text: () => {
+        return `50% de chance de gagner l'équipement Ballantines.`;
+      },
+      reward: (characters: CharactersService, currency: ShopService) => {
+        if(dice(50)) {
+          const actor = characters.getCharacterByName(EHero.KEVIN);
+          actor.getEquipment(EEquipment.BALLANTINES).giveEquipmentTo(actor);
+        }
+      },
+      condition: (actors) => {
+        return !actors.getCharacterByName(EHero.KEVIN).hasEquipment(EEquipment.BALLANTINES);
+      }
+    },{
+      name: `Risk`,
+      text: () => {
+        return `50% de chance de gagner l'équipement Souris congélées`;
+      },
+      reward: (characters: CharactersService, currency: ShopService) => {
+        if(dice(50)) {
+          const actor = characters.getCharacterByName(EHero.KEVIN);
+          actor.getEquipment(EEquipment.SOURIS).giveEquipmentTo(actor);
+        }
+      },
+      condition: (actors) => {
+        return !actors.getCharacterByName(EHero.KEVIN).hasEquipment(EEquipment.SOURIS);
+      }
+    },{
+      name: `Ne pas y aller`,
+      text: () => {
+        return `Rien ne se passe`;
+      },
+      reward: (characters: CharactersService, currency: ShopService) => {
+      }
+    }
+  ]
+},
+{
+  owners: [EHero.ADRIEN],
+  title: 'Jet de dé',
+  description: 'Vous rencontrez un joueur qui vous offre la possibilité de gagner un équipement en jouant au dé.',
+  condition: (actors, $this) => {
+    return actors.some(a => $this.owners.some(owner => owner === a.name));
+  },
+  choices: [
+    {
+      name: `Casque`,
+      text: () => {
+        return `50% de chance de gagner l'équipement Gants d'escalade.`;
+      },
+      reward: (characters: CharactersService, currency: ShopService) => {
+        if(dice(50)) {
+          const actor = characters.getCharacterByName(EHero.ADRIEN);
+          actor.getEquipment(EEquipment.GANTS_ESCALADE).giveEquipmentTo(actor);
+        }
+      },
+      condition: (actors) => {
+        return !actors.getCharacterByName(EHero.ADRIEN).hasEquipment(EEquipment.GANTS_ESCALADE);
+      }
+    },{
+      name: `Risk`,
+      text: () => {
+        return `50% de chance de gagner l'équipement Freelance`;
+      },
+      reward: (characters: CharactersService, currency: ShopService) => {
+        if(dice(50)) {
+          const actor = characters.getCharacterByName(EHero.ADRIEN);
+          actor.getEquipment(EEquipment.FREELANCE).giveEquipmentTo(actor);
+        }
+      },
+      condition: (actors) => {
+        return !actors.getCharacterByName(EHero.ADRIEN).hasEquipment(EEquipment.FREELANCE);
+      }
+    },{
+      name: `Ne pas y aller`,
+      text: () => {
+        return `Rien ne se passe`;
+      },
+      reward: (characters: CharactersService, currency: ShopService) => {
+      }
+    }
+  ]
+},
+{
+  owners: [EHero.COSTY],
+  title: 'Jet de dé',
+  description: 'Vous rencontrez un joueur qui vous offre la possibilité de gagner un équipement en jouant au dé.',
+  condition: (actors, $this) => {
+    return actors.some(a => $this.owners.some(owner => owner === a.name));
+  },
+  choices: [
+    {
+      name: `Casque`,
+      text: () => {
+        return `50% de chance de gagner l'équipement Manette.`;
+      },
+      reward: (characters: CharactersService, currency: ShopService) => {
+        if(dice(50)) {
+          const actor = characters.getCharacterByName(EHero.COSTY);
+          actor.getEquipment(EEquipment.MANETTE_XBOX).giveEquipmentTo(actor);
+        }
+      },
+      condition: (actors) => {
+        return !actors.getCharacterByName(EHero.COSTY).hasEquipment(EEquipment.MANETTE_XBOX);
+      }
+    },{
+      name: `Risk`,
+      text: () => {
+        return `50% de chance de gagner l'équipement Compte deezer`;
+      },
+      reward: (characters: CharactersService, currency: ShopService) => {
+        if(dice(50)) {
+          const actor = characters.getCharacterByName(EHero.COSTY);
+          actor.getEquipment(EEquipment.SPOTIFY).giveEquipmentTo(actor);
+        }
+      },
+      condition: (actors) => {
+        return !actors.getCharacterByName(EHero.COSTY).hasEquipment(EEquipment.SPOTIFY);
+      }
+    },{
+      name: `Ne pas y aller`,
+      text: () => {
+        return `Rien ne se passe`;
+      },
+      reward: (characters: CharactersService, currency: ShopService) => {
       }
     }
   ]

@@ -85,7 +85,7 @@ export class MapService {
 
   forcedTypes() {
     let treasureFloors = Math.floor(this.map.length / 2);
-    let shopFloors = Math.floor(this.map.length / 2) + 1;
+    //let shopFloors = Math.floor(this.map.length / 2) + 1;
     let penultimumFloor = this.map.length - 2;
 
     this.map[treasureFloors].forEach(combat => {
@@ -93,11 +93,11 @@ export class MapService {
         combat.type = ELevelType.TREASURE;
       }
     });
-    this.map[shopFloors].forEach(combat => {
+    /*this.map[shopFloors].forEach(combat => {
       if (exists(combat)) {
         combat.type = ELevelType.SHOP;
       }
-    });
+    });*/
     this.map[penultimumFloor].forEach(combat => {
       if (exists(combat)) {
         combat.type = ELevelType.HEAL;
@@ -107,11 +107,11 @@ export class MapService {
 
   applyTypes() {
     let treasureFloors = Math.floor(this.map.length / 2);
-    let shopFloors = Math.floor(this.map.length / 2) + 1;
+    //let shopFloors = Math.floor(this.map.length / 2) + 1;
     let penultimumFloor = this.map.length - 2;
 
     this.map.forEach((floor, floorIndex) => {
-      if (floorIndex !== 0 && floorIndex !== treasureFloors && floorIndex !== shopFloors && floorIndex !== penultimumFloor) {
+      if (floorIndex !== 0 && floorIndex !== treasureFloors/* && floorIndex !== shopFloors */ && floorIndex !== penultimumFloor) {
         floor.forEach((node, room) => {
           if (node instanceof Combat && node.type === undefined) {
             this.setTypeWithRules(floorIndex, room, node);
