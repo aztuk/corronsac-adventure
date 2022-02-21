@@ -9,10 +9,12 @@
 ### Equipement
 
 * L'équipement Spotify a été modifié, au lieu d'accorder TAUNT à Costy, il soigne l'allié le plus faible de 5% des PV Max de Costy
+* L'équipement Discord a été modifié, au lieu d'accorder UP_AP à ses alliés, le sort fait maintenant double ses dégâts
 
 ### Enemis
 
 * Tous les sorts ennemis ont leur dégâts réduits pour compenser l'augmentation de l'attaque
+* L'alter ego invoqué par Milou a été grandement nerf. Attaque et points de vie réduits.
 
 ### Evènements
 
@@ -59,8 +61,5 @@
 
 ## Todo
 
-* Passif de Costy : ne pas compter les soins dans le vide ?
-* Passif de Costy : Possibilité de monter de plusieurs HP en un tour
 * Mettre animation fumée sur les effets
-* Stats service (ajouter les DOTS dans le compte, tableau séparé)
 

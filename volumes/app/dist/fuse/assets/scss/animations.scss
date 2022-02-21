@@ -2,6 +2,9 @@
 .animation-hurt {
     -webkit-animation: vibrate-1 0.3s linear both;
     animation: vibrate-1 0.3s linear both;
+    &.smoke {
+        animation: none;
+    }
     &:after {
         content: '';
         position: absolute;
@@ -68,7 +71,7 @@
     justify-content: center;
     -webkit-animation: effect linear both;
     animation: effect 1s linear both;
-    animation-delay: 0ms;
+    animation-delay: 200ms;
     z-index: 50;
     filter: drop-shadow(0 0 8px black);
 }

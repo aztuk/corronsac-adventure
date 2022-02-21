@@ -126,7 +126,7 @@ export class EnemiesService {
   createRacaille() {
     let enemy = new Actor('Petite racaille', EClass.TIER_1, false);
 
-    this.applyBaseStats(enemy, { health: 12, attack: 2, power: 0, speed: 45});
+    this.applyBaseStats(enemy, { health: 12, attack: 1, power: 0, speed: 45});
 
     enemy.spells.push(new SpellDescription(ESPells.BASIC));
     enemy.spells.push(new SpellDescription(ESPells.INSULTE));
@@ -183,7 +183,7 @@ export class EnemiesService {
   createVaccin() {
     let enemy = new Actor('Vaccin', EClass.TIER_1, false);
 
-    this.applyBaseStats(enemy, { health: 25, attack: 3, power: 0, speed: 40});
+    this.applyBaseStats(enemy, { health: 25, attack: 2, power: 0, speed: 40});
 
     enemy.spells.push(new SpellDescription(ESPells.BASIC));
     enemy.spells.push(new SpellDescription(ESPells.INJECTION));
@@ -194,7 +194,7 @@ export class EnemiesService {
   createCovid() {
     let enemy = new Actor('Covid', EClass.TIER_1, false);
 
-    this.applyBaseStats(enemy, { health: 22, attack: 3, power: 3, speed: 38});
+    this.applyBaseStats(enemy, { health: 22, attack: 2, power: 3, speed: 38});
 
     enemy.spells.push(new SpellDescription(ESPells.BASIC));
     enemy.spells.push(new SpellDescription(ESPells.DELTA));
@@ -205,7 +205,7 @@ export class EnemiesService {
   createEnfants() {
     let enemy = new Actor('Enfant', EClass.TIER_1, false);
 
-    this.applyBaseStats(enemy, { health: 15, attack: 2, power: 0, speed: 32});
+    this.applyBaseStats(enemy, { health: 15, attack: 1, power: 0, speed: 28});
 
     enemy.spells.push(new SpellDescription(ESPells.BASIC));
     enemy.spells.push(new SpellDescription(ESPells.CRIS));
@@ -266,7 +266,7 @@ export class EnemiesService {
   createMilou() {
     let enemy = new Actor('Milou', EClass.TIER_2, false);
 
-    this.applyBaseStats(enemy, { health: 85, attack: 3, power: 0, speed: 34});
+    this.applyBaseStats(enemy, { health: 65, attack: 2, power: 0, speed: 34});
 
     enemy.spells.push(new SpellDescription(ESPells.BASIC));
     enemy.spells.push(new SpellDescription(ESPells.CLONE));

@@ -188,7 +188,7 @@ export const EEquipment = {
     name: 'Discord',
     price: 59,
     description: (damageInstances, owner?) => {
-      return `<strong class="spell-decorator">Fuite</strong> donne aussi <eff-deco effect="UP_AP"></eff-deco> à 3 alliés.`
+      return `<strong class="spell-decorator">Fuite</strong> inflige maintenant  <dmg-deco amount="3.4" stat="${owner.stats.power * owner.stats.damageMultiplier}" type="magical"></dmg-deco>.`
     },
     stats: () => {
       const stats = new Stats(0,0,0);
@@ -203,11 +203,7 @@ export const EEquipment = {
       let spellUpgrade = actor.spells.find(s => s.name === ESPells.FUITE.name);
 
       if(exists(spellUpgrade)) {
-        spellUpgrade.effectInstances.push({
-          targetsType: ETargetTypes.RANDOM_ALLY,
-          effect: EEffects.UP_AP,
-          targetsAmount: 3
-        });
+        spellUpgrade.damageInstances[0].amount = 3.4;
       }
     }
   },

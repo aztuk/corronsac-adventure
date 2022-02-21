@@ -157,21 +157,21 @@ export class PassiveService {
       if(d.target.name === EHero.ADRIEN) {
         this.adrienBlackPantherPassive += d.damage;
       }
-
-      if(d.caster.name === EHero.ADRIEN &&  this.adrienBlackPantherPassive > 0) {
-        const aliveEnemies = cast._combatActors.enemies.filter(e => e.id !== d.target.id && !e.isDead);
-        cast._combatActors.enemies = aliveEnemies;
-        if(aliveEnemies.length > 0) {
-          if(cast._combatActors.target.health.isDead) {
-            cast._combatActors.target = getRandomInArray(aliveEnemies);
-          }
-
-          spell = new SpellCast(d.caster, cast._combatActors, new SpellDescription(ESPells.ADRIEN_PASSIVE_PROC));
-          spell.damages.push(new Damage(cast._caster, cast._combatActors.target, EDamageType.PHYSIC, this.adrienBlackPantherPassive));
-          this.adrienBlackPantherPassive = 0;
-        }
-      }
     });
+
+    if(cast._caster.name === EHero.ADRIEN &&  this.adrienBlackPantherPassive > 0) {
+      const aliveEnemies = cast._combatActors.enemies.filter(e => !e.isDead);
+      cast._combatActors.enemies = aliveEnemies;
+      if(aliveEnemies.length > 0) {
+        if(cast._combatActors.target.health.isDead) {
+          cast._combatActors.target = getRandomInArray(aliveEnemies);
+        }
+
+        spell = new SpellCast(cast._caster, cast._combatActors, new SpellDescription(ESPells.ADRIEN_PASSIVE_PROC));
+        spell.damages.push(new Damage(cast._caster, cast._combatActors.target, EDamageType.PHYSIC, this.adrienBlackPantherPassive));
+        this.adrienBlackPantherPassive = 0;
+      }
+    }
 
 
     return spell;

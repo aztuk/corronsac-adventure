@@ -333,7 +333,7 @@ export const ESPells = {
       targetsType: ETargetTypes.RANDOM_ENEMY,
       targetsAmount: 1,
       damageType: EDamageType.MAGIC,
-      amount: 2
+      amount: 1.7
     }],
     effectInstances: [{
       targetsType: ETargetTypes.SELF,
@@ -914,8 +914,8 @@ export const ESPells = {
         const alterego = new Actor('Alter-égo', EClass.INVOCATION, false);
         const adrien = $this._combatActors.enemies.find((a) => a.name === EHero.ADRIEN);
 
-        alterego.health = adrien.health;
-        alterego.stats$ = adrien.stats;
+        alterego.stats$ = new Stats(4, 0, 32);
+        alterego.health = new Health(36);
         alterego.spells = adrien.spells;
 
         return [alterego];

@@ -63,6 +63,15 @@ export class DamageAnimationDirective {
     this.renderer.appendChild(animatedElement, effect);
 
     setTimeout(() => {
+      this.renderer.addClass(this.el.nativeElement, 'animation-hurt');
+      this.renderer.addClass(this.el.nativeElement, 'smoke');
+    },0);
+    setTimeout(() => {
+      this.renderer.removeClass(this.el.nativeElement, 'animation-hurt');
+      this.renderer.removeClass(this.el.nativeElement, 'smoke');
+    }, 500);
+
+    setTimeout(() => {
       this.renderer.removeChild(this.el.nativeElement, animatedElement);
     }, 1000);
   }
@@ -92,6 +101,9 @@ export class DamageAnimationDirective {
       break;
       case EDamageType.PHYSIC:
         ouput = 'physic';
+      break;
+      default:
+          ouput = 'smoke';
       break;
     }
 
